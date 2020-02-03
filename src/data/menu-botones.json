@@ -1,0 +1,19 @@
+[
+    {
+        "nombre" : "Agregar recursos",
+        "descripción" : "Agrega recursos..."
+    },
+    {
+        "nombre" : "Ver recursos",
+        "descripción" : "Muetra los recursos publicados"
+    },
+    {
+        "nombre" : "Agregar Planes",
+        "descripción" : "Agrega plantilla de planeamiento"
+    },
+    {
+        "nombre" : "Ver Plantillas de Planeamiento",
+        "descripción" : "Ver plantillas publicadas"
+    }
+
+]

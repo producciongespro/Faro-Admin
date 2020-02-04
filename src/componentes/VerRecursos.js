@@ -13,6 +13,8 @@ function VerRecursos() {
 
     const handleFiltrarRecursos =(e)=>{
         const categoria = e.target.value;
+        console.log("categoria",categoria);
+        
         const limite = dataset.length;
         var tmpDataset = [];
         for (let index = 0; index < limite; index++) {            

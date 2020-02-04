@@ -1,8 +1,20 @@
-import React from 'react';
+import React, {useState}  from 'react';
+import Inicio from './componentes/Inicio';
 import Menu from './componentes/Menu';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
+import VerRecursos from './componentes/VerRecursos';
+
+const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>   ]
 
 function App() {
+  const [componente, setComponente] = useState(null);
+
+  const handleCargarComponentes = (e) => {
+    console.log(e.target.value);    
+    setComponente( componentes[e.target.value] );
+  }
+
+
   return (
     <React.Fragment>
       <div className="jumbotron">
@@ -11,10 +23,19 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="col-4">
-            <Menu/>
+            <Menu handleCargarComponentes={handleCargarComponentes} />
           </div>
           <div className="col-8">
-            <FormEnviarRecurso/>
+            {
+              componente !== null ?
+              (
+                componente
+              ) :
+              (
+                <Inicio/>
+              )
+                
+              }          
           </div>
         </div>
       </div>

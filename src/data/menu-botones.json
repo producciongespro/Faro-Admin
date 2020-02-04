@@ -1,19 +1,23 @@
 [
     {
-        "nombre" : "Agregar recursos",
-        "descripción" : "Agrega recursos..."
+        "nombre": "Inicio",
+        "descripción": "inicio de la aplicación"
     },
     {
-        "nombre" : "Ver recursos",
-        "descripción" : "Muetra los recursos publicados"
+        "nombre": "Agregar recursos",
+        "descripción": "Agrega recursos..."
     },
     {
-        "nombre" : "Agregar Planes",
-        "descripción" : "Agrega plantilla de planeamiento"
+        "nombre": "Ver recursos",
+        "descripción": "Muetra los recursos publicados"        
     },
     {
-        "nombre" : "Ver Plantillas de Planeamiento",
-        "descripción" : "Ver plantillas publicadas"
+        "nombre": "Agregar Planes",
+        "descripción": "Agrega plantilla de planeamiento"
+    },
+    {
+        "nombre": "Ver Plantillas de Planeamiento",
+        "descripción": "Ver plantillas publicadas"        
     }
 
 ]

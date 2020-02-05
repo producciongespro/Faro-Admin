@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Grupocheck from './GurpoCheck';
 
 const niveles = ["Prescolar", "Primaria", "Secundaria" ];
 
@@ -13,7 +14,7 @@ function FormEnviarRecurso() {
 
   const handleSelNivel = (e) => {
     console.log(e.target.value);
-    setNivel(e.target.nive)
+    setNivel(e.target.value)
     
   }
 
@@ -23,16 +24,11 @@ function FormEnviarRecurso() {
         Admin/Agregar recursos
       </div>
       <form>
-        <div className="form-group">
-          {//<label htmlFor="txtNombre">Nombre del recurso:</label>
-          }
+        <div className="form-group">         
           <input type="text" className="form-control" id="txtNombre" name="nombre" placeholder="Nombre" />
         </div>
 
-        <div className="form-group">
-        {
-          //<label htmlFor="txtDescripcion">Descripción del recurso:</label>
-        }
+        <div className="form-group">            
           <input type="text" className="form-control" id="txtDescripcion" name="descripcion" placeholder="Descripción" />
         </div>
 
@@ -52,9 +48,7 @@ function FormEnviarRecurso() {
         </div>
 
      
-            {
-              //Grupo select
-            }
+            <Grupocheck nivel={nivel} />
 
         <div className="form-group">
           {//<label htmlFor="txtUrl">Url de educatico:</label>

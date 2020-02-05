@@ -1,3 +1,5 @@
+import React from 'react';
+
 const annosPrimaria = [
     {
       "id" : 1,
@@ -52,3 +54,50 @@ const annosSecundaria = [
 }
 
 ];
+
+function GrupoCheck(props) {
+  
+  return(
+    
+      <React.Fragment>
+        {
+          (props.nivel === "1" ) &&
+          (
+        <div className="row">
+          <div className="col-12">
+          <div className="pretty p-default p-round p-thick">
+            <input type="checkbox" />
+            <div className="state p-primary-o">
+                <label>Primero</label>
+            </div>
+          </div>
+
+          <div className="pretty p-default p-round p-thick">
+            <input type="checkbox" />
+            <div className="state p-primary-o">
+                <label>Segundo</label>
+            </div>
+          </div>
+
+          </div>
+        </div>
+          )
+        }
+             {
+          (props.nivel === "2") &&
+          (
+            <div className="pretty p-default p-round p-thick">
+            <input type="checkbox" />
+            <div className="state p-primary-o">
+                <label>Sétimo</label>
+            </div>
+          </div>
+          )
+        }
+      </React.Fragment>
+    
+  )
+}
+
+
+export default GrupoCheck;

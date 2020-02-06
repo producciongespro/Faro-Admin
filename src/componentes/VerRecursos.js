@@ -5,7 +5,7 @@ var dataset=null;
 
 obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {    
     dataset = data;
-    console.log("data", dataset);
+    //console.log("data", dataset);
 })
 
 function VerRecursos() {    

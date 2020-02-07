@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import GrupoCheck from './GurpoCheck';
-//import obtener from '../modulos/obtener';
+import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
 import enviar from '../modulos/enviar';
 
 const niveles = ["Prescolar", "Primaria", "Secundaria"];
 
 
-function FormEnviarRecurso(props) {
+function FormEnviarRecurso() {
   const [nivel, setNivel] = useState(-1);
 
   const handleSelNivel = (e) => {
@@ -14,25 +14,13 @@ function FormEnviarRecurso(props) {
     setNivel(e.target.value)
   }
 
-
-  const obtenerValoresCheck =(nombre)=>{
-    let listaAnnos = [];
-    const chk  = document.getElementsByName(nombre);
-    for (let index = 0; index < chk.length; index++) {
-      const anno = { [chk[index].value] : chk[index].checked  }
-      listaAnnos.push(anno);      
-    }
-    return JSON.stringify(listaAnnos);
-  }
-
-  const handleEnviar =(e)=> {
-    e.preventDefault();    
+  const handleEnviar = (e) => {
+    e.preventDefault();
     const data = {
       "anno": obtenerValoresCheck("anno"),
       "nombre": document.getElementById("txtNombre").value
     }
-
-   enviar("http://localhost/faro/webservices/test1.php", data );   
+    enviar("http://localhost/faro/webservices/test1.php", data);
   }
 
 
@@ -43,13 +31,37 @@ function FormEnviarRecurso(props) {
       </div>
       <form onSubmit={handleEnviar} id="form1" >
 
-        <div className="form-group">
-          <input type="text" className="form-control" id="txtNombre" name="nombre" placeholder="Nombre" />
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+          </div>
+          <input type="text" className="form-control" id="txtNombre" aria-label="Default" placeholder="Escriba aquí el nombre del recurso." />
         </div>
+
+
 
         <div className="form-group">
           <input type="text" className="form-control" id="txtDescripcion" name="descripcion" placeholder="Descripción" />
         </div>
+
+
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="inputGroupSelect01">Nivel</label>
+          </div>
+          <select className="custom-select" id="inputGroupSelect01">
+              <option defaultValue value={-1} >Seleccione un nivel</option>
+            {
+              niveles.map((item, i) => (
+                <option key={"categoria" + i} value={i}> {item} </option>
+              ))
+            }
+          </select>
+        </div>
+
+
+
+
 
         <div className="input-group mb-3">
           <div className="input-group-prepend">
@@ -67,7 +79,7 @@ function FormEnviarRecurso(props) {
         </div>
 
 
-        <GrupoCheck nivel={nivel} nombre="anno"  />
+        <GrupoCheck nivel={nivel} nombre="anno" />
 
         <div className="form-group">
           {//<label htmlFor="txtUrl">Url de educatico:</label>
@@ -80,7 +92,7 @@ function FormEnviarRecurso(props) {
 
 
 
-        <button type="submit"          className="btn btn-primary"  > Enviar  </button>
+        <button type="submit" className="btn btn-primary"  > Enviar  </button>
       </form>
     </React.Fragment>
   )

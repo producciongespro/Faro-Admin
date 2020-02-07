@@ -77,7 +77,7 @@ function GrupoCheck(props) {
         (props.nivel === "2") &&
         (
           annosSecundaria.map((item, i) => (
-            <div key={"primaria"+i} className="pretty p-default">
+            <div key={"secundaria"+i} className="pretty p-default">
               <input type="checkbox" value={item.id} name={props.nombre} />
               <div className="state p-primary">
                 <label>{item.nombre}</label>

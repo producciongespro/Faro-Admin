@@ -61,7 +61,7 @@ function GrupoCheck(props) {
     <div className="row my-2">
       <div className="col-12">    
       {
-        (props.nivel === "1") &&
+        (props.nivel === 1) &&
         (
           annosPrimaria.map((item, i) => (
             <div key={"primaria"+i} className="pretty p-default">
@@ -74,7 +74,7 @@ function GrupoCheck(props) {
         )
       }
       {
-        (props.nivel === "2") &&
+        (props.nivel === 2) &&
         (
           annosSecundaria.map((item, i) => (
             <div key={"secundaria"+i} className="pretty p-default">

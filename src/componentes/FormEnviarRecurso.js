@@ -20,7 +20,7 @@ function FormEnviarRecurso() {
   const handleEnviar = (e) => {
     e.preventDefault();
 
-       
+      
 
     const data = {
       "anno": obtenerValoresCheck("anno"),
@@ -107,7 +107,7 @@ function FormEnviarRecurso() {
         }
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+            <span className="input-group-text">Nombre</span>
           </div>
           <input type="text" className="form-control" id="txtNombre" aria-label="Default" placeholder="Escriba aquí el nombre del recurso." />
         </div>

@@ -3,6 +3,7 @@ import Inicio from './componentes/Inicio';
 import Menu from './componentes/Menu';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
+import './App.css';
 
 const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>   ]
 

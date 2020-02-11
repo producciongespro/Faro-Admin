@@ -16,8 +16,8 @@ export default function FormEnviarRecurso() {
   const onSubmit = data => {
     console.log( "Antes del append", data);
     const valorescheck = obtenerValoresCheck("anno");
-
     data.anno = valorescheck;
+    data.usuario = "pepito.chamorro@corre.de";
 
     console.log("DATA 2", data);
     
@@ -28,6 +28,8 @@ export default function FormEnviarRecurso() {
   const obtenerNivel = () => {
     setNivel(parseInt(getValues().id_nivel));
   }
+
+
 
 
 
@@ -108,6 +110,7 @@ export default function FormEnviarRecurso() {
           </div>
           <input type="text" className="form-control" name="nombre" id="txtNombre" aria-label="Default" placeholder="Escriba aquí el nombre del recurso." ref={register({ required: true, max: 32, min: 0, maxLength: 80 })} />
         </div>
+          {errors.nombre && <p className="error" >Nombre requerido</p>}
 
         {
           //DESCRIPCIÓN: 
@@ -144,8 +147,9 @@ export default function FormEnviarRecurso() {
             aria-label="Default"
             placeholder="Escriba la dirección web del recurso en Educatico."
             ref={register({ required: true })}
-          />
+          />          
         </div>
+        {errors.url && <p className="error">URL requerido</p>}
 
         {
           //Apoyo educativo

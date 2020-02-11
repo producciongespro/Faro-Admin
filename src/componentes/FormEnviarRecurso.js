@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import GrupoCheck from './GurpoCheck';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
-//import enviar from '../modulos/enviar';
+import enviar from '../modulos/enviar';
 
 const niveles = ["Prescolar", "Primaria", "Secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
 const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes plásticas"];
@@ -17,9 +17,9 @@ export default function FormEnviarRecurso() {
     console.log( "Antes del append", data);
     const valorescheck = obtenerValoresCheck("anno");
     data.anno = valorescheck;
-    data.usuario = "pepito.chamorro@corre.de";
-
-    console.log("DATA 2", data);
+    data.usuario = "2";
+    enviar("http://localhost/faro/webservices/registrar_recurso.php", data );
+    //console.log("DATA 2", data);
     
   }
   console.log(errors);

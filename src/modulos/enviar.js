@@ -1,15 +1,19 @@
 const axios = require('axios');
 
 function enviar(url, data, cb) {
+  data.apoyo=+data.apoyo;
+  
 
   console.log("data a enviar", data);
   
 
   axios.post(url, data)
     .then((response) => {
-      console.log(response);
+        console.log(response);
+        cb(response.data.msj);
     }, (error) => {
-      console.log(error);
+        console.log( "error->", error );      
+        cb(error.message );
     });
 }
 

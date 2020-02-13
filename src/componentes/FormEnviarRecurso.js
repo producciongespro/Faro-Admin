@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
 import GrupoCheck from './GurpoCheck';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
 import enviar from '../modulos/enviar';
+import config from '../config.json';
+
+console.log("config", config);
+
 
 const niveles = ["Prescolar", "Primaria", "Secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
 const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes plásticas"];
@@ -18,7 +25,15 @@ export default function FormEnviarRecurso() {
     const valorescheck = obtenerValoresCheck("anno");
     data.anno = valorescheck;
     data.usuario = "2";
-    enviar("http://localhost/faro/webservices/registrar_recurso.php", data );
+    enviar("http://localhost/faro/webservices/registrar_recurso.php", data, function (respuesta) {
+      alertify.alert(
+                config.nombre+" "+config.version, 
+                respuesta, 
+                function(){ 
+                  console.log("ok");                  
+                 }
+                );
+      } );
     //console.log("DATA 2", data);
     
   }

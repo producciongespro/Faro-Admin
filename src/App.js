@@ -23,10 +23,10 @@ function App() {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-4">
+          <div className="col-3">
             <Menu handleCargarComponentes={handleCargarComponentes} />
           </div>
-          <div className="col-8">
+          <div className="col-9">
             {
               componente !== null ?
               (

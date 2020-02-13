@@ -1,29 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import obtener from '../modulos/obtener';
 var dataset=null;
+
+const niveles = ["prescolar", "primaria", "secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
 
 
 obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {    
     dataset = data;
-    //console.log("data", dataset);
+    console.log("dataset:", dataset);
 })
 
 function VerRecursos() {    
     const [dataFiltrados, setDataFiltrados] = useState(null);
+   var nivel=null
 
     const handleFiltrarRecursos =(e)=>{
-        const categoria = e.target.value;
-        console.log("categoria",categoria);
-        
-        const limite = dataset.length;
-        var tmpDataset = [];
-        for (let index = 0; index < limite; index++) {            
-            if (categoria === dataset[index].nivel  ) {
-                tmpDataset.push(dataset[index]);
-            }
+         nivel = e.target.value;
+        console.log("Nivel:",nivel);
+        if (dataset.length > 1) {
+            const limite = dataset.length;
+            var tmpDataset = [];
+            for (let index = 0; index < limite; index++) {            
+                if (nivel === dataset[index].nivel  ) {
+                    tmpDataset.push(dataset[index]);
+                }
+            }      
+            setDataFiltrados(tmpDataset);
+      
         }      
-        setDataFiltrados(tmpDataset);
     }
+
+    useEffect(() => {
+      
+   
+       
+      });
+
+
 
     return (
         <React.Fragment>
@@ -33,14 +46,16 @@ function VerRecursos() {
 
             <div className="input-group mb-3">
                 <div className="input-group-prepend">
-                    <label className="input-group-text" htmlFor="selCategoria">Categoría</label>
+                    <label className="input-group-text" htmlFor="selCategoria">Niveles</label>
                 </div>
                <div className="col-6">
                <select onChange={handleFiltrarRecursos} className="custom-select" id="selCategoria">                    
                     <option defaultValue >Seleccione un opción</option>
-                    <option value="prescolar">Preescolar</option>
-                    <option value="primaria"> Primaria </option>
-                    <option value="secundaria">Secundaria</option>                    
+                    {
+                        niveles.map((item,i)=>(
+                            <option key={"Nivel"+i} value={item}> {item} </option>
+                        ))
+                    }
                 </select>
                </div>
             </div>

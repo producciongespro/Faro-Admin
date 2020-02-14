@@ -1,41 +1,138 @@
 import React, { useState, useEffect } from 'react';
 import obtener from '../modulos/obtener';
-var dataset=null;
+import filtrar from '../modulos/filtrar';
+var dataset = null;
+
 
 const niveles = ["prescolar", "primaria", "secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
+//const annosPrimaria = [1, 2, 3, 4, 5, 6];
+//const annosSecundaria = [7, 8, 9, 10, 11];
+//const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes plásticas"];
+//const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios sociales", "Artes plásticas"];
 
 
-obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {    
+obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {
     dataset = data;
     console.log("dataset:", dataset);
 })
 
 function VerRecursos() {    
-    const [dataFiltrados, setDataFiltrados] = useState(null);
-   var nivel=null
+    //const [dataFiltrados, setDataFiltrados] = useState(null);
+    const [nivel, setNivel] = useState(null);
+    const [tablaFiltrada, setTablaFiltrada ] = useState(null);
 
-    const handleFiltrarRecursos =(e)=>{
-         nivel = e.target.value;
-        console.log("Nivel:",nivel);
-        if (dataset.length > 1) {
-            const limite = dataset.length;
-            var tmpDataset = [];
-            for (let index = 0; index < limite; index++) {            
-                if (nivel === dataset[index].nivel  ) {
-                    tmpDataset.push(dataset[index]);
-                }
-            }      
-            setDataFiltrados(tmpDataset);
-      
-        }      
-    }
 
     useEffect(() => {
-      
-   
-       
-      });
+        console.log("Nivel", nivel);        
+        //console.log("dataFiltrados", dataFiltrados);
+    });
 
+
+
+    const handleSeleccionarNivel = (e) => {
+        setNivel(e.target.value);
+    }
+
+    const handleObtenerDatosFiltrados =()=> {
+        //Obtiene un array con el nivel filtrado
+        let tmpData = filtrar( dataset, "nivel", nivel );
+        //Controlador Render tabla que selecciona materias y año       
+        switch (nivel) {
+            case "primaria":
+                setTablaFiltrada(renderTablaConMateria(tmpData))
+            break;
+            case "Educación Jóvenes y adultos":
+                setTablaFiltrada(renderTablaSinMateria(tmpData))
+            break;
+        
+            default:
+                console.log("Nivel no definido en controlador render tabla");                
+                break;
+        }
+    }
+
+ 
+    const renderTablaConMateria = (array) => {
+        let tmpTabla = (
+            <React.Fragment>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Año</th>
+                            <th scope="col"> Editar </th>
+                            <th scope="col"> Eliminar </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            array !== null &&
+                            (
+                                array.map((item, i) => (
+                                    <tr key={"recurso" + i}>
+                                        <th scope="row">{i + 1}</th>
+                                        <td>{item.nombre}</td>
+                                        <td>{item.descripcion}</td>
+                                        <td>{item.anno}</td>
+                                        <td>
+                                            <i className="fas fa-pencil-alt"></i>
+                                        </td>
+                                        <td>
+                                            <i className="far fa-trash-alt"></i>
+                                        </td>
+                                    </tr>
+                                ))
+                            )
+                        }
+                    </tbody>
+                </table>
+            </React.Fragment>
+        )
+        return tmpTabla;
+    }
+
+    const renderTablaSinMateria = (array) => {
+        let tmpTabla = (
+            <React.Fragment>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col"> Editar </th>
+                            <th scope="col"> Eliminar </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            array !== null &&
+                            (
+                                array.map((item, i) => (
+                                    <tr key={"recurso" + i}>
+                                        <th scope="row">{i + 1}</th>
+                                        <td>{item.nombre}</td>
+                                        <td>{item.descripcion}</td>
+                                        <td>
+                                            <i className="fas fa-pencil-alt"></i>
+                                        </td>
+                                        <td>
+                                            <i className="far fa-trash-alt"></i>
+                                        </td>
+                                    </tr>
+                                ))
+                            )
+                        }
+                    </tbody>
+                </table>
+            </React.Fragment>
+        )
+        return tmpTabla;
+    }
 
 
     return (
@@ -43,57 +140,34 @@ function VerRecursos() {
             <div className="alert alert-primary" role="alert">
                 Admin/Ver recursos
             </div>
-
-            <div className="input-group mb-3">
+            {
+                //********************* Select NIVEL
+            }
+           <div className="row">
+               <div className="col-8">
+               <div className="input-group mb-3">
                 <div className="input-group-prepend">
-                    <label className="input-group-text" htmlFor="selCategoria">Niveles</label>
+                    <label className="input-group-text" htmlFor="selNivel">Nivel</label>
                 </div>
-               <div className="col-6">
-               <select onChange={handleFiltrarRecursos} className="custom-select" id="selCategoria">                    
-                    <option defaultValue >Seleccione un opción</option>
+                <select
+                    className="custom-select"
+                    id="selNivel"
+                    onChange={handleSeleccionarNivel}
+                >
+                    <option defaultValue>Seleccione un nivel</option>
                     {
-                        niveles.map((item,i)=>(
-                            <option key={"Nivel"+i} value={item}> {item} </option>
+                        niveles.map((item, i) => (
+                            <option key={"Nivel" + i} value={item}> {item} </option>
                         ))
                     }
                 </select>
-               </div>
             </div>
-
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Año</th>
-                        <th scope="col"> Editar </th>
-                        <th scope="col"> Eliminar </th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                      {
-                          dataFiltrados !== null && 
-                          (
-                            dataFiltrados.map((item, i)=>(
-                            <tr key={"recurso"+i}>
-                                <th scope="row">{i+1}</th>
-                                <td>{item.nombre}</td>
-                                <td>{item.descripcion}</td>
-                                <td>{item.anno}</td>
-                                <td>
-                                    <i className="fas fa-pencil-alt"></i>
-                                </td>
-                                <td>
-                                    <i className="far fa-trash-alt"></i>
-                                </td>
-                            </tr> 
-                            ))
-                          )                     
-                      }                
-                </tbody>
-            </table>
+               </div>
+               <div className="col-4">
+                   <button onClick={handleObtenerDatosFiltrados} className="btn btn-outline-primary btn-block">Buscar</button>
+               </div>
+           </div>
+            {tablaFiltrada}
 
         </React.Fragment>
     )

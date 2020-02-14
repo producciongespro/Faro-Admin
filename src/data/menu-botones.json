@@ -16,8 +16,8 @@
         "descripción": "Agrega plantilla de planeamiento"
     },
     {
-        "nombre": "Ver Plantillas de Planeamiento",
-        "descripción": "Ver plantillas publicadas"        
+        "nombre": "Ver plantillas",
+        "descripción": "Ver plantillas de planeamiento publicadas"        
     }
 
 ]

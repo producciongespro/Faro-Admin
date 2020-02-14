@@ -11,7 +11,7 @@ function App() {
   const [componente, setComponente] = useState(null);
 
   const handleCargarComponentes = (e) => {
-    console.log(e.target.value);    
+    //console.log(e.target.value);    
     setComponente( componentes[e.target.value] );
   }
 
@@ -23,10 +23,10 @@ function App() {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-3">
+          <div className="col-4">
             <Menu handleCargarComponentes={handleCargarComponentes} />
           </div>
-          <div className="col-9">
+          <div className="col-8">
             {
               componente !== null ?
               (

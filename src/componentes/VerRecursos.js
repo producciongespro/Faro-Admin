@@ -25,6 +25,7 @@ function VerRecursos() {
     useEffect(() => {
         console.log("Nivel", nivel);        
         //console.log("dataFiltrados", dataFiltrados);
+        //handleObtenerDatosFiltrados();
     });
 
 
@@ -38,29 +39,39 @@ function VerRecursos() {
         let tmpData = filtrar( dataset, "nivel", nivel );
         //Controlador Render tabla que selecciona materias y año       
         switch (nivel) {
+            case "prescolar":
             case "primaria":
+            case "secundaria":
                 setTablaFiltrada(renderTablaConMateria(tmpData))
             break;
             case "Educación Jóvenes y adultos":
+            case "Programa Bandera Azul":
+            case "Programa Nacional de Ferias":
+            case "Educación intercultural":
                 setTablaFiltrada(renderTablaSinMateria(tmpData))
             break;
-        
+            
             default:
-                console.log("Nivel no definido en controlador render tabla");                
+                console.log("Nivel no definido en controlador render tabla");
+                setTablaFiltrada("No se encuentran resultados")                
                 break;
         }
     }
 
  
     const renderTablaConMateria = (array) => {
-        let tmpTabla = (
+        let tmpTabla; 
+        array.length === 0 ?         
+        tmpTabla = <span>No se encontraron registros para este nivel. </span>  
+        :              
+        tmpTabla = (
             <React.Fragment>
                 <table className="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Descripción</th>
+                            <th scope="col">Asignatura</th>
+                            <th scope="col">Nombre</th>                            
                             <th scope="col">Año</th>
                             <th scope="col"> Editar </th>
                             <th scope="col"> Eliminar </th>
@@ -74,8 +85,8 @@ function VerRecursos() {
                                 array.map((item, i) => (
                                     <tr key={"recurso" + i}>
                                         <th scope="row">{i + 1}</th>
-                                        <td>{item.nombre}</td>
-                                        <td>{item.descripcion}</td>
+                                        <td>{item.materia}</td>
+                                        <td>{item.nombre}</td>                                        
                                         <td>{item.anno}</td>
                                         <td>
                                             <i className="fas fa-pencil-alt"></i>
@@ -95,7 +106,11 @@ function VerRecursos() {
     }
 
     const renderTablaSinMateria = (array) => {
-        let tmpTabla = (
+        let tmpTabla;        
+        array.length === 0 ?         
+        tmpTabla = <span>No se encontraron registros para este nivel. </span>  
+        :        
+        tmpTabla = (
             <React.Fragment>
                 <table className="table table-striped">
                     <thead>

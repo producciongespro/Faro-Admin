@@ -9,7 +9,8 @@ function enviar(url, data, cb) {
 
   axios.post(url, data)
     .then((response) => {
-        console.log(response);
+        //console.log(response);
+        console.log(response.data );
         cb(response.data.msj);
     }, (error) => {
         console.log( "error->", error );      

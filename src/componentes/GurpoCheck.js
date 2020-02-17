@@ -65,7 +65,7 @@ function GrupoCheck(props) {
         (
           annosPrimaria.map((item, i) => (
             <div key={"primaria"+i} className="pretty p-default">
-              <input  type="checkbox" value={item.id}  name={props.nombre} />
+              <input  type="checkbox" value={item.nombre}  name={props.nombre} />
               <div className="state p-primary">
                 <label>{item.nombre}</label>
               </div>
@@ -78,7 +78,7 @@ function GrupoCheck(props) {
         (
           annosSecundaria.map((item, i) => (
             <div key={"secundaria"+i} className="pretty p-default">
-              <input type="checkbox" value={item.id} name={props.nombre} />
+              <input type="checkbox" value={item.nombre} name={props.nombre} />
               <div className="state p-primary">
                 <label>{item.nombre}</label>
               </div>

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import $ from 'jquery';
+import esp from "../data/lang-esp.json";
+import DataTable from 'datatables.net';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
+
 var dataset = null;
 
 
@@ -13,7 +17,7 @@ const niveles = ["prescolar", "primaria", "secundaria", "Educación intercultura
 
 obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {
     dataset = data;
-    console.log("dataset:", dataset);
+    //console.log("dataset:", dataset);
 })
 
 function VerRecursos() {    
@@ -23,9 +27,24 @@ function VerRecursos() {
 
 
     useEffect(() => {
-        console.log("Nivel", nivel);        
-        //console.log("dataFiltrados", dataFiltrados);
-        //handleObtenerDatosFiltrados();
+        //console.log("Nivel", nivel);        
+        //console.log("tablaFiltrada", tablaFiltrada); 
+        //Evitar sobre inicilización de tabla por el llamado dinámico:
+        
+        if ( tablaFiltrada !== "No se encontraron registros para este nivel." ) {
+            let table;
+            if ( $.fn.dataTable.isDataTable( '#tblNivel' ) ) {
+                table = $('#tblNivel').DataTable();
+            }
+            else {
+                table = $('#tblNivel').DataTable( {
+                    paging: false
+                } );
+            }  
+        } else {
+            console.log("vacia");
+            
+        }        
     });
 
 
@@ -56,8 +75,10 @@ function VerRecursos() {
                 setTablaFiltrada("No se encuentran resultados")                
                 break;
         }
+              
     }
 
+ 
  
     const renderTablaConMateria = (array) => {
         let tmpTabla; 
@@ -66,7 +87,7 @@ function VerRecursos() {
         :              
         tmpTabla = (
             <React.Fragment>
-                <table className="table table-striped">
+                <table id="tblNivel" className="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -87,7 +108,7 @@ function VerRecursos() {
                                         <th scope="row">{i + 1}</th>
                                         <td>{item.materia}</td>
                                         <td>{item.nombre}</td>                                        
-                                        <td>{item.anno}</td>
+                                        <td>{item.anno}</td>                                     
                                         <td>
                                             <i className="fas fa-pencil-alt"></i>
                                         </td>
@@ -112,7 +133,7 @@ function VerRecursos() {
         :        
         tmpTabla = (
             <React.Fragment>
-                <table className="table table-striped">
+                <table id="tblNivel" className="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

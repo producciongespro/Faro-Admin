@@ -15,37 +15,47 @@ const niveles = ["prescolar", "primaria", "secundaria", "Educación intercultura
 //const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios sociales", "Artes plásticas"];
 
 
-obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {
-    dataset = data;
-    //console.log("dataset:", dataset);
-})
 
-function VerRecursos() {    
+
+function VerRecursos() {
     //const [dataFiltrados, setDataFiltrados] = useState(null);
     const [nivel, setNivel] = useState(null);
-    const [tablaFiltrada, setTablaFiltrada ] = useState(null);
+    const [tablaFiltrada, setTablaFiltrada] = useState(null);
+    const [datosListos, setDatosListos] = useState(false);
 
 
-    useEffect(() => {
-        //console.log("Nivel", nivel);        
-        //console.log("tablaFiltrada", tablaFiltrada); 
-        //Evitar sobre inicilización de tabla por el llamado dinámico:
+
+
+  
+
+
+    useEffect(() => {  
+        //Didmount              
+        //Se hace petición Ajax 
+         obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {
+            dataset = data;
+            console.log("dataset:", dataset);
+            setDatosListos(true)               
+            })               
+        },[] );
+
+    useEffect (()=>{
+        //Cada vez que un estado cambie
+        console.log("nivel",nivel);
+        let table;
+        if ($.fn.dataTable.isDataTable('#tblNivel')) {
+            table = $('#tblNivel').DataTable(
+                //{language: esp}
+            );
+        }
+        else {
+            table = $('#tblNivel').DataTable({
+                language: esp,
+                paging: false
+            });
+        }
         
-        if ( tablaFiltrada !== "No se encontraron registros para este nivel." ) {
-            let table;
-            if ( $.fn.dataTable.isDataTable( '#tblNivel' ) ) {
-                table = $('#tblNivel').DataTable();
-            }
-            else {
-                table = $('#tblNivel').DataTable( {
-                    paging: false
-                } );
-            }  
-        } else {
-            console.log("vacia");
-            
-        }        
-    });
+    })
 
 
 
@@ -53,38 +63,38 @@ function VerRecursos() {
         setNivel(e.target.value);
     }
 
-    const handleObtenerDatosFiltrados =()=> {
+    const handleObtenerDatosFiltrados = () => {
         //Obtiene un array con el nivel filtrado
-        let tmpData = filtrar( dataset, "nivel", nivel );
+        let tmpData = filtrar(dataset, "nivel", nivel);
         //Controlador Render tabla que selecciona materias y año       
         switch (nivel) {
             case "prescolar":
             case "primaria":
             case "secundaria":
                 setTablaFiltrada(renderTablaConMateria(tmpData))
-            break;
+                break;
             case "Educación Jóvenes y adultos":
             case "Programa Bandera Azul":
             case "Programa Nacional de Ferias":
             case "Educación intercultural":
                 setTablaFiltrada(renderTablaSinMateria(tmpData))
-            break;
-            
+                break;
+
             default:
                 console.log("Nivel no definido en controlador render tabla");
-                setTablaFiltrada("No se encuentran resultados")                
+                setTablaFiltrada("No se encuentran resultados")
                 break;
         }
-              
+
     }
 
- 
- 
+
+
     const renderTablaConMateria = (array) => {
-        let tmpTabla; 
-        array.length === 0 ?         
-        tmpTabla = <span>No se encontraron registros para este nivel. </span>  
-        :              
+        let tmpTabla;
+        // array.length === 0 ?         
+        // tmpTabla = <span>No se encontraron registros para este nivel. </span>  
+        // :              
         tmpTabla = (
             <React.Fragment>
                 <table id="tblNivel" className="table table-striped">
@@ -92,7 +102,7 @@ function VerRecursos() {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Asignatura</th>
-                            <th scope="col">Nombre</th>                            
+                            <th scope="col">Nombre</th>
                             <th scope="col">Año</th>
                             <th scope="col"> Editar </th>
                             <th scope="col"> Eliminar </th>
@@ -107,8 +117,8 @@ function VerRecursos() {
                                     <tr key={"recurso" + i}>
                                         <th scope="row">{i + 1}</th>
                                         <td>{item.materia}</td>
-                                        <td>{item.nombre}</td>                                        
-                                        <td>{item.anno}</td>                                     
+                                        <td>{item.nombre}</td>
+                                        <td>{item.anno}</td>
                                         <td>
                                             <i className="fas fa-pencil-alt"></i>
                                         </td>
@@ -127,10 +137,10 @@ function VerRecursos() {
     }
 
     const renderTablaSinMateria = (array) => {
-        let tmpTabla;        
-        array.length === 0 ?         
-        tmpTabla = <span>No se encontraron registros para este nivel. </span>  
-        :        
+        let tmpTabla;
+        // array.length === 0 ?         
+        // tmpTabla = <span>No se encontraron registros para este nivel. </span>  
+        // :        
         tmpTabla = (
             <React.Fragment>
                 <table id="tblNivel" className="table table-striped">
@@ -172,40 +182,42 @@ function VerRecursos() {
 
 
     return (
-        <React.Fragment>
+    
+        datosListos ?        
+            <React.Fragment>
             <div className="alert alert-primary" role="alert">
-                Admin/Ver recursos
-            </div>
-            {
-                //********************* Select NIVEL
-            }
-           <div className="row">
-               <div className="col-8">
-               <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                    <label className="input-group-text" htmlFor="selNivel">Nivel</label>
+            Admin/Ver recursos
+            </div>         
+    
+        <div className="row">
+            <div className="col-8">
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <label className="input-group-text" htmlFor="selNivel">Nivel</label>
+                    </div>
+                    <select
+                        className="custom-select"
+                        id="selNivel"
+                        onChange={handleSeleccionarNivel}
+                    >
+                        <option defaultValue>Seleccione un nivel</option>
+                        {
+                            niveles.map((item, i) => (
+                                <option key={"Nivel" + i} value={item}> {item} </option>
+                            ))
+                        }
+                    </select>
                 </div>
-                <select
-                    className="custom-select"
-                    id="selNivel"
-                    onChange={handleSeleccionarNivel}
-                >
-                    <option defaultValue>Seleccione un nivel</option>
-                    {
-                        niveles.map((item, i) => (
-                            <option key={"Nivel" + i} value={item}> {item} </option>
-                        ))
-                    }
-                </select>
             </div>
-               </div>
-               <div className="col-4">
-                   <button onClick={handleObtenerDatosFiltrados} className="btn btn-outline-primary btn-block">Buscar</button>
-               </div>
-           </div>
-            {tablaFiltrada}
-
-        </React.Fragment>
+            <div className="col-4">
+                <button onClick={handleObtenerDatosFiltrados} className="btn btn-outline-primary btn-block">Buscar</button>
+            </div>
+        </div>
+        {tablaFiltrada}
+    </React.Fragment>
+         :        
+            <span>Obteniendo datos del servidor. Por favor espere... </span>          
+    
     )
 }
 

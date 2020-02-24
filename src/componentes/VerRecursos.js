@@ -19,11 +19,10 @@ async function obtenerDatos(cb) {
 
 function VerRecursos() {    
     const [nivel, setNivel] = useState(null);
+    const [asignatura, setAsignatura ] = useState(null);
+    const [asignaturas, setAsignaturas] = useState(null);
     const [tablaFiltrada, setTablaFiltrada] = useState(null);
     const [datosListos, setDatosListos] = useState(false);
-
-
-    
 
 
     useEffect(() => {  
@@ -35,13 +34,24 @@ function VerRecursos() {
     useEffect (()=>{
         //Cada vez que un estado cambie
         console.log("nivel",nivel);       
-        
+        console.log("asignaturas",asignaturas);               
+        console.log("Asignatura seleccionda", asignatura);        
     })
 
 
 
-    const handleSeleccionarNivel = (e) => {
-        setNivel(e.target.value);
+    const handleSeleccionarNivel = (e) => {   
+        const target = e.target;
+        setNivel(target.value);
+        const indice = target[target.selectedIndex].getAttribute('data-indice');
+        console.log("indice", indice);
+        setAsignaturas( niveles[indice].asignaturas )        
+    }
+
+    const handleSeleccionarAsignatura =(e)=> {
+        //console.log("Asignatura", e.target.value);
+        setAsignatura(e.target.value);
+        
     }
 
     const handleObtenerDatosFiltrados = () => {
@@ -95,7 +105,10 @@ function VerRecursos() {
                             array !== null &&
                             (
                                 array.map((item, i) => (
-                                    <tr key={"recurso" + i}>
+
+                                    item.materia === asignatura && 
+                                    (
+                                        <tr key={"recurso" + i}>
                                         <th scope="row">{i + 1}</th>
                                         <td>{item.materia}</td>
                                         <td>{item.nombre}</td>
@@ -107,6 +120,8 @@ function VerRecursos() {
                                             <i className="far fa-trash-alt"></i>
                                         </td>
                                     </tr>
+                                    )
+
                                 ))
                             )
                         }
@@ -171,7 +186,10 @@ function VerRecursos() {
             </div>         
     
         <div className="row">
-            <div className="col-8">
+            {
+                //Select de NIVEL
+            }
+            <div className="col-4">
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
                         <label className="input-group-text" htmlFor="selNivel">Nivel</label>
@@ -184,12 +202,40 @@ function VerRecursos() {
                         <option defaultValue>Seleccione un nivel</option>
                         {
                             niveles.map((item, i) => (
-                                <option key={"Nivel" + i} value={item.nombre }> {item.nombre} </option>
+                                <option key={"Nivel" + i}  data-indice={i} value={item.nombre }> {item.nombre} </option>
                             ))
                         }
                     </select>
                 </div>
             </div>
+            {
+                // Select de asignatura (materia)
+            }
+            <div className="col-4">
+            <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <label className="input-group-text" htmlFor="selAsignatura">Asigntaura</label>
+                    </div>
+                    <select
+                        className="custom-select"
+                        id="selAsigntaura"
+                        onChange={handleSeleccionarAsignatura}
+                    >
+                        <option defaultValue>Seleccione una opción</option>
+                        {                            
+                            asignaturas !== null &&
+                            asignaturas.map((item, i) => (
+                                <option key={"asignaturas" + i} value={item }> {item} </option>
+                            ))                            
+                        }
+                    </select>
+                </div>
+
+            </div>
+
+                {
+                 // Botón Buscar   
+                }
             <div className="col-4">
                 <button onClick={handleObtenerDatosFiltrados} className="btn btn-outline-primary btn-block">Buscar</button>
             </div>

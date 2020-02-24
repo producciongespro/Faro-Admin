@@ -2,39 +2,10 @@
 [  
     {
         "nombre": "Primaria",
-        "categorias": [
-            {
-                "nombre": "I Ciclo",
-                "annos": ["Primero", "Segundo", "Tercero" ],
-                "materias": ["Artes Plásticas", "Español", "Ciencias", "Matemáticas", "Agricultura" ] 
-            },
-            {
-                "nombre": "II Ciclo",
-                "annos": ["Cuarto", "Quinto", "Sexto" ],
-                "materias": ["Artes Plásticas", "Español", "Ciencias", "Matemáticas", "Estudios Sociales" ] 
-            }
-        ]         
-        
+        "asignaturas": ["Artes Plásticas", "Español", "Ciencias", "Matemáticas", "Estudios Sociales" ]                
     },
     {
         "nombre":"Secundaria",
-        "categorias":    [
-            {
-                "nombre": "III Ciclo",
-                "annos": ["Sétimo", "Octavo", "Noveno" ],
-                "materias" : ["Artes Plásticas", "Español", "Ciencias", "Matemáticas" ] 
-            },
-            {
-                "nombre": "IV Ciclo 1",
-                "annos": ["Décimo" ],
-                "materias" : ["Artes Plásticas", "Español", "Biología", "Química", "Física", "Matemáticas", "Psicología"  ] 
-            },
-            {
-                "nombre": "IV Ciclo 2",
-                "annos": ["Undécimo" ],
-                "materias" : [ "Español", "Biología", "Química", "Física", "Matemáticas", "Filosofía"  ] 
-            }
-        ]       
-        
+        "asignaturas" : ["Artes Plásticas", "Español", "Biología", "Química", "Física", "Matemáticas", "Psicología"  ] 
     }
 ]

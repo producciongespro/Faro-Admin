@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import $ from 'jquery';
-import esp from "../data/lang-esp.json";
-import DataTable from 'datatables.net';
+//import DataTable from 'datatables.net';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
 
 var dataset = null;
 
 
-const niveles = ["prescolar", "primaria", "secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
+const niveles = ["Prescolar", "Primaria", "Secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
 //const annosPrimaria = [1, 2, 3, 4, 5, 6];
 //const annosSecundaria = [7, 8, 9, 10, 11];
 //const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes plásticas"];
@@ -17,8 +15,7 @@ const niveles = ["prescolar", "primaria", "secundaria", "Educación intercultura
 
 
 
-function VerRecursos() {
-    //const [dataFiltrados, setDataFiltrados] = useState(null);
+function VerRecursos() {    
     const [nivel, setNivel] = useState(null);
     const [tablaFiltrada, setTablaFiltrada] = useState(null);
     const [datosListos, setDatosListos] = useState(false);
@@ -41,19 +38,7 @@ function VerRecursos() {
 
     useEffect (()=>{
         //Cada vez que un estado cambie
-        console.log("nivel",nivel);
-        let table;
-        if ($.fn.dataTable.isDataTable('#tblNivel')) {
-            table = $('#tblNivel').DataTable(
-                //{language: esp}
-            );
-        }
-        else {
-            table = $('#tblNivel').DataTable({
-                language: esp,
-                paging: false
-            });
-        }
+        console.log("nivel",nivel);       
         
     })
 
@@ -68,9 +53,9 @@ function VerRecursos() {
         let tmpData = filtrar(dataset, "nivel", nivel);
         //Controlador Render tabla que selecciona materias y año       
         switch (nivel) {
-            case "prescolar":
-            case "primaria":
-            case "secundaria":
+            case "Prescolar":
+            case "Primaria":
+            case "Secundaria":
                 setTablaFiltrada(renderTablaConMateria(tmpData))
                 break;
             case "Educación Jóvenes y adultos":

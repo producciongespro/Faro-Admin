@@ -1,17 +1,8 @@
-function obtener(url, cb ) {
-
-    fetch(url, cb )
-    .then((response) => {
-      return response.json();
-    })
-    .then((json) => {
-      //console.log(json);
-      cb(json);
-    })
-    .catch(function(err) {
-       console.log("Error:", err);       
-      });
-
+async function obtener (url) {
+  const response = await fetch(url);
+  const json = await response.json();
+  //console.log(json);
+  return json;
 }
 
 

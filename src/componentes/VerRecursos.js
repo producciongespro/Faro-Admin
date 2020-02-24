@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-//import DataTable from 'datatables.net';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
+import niveles from '../data/niveles.json';
+
 
 var dataset = null;
 
 
-const niveles = ["Prescolar", "Primaria", "Secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
-//const annosPrimaria = [1, 2, 3, 4, 5, 6];
-//const annosSecundaria = [7, 8, 9, 10, 11];
-//const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes plásticas"];
-//const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios sociales", "Artes plásticas"];
+async function obtenerDatos(cb) {
+    dataset = await obtener("http://localhost/faro/webservices/obtener_recursos.php");
+    //niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")
+    console.log("niveles", niveles);    
+    console.log("dataset", dataset);
+    cb()
 
-
+}
 
 
 function VerRecursos() {    
@@ -21,19 +23,13 @@ function VerRecursos() {
     const [datosListos, setDatosListos] = useState(false);
 
 
-
-
-  
+    
 
 
     useEffect(() => {  
-        //Didmount              
-        //Se hace petición Ajax 
-         obtener("http://localhost/faro/webservices/obtener_recursos.php", function (data) {
-            dataset = data;
-            console.log("dataset:", dataset);
+        obtenerDatos(function () { 
             setDatosListos(true)               
-            })               
+         });
         },[] );
 
     useEffect (()=>{
@@ -53,7 +49,7 @@ function VerRecursos() {
         let tmpData = filtrar(dataset, "nivel", nivel);
         //Controlador Render tabla que selecciona materias y año       
         switch (nivel) {
-            case "Prescolar":
+            case "Preescolar":
             case "Primaria":
             case "Secundaria":
                 setTablaFiltrada(renderTablaConMateria(tmpData))
@@ -188,7 +184,7 @@ function VerRecursos() {
                         <option defaultValue>Seleccione un nivel</option>
                         {
                             niveles.map((item, i) => (
-                                <option key={"Nivel" + i} value={item}> {item} </option>
+                                <option key={"Nivel" + i} value={item.nombre }> {item.nombre} </option>
                             ))
                         }
                     </select>

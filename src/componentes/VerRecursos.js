@@ -167,7 +167,7 @@ function VerRecursos() {
                                             <i className="fas fa-pencil-alt"></i>
                                         </td>
                                         <td>
-                                            <i className="far fa-trash-alt"></i>
+                                            <i id={item.id}  onClick={handleEliminar} className="far fa-trash-alt"></i>
                                         </td>
                                     </tr>
                                 ))
@@ -178,6 +178,11 @@ function VerRecursos() {
             </React.Fragment>
         )
         return tmpTabla;
+    }
+
+    const handleEliminar = (e)=>{
+        console.log("id a eliminar", e.target.id);
+        
     }
 
 

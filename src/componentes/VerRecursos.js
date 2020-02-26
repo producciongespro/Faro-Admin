@@ -10,16 +10,14 @@ import enviar from '../modulos/enviar';
 import config from '../config.json';
 
 var asignaturas= null;
-var asignatura= null;
 var datosJson= null;
-
+var datosPorNivel=null;
 
 
 function VerRecursos() {  
     const [datosFiltrados, setDatosFiltrados]= useState(null);       
     const [datosListos, setDatosListos]= useState(false);
-
-
+    
     async function obtenerDatos() {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");        
         console.log("datosJson", datosJson);        
@@ -34,7 +32,7 @@ function VerRecursos() {
         },[] );
 
     useEffect (()=>{       
-        console.log("Datos filtrados:", datosFiltrados);         
+        //console.log("Datos filtrados:", datosFiltrados);         
     })
 
  
@@ -58,24 +56,30 @@ function VerRecursos() {
 
 
     const handleSeleccionarNivel = (e) => {   
-        const target = e.target;
+        const target = e.target;        
         const nivel = target.value;
         const indice = target[target.selectedIndex].getAttribute('data-indice');
-        console.log("indice", indice);
+        console.log("indice nivel", indice);
         asignaturas = niveles[indice].asignaturas;
-        filtrarPorNivel(nivel);
+        //Filtra array por nivel y lo carga en el estado datosFiltrados:
+        datosPorNivel = filtrar(datosJson, "nivel", nivel  );
+        setDatosFiltrados(datosPorNivel);        
     }
 
-    const handleSeleccionarAsignatura =(e)=> {
-        //console.log("Asignatura", e.target.value);
-        asignatura = e.target.value;
+    
+
+
+    const handleSeleccionarAsignatura =(e)=> {        
+        const asignatura = e.target.value;
+        console.log("Asignatura", asignatura);
+        if (asignatura !== "Todas") {
+            const tmpData = filtrar(datosPorNivel, "materia", asignatura);
+            setDatosFiltrados(tmpData);            
+        } else {
+            setDatosFiltrados(datosPorNivel);            
+        }
         
-    }
 
-    const filtrarPorNivel = (nivel) => {
-        //Obtiene un array con el nivel filtrado
-        const tmpData = filtrar(datosJson, "nivel", nivel);
-        setDatosFiltrados(tmpData);
     }
 
 
@@ -127,7 +131,7 @@ function VerRecursos() {
                         id="selAsigntaura"
                         onChange={handleSeleccionarAsignatura}
                     >
-                        <option defaultValue>Seleccione una opción</option>
+                        <option defaultValue value="Todas">Todas</option>
                         {                            
                             asignaturas !== null &&
                             asignaturas.map((item, i) => (

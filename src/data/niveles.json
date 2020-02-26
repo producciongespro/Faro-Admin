@@ -2,10 +2,10 @@
 [  
     {
         "nombre": "Primaria",
-        "asignaturas": ["Artes Plásticas", "Español", "Ciencias", "Matemáticas", "Estudios Sociales" ]                
+        "asignaturas": ["Artes Plásticas", "Español", "Ciencias", "Matemática", "Estudios Sociales" ]                
     },
     {
         "nombre":"Secundaria",
-        "asignaturas" : ["Artes Plásticas", "Español", "Biología", "Química", "Física", "Matemáticas", "Psicología"  ] 
+        "asignaturas" : ["Artes Plásticas", "Español", "Biología", "Química", "Física", "Matemática", "Psicología"  ] 
     }
 ]

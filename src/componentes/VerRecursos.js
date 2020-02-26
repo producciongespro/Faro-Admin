@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Tabla from './Tabla';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
@@ -8,52 +9,35 @@ import niveles from '../data/niveles.json';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
 
-
-
-
-
+var asignaturas= null;
+var asignatura= null;
+var datosJson= null;
 
 
 
 function VerRecursos() {  
-    const [arrayData, setArrayData]= useState(null);
-    const [nivel, setNivel] = useState(null);
-    const [asignatura, setAsignatura ]= useState(null);
-    const [asignaturas, setAsignaturas]= useState(null);
-    const [tablaFiltrada, setTablaFiltrada]= useState(null);
+    const [datosFiltrados, setDatosFiltrados]= useState(null);       
     const [datosListos, setDatosListos]= useState(false);
 
 
-    async function obtenerDatos(cb) {
-        const tmpData = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
-        setArrayData(tmpData);
-        //niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")
-        console.log("niveles", niveles);            
-        cb()    
+    async function obtenerDatos() {
+        datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");        
+        console.log("datosJson", datosJson);        
+        setDatosListos(true);
+        //TODO: niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")        
     }
 
 
     useEffect(() => {  
-        setup();
+        console.log("Componente montado");        
+        obtenerDatos();
         },[] );
 
-    useEffect (()=>{
-        //Cada vez que un estado cambie
-        console.log("nivel",nivel);       
-        console.log("asignaturas",asignaturas);               
-        console.log("Asignatura seleccionda", asignatura); 
-        console.log("DATA cargado:", arrayData); 
-        if (arrayData !== null) {
-            handleObtenerDatosFiltrados();
-        }            
+    useEffect (()=>{       
+        console.log("Datos filtrados:", datosFiltrados);         
     })
 
-    const setup =()=>{
-        obtenerDatos(function () { 
-            setDatosListos(true)               
-         });
-    }
-
+ 
 
     const handleEliminarRecurso =(e)=> {
         const id = e.target.id;
@@ -64,8 +48,7 @@ function VerRecursos() {
                 config.nombre+" "+config.version, 
                 param, 
                 function(){ 
-                  console.log("ok");
-                  setup();
+                  console.log("ok");                  
                   //handleObtenerDatosFiltrados();
                  }
                 );          
@@ -76,137 +59,28 @@ function VerRecursos() {
 
     const handleSeleccionarNivel = (e) => {   
         const target = e.target;
-        setNivel(target.value);
+        const nivel = target.value;
         const indice = target[target.selectedIndex].getAttribute('data-indice');
         console.log("indice", indice);
-        setAsignaturas( niveles[indice].asignaturas )        
+        asignaturas = niveles[indice].asignaturas;
+        filtrarPorNivel(nivel);
     }
 
     const handleSeleccionarAsignatura =(e)=> {
         //console.log("Asignatura", e.target.value);
-        setAsignatura(e.target.value);
+        asignatura = e.target.value;
         
     }
 
-    const handleObtenerDatosFiltrados = () => {
+    const filtrarPorNivel = (nivel) => {
         //Obtiene un array con el nivel filtrado
-        const tmpData = filtrar(arrayData, "nivel", nivel);
-        //Controlador Render tabla que selecciona materias y año       
-        switch (nivel) {
-            case "Preescolar":
-            case "Primaria":
-            case "Secundaria":
-                setTablaFiltrada(renderTablaConMateria(tmpData))
-                break;
-            case "Educación Jóvenes y adultos":
-            case "Programa Bandera Azul":
-            case "Programa Nacional de Ferias":
-            case "Educación intercultural":
-                setTablaFiltrada(renderTablaSinMateria(tmpData))
-                break;
-            default:
-                console.log("Nivel no definido en controlador render tabla");
-                setTablaFiltrada("No se encuentran resultados")
-                break;
-        }
+        const tmpData = filtrar(datosJson, "nivel", nivel);
+        setDatosFiltrados(tmpData);
     }
 
 
 
-    const renderTablaConMateria = (array) => {
-        let tmpTabla;
-        // array.length === 0 ?         
-        // tmpTabla = <span>No se encontraron registros para este nivel. </span>  
-        // :              
-        tmpTabla = (
-            <React.Fragment>
-                <table id="tblNivel" className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Asignatura</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Año</th>
-                            <th scope="col"> Editar </th>
-                            <th scope="col"> Eliminar </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            array !== null &&
-                            (
-                                array.map((item, i) => (
-
-                                    item.materia === asignatura && 
-                                    (
-                                        <tr key={"recurso" + i}>
-                                        <th scope="row">{i + 1}</th>
-                                        <td>{item.materia}</td>
-                                        <td>{item.nombre}</td>
-                                        <td>{item.anno}</td>
-                                        <td>
-                                            <i className="fas fa-pencil-alt"></i>
-                                        </td>
-                                        <td>
-                                            <i id={item.id} onClick={handleEliminarRecurso} className="far fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                    )
-
-                                ))
-                            )
-                        }
-                    </tbody>
-                </table>
-            </React.Fragment>
-        )
-        return tmpTabla;
-    }
-
-    const renderTablaSinMateria = (array) => {
-        let tmpTabla;
-        // array.length === 0 ?         
-        // tmpTabla = <span>No se encontraron registros para este nivel. </span>  
-        // :        
-        tmpTabla = (
-            <React.Fragment>
-                <table id="tblNivel" className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col"> Editar </th>
-                            <th scope="col"> Eliminar </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            array !== null &&
-                            (
-                                array.map((item, i) => (
-                                    <tr key={"recurso" + i}>
-                                        <th scope="row">{i + 1}</th>
-                                        <td>{item.nombre}</td>
-                                        <td>{item.descripcion}</td>
-                                        <td>
-                                            <i className="fas fa-pencil-alt"></i>
-                                        </td>
-                                        <td>
-                                            <i className="far fa-trash-alt"></i>
-                                        </td>
-                                    </tr>
-                                ))
-                            )
-                        }
-                    </tbody>
-                </table>
-            </React.Fragment>
-        )
-        return tmpTabla;
-    }
+    
 
 
     return (
@@ -267,12 +141,9 @@ function VerRecursos() {
 
                 {
                  // Botón Buscar   
-                }
-            <div className="col-4">
-                <button onClick={handleObtenerDatosFiltrados} className="btn btn-outline-primary btn-block">Buscar</button>
-            </div>
+                }            
         </div>
-        {tablaFiltrada}
+        <Tabla array={datosFiltrados}  handleEliminarRecurso={handleEliminarRecurso} />
     </React.Fragment>
          :        
             <span>Obteniendo datos del servidor. Por favor espere... </span>          

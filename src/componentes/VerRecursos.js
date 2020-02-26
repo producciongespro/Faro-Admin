@@ -42,7 +42,10 @@ function VerRecursos() {
         console.log("nivel",nivel);       
         console.log("asignaturas",asignaturas);               
         console.log("Asignatura seleccionda", asignatura); 
-        console.log("DATA cargado:", arrayData);       
+        console.log("DATA cargado:", arrayData); 
+        if (arrayData !== null) {
+            handleObtenerDatosFiltrados();
+        }            
     })
 
     const setup =()=>{
@@ -63,6 +66,7 @@ function VerRecursos() {
                 function(){ 
                   console.log("ok");
                   setup();
+                  //handleObtenerDatosFiltrados();
                  }
                 );          
          } )        

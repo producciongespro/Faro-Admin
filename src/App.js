@@ -1,11 +1,12 @@
 import React, {useState}  from 'react';
 import Inicio from './componentes/Inicio';
+import Prueba from './componentes/Prueba';
 import Menu from './componentes/Menu';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 import './App.css';
 
-const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>   ]
+const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Prueba/>   ]
 
 function App() {
   const [componente, setComponente] = useState(null);
@@ -34,6 +35,7 @@ function App() {
               ) :
               (
                 <Inicio/>
+                //<Prueba/>
               )
                 
               }          

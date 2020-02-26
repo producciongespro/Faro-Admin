@@ -10,25 +10,30 @@ import enviar from '../modulos/enviar';
 import config from '../config.json';
 
 var asignaturas= null;
+var nivel=null;
+var asignatura=null;
 var datosJson= null;
 var datosPorNivel=null;
+
 
 
 function VerRecursos() {  
     const [datosFiltrados, setDatosFiltrados]= useState(null);       
     const [datosListos, setDatosListos]= useState(false);
     
-    async function obtenerDatos() {
+    async function obtenerDatos( cb ) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");        
         console.log("datosJson", datosJson);        
-        setDatosListos(true);
+        cb()
         //TODO: niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")        
     }
 
 
     useEffect(() => {  
         console.log("Componente montado");        
-        obtenerDatos();
+        obtenerDatos(function () { 
+            setDatosListos(true);
+         });
         },[] );
 
     useEffect (()=>{       
@@ -47,7 +52,12 @@ function VerRecursos() {
                 param, 
                 function(){ 
                   console.log("ok");                  
-                  //handleObtenerDatosFiltrados();
+                  obtenerDatos(function () { 
+                        //Array filtrado Por nivel
+                        datosPorNivel = filtrar(datosJson, "nivel", nivel  );
+                        //Asignatura
+                        filtrarPorAsignatura();
+                   });
                  }
                 );          
          } )        
@@ -57,7 +67,7 @@ function VerRecursos() {
 
     const handleSeleccionarNivel = (e) => {   
         const target = e.target;        
-        const nivel = target.value;
+        nivel = target.value;
         const indice = target[target.selectedIndex].getAttribute('data-indice');
         console.log("indice nivel", indice);
         asignaturas = niveles[indice].asignaturas;
@@ -70,16 +80,18 @@ function VerRecursos() {
 
 
     const handleSeleccionarAsignatura =(e)=> {        
-        const asignatura = e.target.value;
+        asignatura = e.target.value;
         console.log("Asignatura", asignatura);
+        filtrarPorAsignatura();
+    }
+
+    const filtrarPorAsignatura =()=>{
         if (asignatura !== "Todas") {
             const tmpData = filtrar(datosPorNivel, "materia", asignatura);
             setDatosFiltrados(tmpData);            
         } else {
             setDatosFiltrados(datosPorNivel);            
-        }
-        
-
+        } 
     }
 
 

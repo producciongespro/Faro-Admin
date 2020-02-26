@@ -24,7 +24,7 @@ export default function FormEnviarRecurso() {
     const valorescheck = obtenerValoresCheck("anno");
     data.anno = valorescheck;
     data.id_usuario = "2";
-    enviar("http://localhost/faro/webservices/registrar_recurso.php", data, function (respuesta) {
+    enviar( config.servidor + "faro/webservices/registrar_recurso.php", data, function (respuesta) {
       alertify.alert(
                 config.nombre+" "+config.version, 
                 respuesta, 

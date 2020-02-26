@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
 import niveles from '../data/niveles.json';
+import enviar from '../modulos/enviar';
+import config from '../config.json';
 
 
 var dataset = null;
 
 
 async function obtenerDatos(cb) {
-    dataset = await obtener("http://localhost/faro/webservices/obtener_recursos.php");
+    dataset = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
     //niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")
     console.log("niveles", niveles);    
     console.log("dataset", dataset);
@@ -37,6 +42,22 @@ function VerRecursos() {
         console.log("asignaturas",asignaturas);               
         console.log("Asignatura seleccionda", asignatura);        
     })
+
+
+    const handleEliminarRecurso =(e)=> {
+        const id = e.target.id;
+        const data = {"id": id,"id_usuario": "106" };
+        enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (param) { 
+            //console.log("param",param);  
+            alertify.alert(
+                config.nombre+" "+config.version, 
+                param, 
+                function(){ 
+                  console.log("ok");                  
+                 }
+                );          
+         } )        
+    }
 
 
 
@@ -117,7 +138,7 @@ function VerRecursos() {
                                             <i className="fas fa-pencil-alt"></i>
                                         </td>
                                         <td>
-                                            <i className="far fa-trash-alt"></i>
+                                            <i id={item.id} onClick={handleEliminarRecurso} className="far fa-trash-alt"></i>
                                         </td>
                                     </tr>
                                     )

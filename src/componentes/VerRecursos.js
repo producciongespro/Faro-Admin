@@ -9,39 +9,47 @@ import enviar from '../modulos/enviar';
 import config from '../config.json';
 
 
-var dataset = null;
 
 
-async function obtenerDatos(cb) {
-    dataset = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
-    //niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")
-    console.log("niveles", niveles);    
-    console.log("dataset", dataset);
-    cb()
-
-}
 
 
-function VerRecursos() {    
+
+
+function VerRecursos() {  
+    const [arrayData, setArrayData]= useState(null);
     const [nivel, setNivel] = useState(null);
-    const [asignatura, setAsignatura ] = useState(null);
-    const [asignaturas, setAsignaturas] = useState(null);
-    const [tablaFiltrada, setTablaFiltrada] = useState(null);
-    const [datosListos, setDatosListos] = useState(false);
+    const [asignatura, setAsignatura ]= useState(null);
+    const [asignaturas, setAsignaturas]= useState(null);
+    const [tablaFiltrada, setTablaFiltrada]= useState(null);
+    const [datosListos, setDatosListos]= useState(false);
+
+
+    async function obtenerDatos(cb) {
+        const tmpData = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
+        setArrayData(tmpData);
+        //niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")
+        console.log("niveles", niveles);            
+        cb()    
+    }
 
 
     useEffect(() => {  
-        obtenerDatos(function () { 
-            setDatosListos(true)               
-         });
+        setup();
         },[] );
 
     useEffect (()=>{
         //Cada vez que un estado cambie
         console.log("nivel",nivel);       
         console.log("asignaturas",asignaturas);               
-        console.log("Asignatura seleccionda", asignatura);        
+        console.log("Asignatura seleccionda", asignatura); 
+        console.log("DATA cargado:", arrayData);       
     })
+
+    const setup =()=>{
+        obtenerDatos(function () { 
+            setDatosListos(true)               
+         });
+    }
 
 
     const handleEliminarRecurso =(e)=> {
@@ -53,7 +61,8 @@ function VerRecursos() {
                 config.nombre+" "+config.version, 
                 param, 
                 function(){ 
-                  console.log("ok");                  
+                  console.log("ok");
+                  setup();
                  }
                 );          
          } )        
@@ -77,7 +86,7 @@ function VerRecursos() {
 
     const handleObtenerDatosFiltrados = () => {
         //Obtiene un array con el nivel filtrado
-        let tmpData = filtrar(dataset, "nivel", nivel);
+        const tmpData = filtrar(arrayData, "nivel", nivel);
         //Controlador Render tabla que selecciona materias y año       
         switch (nivel) {
             case "Preescolar":
@@ -91,13 +100,11 @@ function VerRecursos() {
             case "Educación intercultural":
                 setTablaFiltrada(renderTablaSinMateria(tmpData))
                 break;
-
             default:
                 console.log("Nivel no definido en controlador render tabla");
                 setTablaFiltrada("No se encuentran resultados")
                 break;
         }
-
     }
 
 

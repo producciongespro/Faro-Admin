@@ -10,7 +10,7 @@ import enviar from '../modulos/enviar';
 import config from '../config.json';
 
 var asignaturas = null;
-var nivel = null;
+var idNivel = null;
 var asignatura = null;
 var datosJson = null;
 var datosPorNivel = null;
@@ -24,14 +24,14 @@ function VerRecursos() {
 
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
-        console.log("datosJson", datosJson);
+        //console.log("datosJson", datosJson);
         cb()
         //TODO: niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")        
     }
 
 
     useEffect(() => {
-        console.log("Componente montado");
+       // console.log("Componente montado");
         obtenerDatos(function () {
             setDatosListos(true);
         });
@@ -39,7 +39,7 @@ function VerRecursos() {
 
     useEffect(() => {
         //console.log("Datos filtrados:", datosFiltrados);         
-        console.log("En Espera", esperando);
+        //console.log("En Espera", esperando);
 
     })
 
@@ -51,40 +51,30 @@ function VerRecursos() {
 
         alertify.confirm("¿Desea realmente eliminar el recurso?",
             function () {
-
                 enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (param) {
                     //console.log("param",param);  
                     alertify.success(param);
                     setEsperando(true);
                     obtenerDatos(function () {
                         //Array filtrado Por nivel
-                        datosPorNivel = filtrar(datosJson, "nivel", nivel);
+                        datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
                         //Asignatura
                         filtrarPorAsignatura();
                         setEsperando(false);
                     });                    
-                })
-                
-            });
+                })                
+            });      
+}
 
 
 
-
-
-
-      
-    }
-
-
-
-    const handleSeleccionarNivel = (e) => {
-        const target = e.target;
-        nivel = target.value;
-        const indice = target[target.selectedIndex].getAttribute('data-indice');
-        console.log("indice nivel", indice);
-        asignaturas = niveles[indice].asignaturas;
+    const handleSeleccionarNivel = (e) => {        
+        idNivel = e.target.value;        
+        //console.log("indice nivel", idNivel);
+        asignaturas = filtrar(niveles, "id", idNivel)[0].asignaturas;
+        //console.log("asignaturas",asignaturas);        
         //Filtra array por nivel y lo carga en el estado datosFiltrados:
-        datosPorNivel = filtrar(datosJson, "nivel", nivel);
+        datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
         setDatosFiltrados(datosPorNivel);
     }
 
@@ -136,7 +126,7 @@ function VerRecursos() {
                                 <option defaultValue>Seleccione un nivel</option>
                                 {
                                     niveles.map((item, i) => (
-                                        <option key={"Nivel" + i} data-indice={i} value={item.nombre}> {item.nombre} </option>
+                                        <option key={"Nivel" + i} value={item.id}> {item.nombre} </option>
                                     ))
                                 }
                             </select>

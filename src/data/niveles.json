@@ -1,10 +1,16 @@
-
 [  
     {
+        "id": "1",
+        "nombre": "Preescolar",
+        "asignaturas": []                
+    },
+    {
+        "id": "2",
         "nombre": "Primaria",
         "asignaturas": ["Artes Plásticas", "Español", "Ciencias", "Matemática", "Estudios Sociales" ]                
     },
     {
+        "id": "3",
         "nombre":"Secundaria",
         "asignaturas" : ["Artes Plásticas", "Español", "Biología", "Química", "Física", "Matemática", "Psicología"  ] 
     }

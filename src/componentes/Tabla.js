@@ -2,7 +2,7 @@ import React from 'react';
 
 function Tabla (props) {
     return (
-        <table id="tblNivel" className="table table-striped">
+        <table id="tblNivel" className={props.clase}>
         <thead>
             <tr>
                 <th scope="col">#</th>                

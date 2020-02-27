@@ -11,7 +11,7 @@ import config from '../config.json';
 
 var asignaturas = null;
 var idNivel = null;
-var asignatura = null;
+var asignatura = "Todas";
 var datosJson = null;
 var datosPorNivel = null;
 
@@ -24,7 +24,7 @@ function VerRecursos() {
 
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
-        //console.log("datosJson", datosJson);
+        console.log("datosJson", datosJson);
         cb()
         //TODO: niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")        
     }
@@ -88,7 +88,9 @@ function VerRecursos() {
     }
 
     const filtrarPorAsignatura = () => {
-        if (asignatura !== "Todas") {
+        console.log("Asignatura en filtrar nivel", asignatura);
+        
+        if (asignatura !== "Todas" )  {
             const tmpData = filtrar(datosPorNivel, "materia", asignatura);
             setDatosFiltrados(tmpData);
         } else {
@@ -163,11 +165,11 @@ function VerRecursos() {
                 </div>
                     {
                         esperando ?
-                        (
-                            <span>Por favor espere...</span>
+                        (                          
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  clase="table table-striped sombreado" />
                         ):
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} />
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  clase="table table-striped" />
                         )
                     }
                         

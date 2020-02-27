@@ -43,8 +43,6 @@ function VerRecursos() {
 
     })
 
-
-
     const handleEliminarRecurso = (e) => {
         const id = e.target.id;
         const data = { "id": id, "id_usuario": "106" };
@@ -64,9 +62,7 @@ function VerRecursos() {
                     });                    
                 })                
             });      
-}
-
-
+    }
 
     const handleSeleccionarNivel = (e) => {        
         idNivel = e.target.value;        
@@ -77,9 +73,6 @@ function VerRecursos() {
         datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
         setDatosFiltrados(datosPorNivel);
     }
-
-
-
 
     const handleSeleccionarAsignatura = (e) => {
         asignatura = e.target.value;
@@ -97,9 +90,6 @@ function VerRecursos() {
             setDatosFiltrados(datosPorNivel);
         }
     }
-
-
-
 
 
 

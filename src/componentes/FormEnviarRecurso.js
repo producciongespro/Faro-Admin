@@ -43,6 +43,20 @@ export default function FormEnviarRecurso() {
     setNivel(parseInt(getValues().id_nivel));
   }
 
+  const handleValidarEducatico =(e)=>{
+    const  str = e.target.value;
+    console.log("Valor obtenido", str);    
+    const patt = new RegExp("www.mep.go.cr/educatico");
+    const res = patt.test(str);
+    console.log("Resultado", res);
+    if (res!==true) {
+      alertify
+        .alert("La url del recruso debe provenir de educatico.", function(){
+        console.log("Aceptar");        
+  });
+    }
+            
+  }
 
 
 
@@ -102,7 +116,7 @@ export default function FormEnviarRecurso() {
                   )
                 }
                 {
-                  //Caso de secudnaria
+                  //Caso de secundaria
                   nivel === 2 &&
                   (
                     asignaturaSecundaria.map((item, i) => (
@@ -126,6 +140,27 @@ export default function FormEnviarRecurso() {
         </div>
           {errors.nombre && <p className="error" >Nombre requerido</p>}
 
+          {
+          //URL
+        }
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" >URL</span>
+          </div>
+          <input
+            onBlur={handleValidarEducatico}
+            type="text"
+            name="url"
+            id="txtUrl"
+            className="form-control"
+            aria-label="Default"
+            placeholder="Escriba la dirección web del recurso en Educatico."
+            ref={register({ required: true })}
+          />          
+        </div>
+        {errors.url && <p className="error">URL requerido</p>}
+
+
         {
           //DESCRIPCIÓN: 
         }
@@ -146,24 +181,7 @@ export default function FormEnviarRecurso() {
         <br />
 
 
-        {
-          //URL
-        }
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" >URL</span>
-          </div>
-          <input
-            type="text"
-            name="url"
-            id="txtUrl"
-            className="form-control"
-            aria-label="Default"
-            placeholder="Escriba la dirección web del recurso en Educatico."
-            ref={register({ required: true })}
-          />          
-        </div>
-        {errors.url && <p className="error">URL requerido</p>}
+        
 
         {
           //Apoyo educativo

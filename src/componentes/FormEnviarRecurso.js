@@ -162,6 +162,26 @@ export default function FormEnviarRecurso() {
 
 
         {
+          //URL IMAGEN
+        }
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" >URL Imagen</span>
+          </div>
+          <input            
+            type="text"
+            name="img_educatico"
+            id="txtUrlImagen"
+            className="form-control"
+            aria-label="Default"
+            placeholder="Coloque la dirección web de la imagen miniatura del recurso."
+            ref={register({ required: true })}
+          />          
+        </div>
+        {errors.url && <p className="error">URL requerido</p>}
+
+
+        {
           //DESCRIPCIÓN: 
         }
         <div className="input-group">

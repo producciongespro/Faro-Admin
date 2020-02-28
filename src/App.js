@@ -2,7 +2,6 @@ import React, {useState}  from 'react';
 import Inicio from './componentes/Inicio';
 import Prueba from './componentes/Prueba';
 import Menu from './componentes/Menu';
-import Modalc from './componentes/Modal';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 
@@ -35,9 +34,9 @@ function App() {
                 componente
               ) :
               (
-                //<Inicio/>
+                <Inicio/>
                 //<Prueba/>
-                <Modalc/>
+                
               )
                 
               }          

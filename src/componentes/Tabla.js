@@ -23,7 +23,7 @@ function Tabla (props) {
                                 <td>{item.nombre}</td>
                                 <td>{item.anno}</td>
                                 <td>
-                                    <i className="fas fa-pencil-alt"></i>
+                                    <i id={item.id} onClick={props.handleShow} className="fas fa-pencil-alt"></i>
                                 </td>
                                 <td>
                                     <i id={item.id} onClick={props.handleEliminarRecurso} className="far fa-trash-alt"></i>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import Tabla from './Tabla';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
@@ -21,6 +22,10 @@ function VerRecursos() {
     const [datosFiltrados, setDatosFiltrados] = useState(null);
     const [datosListos, setDatosListos] = useState(false);
     const [esperando, setEsperando] = useState(false);
+    const [show, setShow] = useState(false);
+    //Abrir o cerrar modal
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
@@ -65,7 +70,7 @@ function VerRecursos() {
     }
 
     const handleSeleccionarNivel = (e) => {        
-        idNivel = e.target.value;        
+        idNivel = e.target.value.toString();        
         //console.log("indice nivel", idNivel);
         asignaturas = filtrar(niveles, "id", idNivel)[0].asignaturas;
         //console.log("asignaturas",asignaturas);        
@@ -159,14 +164,39 @@ function VerRecursos() {
                             <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  clase="table table-striped sombreado" />
                         ):
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  clase="table table-striped" />
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  handleShow={handleShow} clase="table table-striped" />
                         )
                     }
-                        
+                    {
+                        //MODAL
+                    }                       
+                    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edición</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">Nombre del recurso</span>
+            </div>
+            <input type="text" className="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cerrar
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Guardar Cambios
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
             </React.Fragment>
             :
-            <span>Obteniendo datos del servidor. Por favor espere... </span>
+            <span>
+                Obteniendo datos del servidor. Por favor espere... 
+            </span>
 
     )
 }

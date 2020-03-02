@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { Button, Modal } from 'react-bootstrap';
 import Tabla from './Tabla';
+import GrupoCheck from './GurpoCheck';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
@@ -29,21 +31,23 @@ function VerRecursos() {
     const [esperando, setEsperando] = useState(false);
     //Objeto que alamacena los campos del registro seleccionado en edición
     const [detalleRecurso, setDetalleRecurso] = useState(null);
+    //Validación form mediante Context Hooks
+    const { register, handleSubmit, errors, getValues } = useForm();
     //Estado para ocultar o mostrar un modal
     const [show, setShow] = useState(false);
     //cerrar modal
     const handleClose = () => setShow(false);
-    
+
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
-        console.log("datosJson", datosJson);
+        //console.log("datosJson", datosJson);
         cb()
         //TODO: niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")        
     }
 
 
     useEffect(() => {
-       // console.log("Componente montado");
+        // console.log("Componente montado");
         obtenerDatos(function () {
             setDatosListos(true);
         });
@@ -71,30 +75,31 @@ function VerRecursos() {
                         //Asignatura
                         filtrarPorAsignatura();
                         setEsperando(false);
-                    });                    
-                })                
-            });      
+                    });
+                })
+            });
     }
 
-    const handleEditarRecurso =(e)=> {
+    const handleEditarRecurso = (e) => {
         const id = e.target.id;
-        console.log("idItem",id);
-        const tmpRecurso = filtrar(datosPorNivel, "id", id );
-        console.log("tmpRecursos",tmpRecurso);
-        
-        
+        //console.log("idItem", id);
+        const tmpRecurso = filtrar(datosPorNivel, "id", id);
+        //console.log("tmpRecursos", tmpRecurso[0]);
+        setDetalleRecurso(tmpRecurso[0]);
+
+
         setShow(true);
     }
 
-    const handleSeleccionarNivel = (e) => {        
+    const handleSeleccionarNivel = (e) => {
         idNivel = parseInt(e.target.value);
         //console.log("indice nivel", idNivel);
         asignaturas = filtrar(niveles, "id", idNivel)[0].asignaturas;
         //console.log("asignaturas",asignaturas);        
         //Filtra array por nivel y lo carga en el estado datosFiltrados:
         datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
-        console.log("datosPorNivel",datosPorNivel);
-        
+        console.log("datosPorNivel", datosPorNivel);
+
         setDatosFiltrados(datosPorNivel);
     }
 
@@ -106,8 +111,8 @@ function VerRecursos() {
 
     const filtrarPorAsignatura = () => {
         console.log("Asignatura en filtrar nivel", asignatura);
-        
-        if (asignatura !== "Todas" )  {
+
+        if (asignatura !== "Todas") {
             const tmpData = filtrar(datosPorNivel, "materia", asignatura);
             setDatosFiltrados(tmpData);
         } else {
@@ -177,44 +182,100 @@ function VerRecursos() {
                         // Botón Buscar   
                     }
                 </div>
-                    {
-                        esperando ?
-                        (                          
-                            <Tabla array={datosFiltrados} clase="table table-striped sombreado" />
-                        ):
+                {
+                    esperando ?
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  handleShow={handleEditarRecurso} clase="table table-striped" />
+                            <Tabla array={datosFiltrados} clase="table table-striped sombreado" />
+                        ) :
+                        (
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" />
                         )
-                    }
-                    {
-                        //MODAL
-                    }                       
-                    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edición</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="basic-addon1">Nombre del recurso</span>
-            </div>
-            <input type="text" className="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" />
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Cerrar
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Guardar Cambios
-            </Button>
-          </Modal.Footer>
-        </Modal>
+                }
+                {
+                    //MODAL
+                }
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edición</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {
+                            detalleRecurso !== null &&
+                            (
+                                <form action="" method="post">
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" id="spnNombreRecurso">Nombre del recurso</span>
+                                        </div>
+                                        <input type="text" className="form-control" placeholder="Nombre" defaultValue={detalleRecurso.nombre} aria-describedby="spnNombreRecurso" />
+                                    </div>
+
+                                    <div className="input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text">Descripción:</span>
+                                        </div>
+                                        <textarea className="form-control" defaultValue={detalleRecurso.descripcion} aria-label="With textarea"></textarea>
+                                    </div>
+                                    <br />
+                                    {
+                                        //URL
+                                    }
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" >URL</span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="url"
+                                            id="txtUrl"
+                                            className="form-control"
+                                            aria-label="Default"
+                                            placeholder="Escriba la dirección web del recurso en Educatico."
+                                            defaultValue={detalleRecurso.url}
+                                            ref={register({ required: true })}
+                                        />
+                                    </div>
+                                    {errors.url && <p className="error">URL requerido</p>}
+
+                                                                {
+                                    //Año por nivel          
+                                    }
+                                    <GrupoCheck nivel= { parseInt(detalleRecurso.id_nivel) } nombre="anno" listaAnnos={detalleRecurso.anno} />
+
+                                    {
+                                        //URL IMAGEN
+                                    }
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" >URL Imagen</span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="img_educatico"
+                                            id="txtUrlImagen"
+                                            className="form-control"
+                                            aria-label="Default"
+                                            placeholder="Coloque la dirección web de la imagen miniatura del recurso."
+                                            defaultValue={detalleRecurso.img_educatico}
+                                            ref={register({ required: true })}
+                                        />
+                                    </div>
+                                    {errors.url && <p className="error">URL requerido</p>}
+                                </form>
+                            )
+                        }
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            <i className="far fa-save"></i>
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
 
             </React.Fragment>
             :
             <span>
-                Obteniendo datos del servidor. Por favor espere... 
+                Obteniendo datos del servidor. Por favor espere...
             </span>
 
     )

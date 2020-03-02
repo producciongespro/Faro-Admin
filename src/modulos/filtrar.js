@@ -1,9 +1,8 @@
 function filtrar (array, llave, valor ) {    
     
-    console.log("*********Filtro por criterio llave", llave);    
-    console.log("******Valor de la llave", valor );
-    
-    console.log("aaray recibido para filtrar", array);         
+    //console.log("*********Filtro por criterio llave", llave);    
+    //console.log("******Valor de la llave", valor );    
+    //console.log("aaray recibido para filtrar", array);         
     
     if (array.length > 0) {
         const limite = array.length;
@@ -24,7 +23,7 @@ function filtrar (array, llave, valor ) {
                 
         }                 
     }
-    console.log("Arreglo retornado", tmpData);    
+    //console.log("Arreglo retornado", tmpData);    
     return tmpData;
 }
 

@@ -7,11 +7,11 @@ import GrupoCheck from './GurpoCheck';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
+import niveles from '../data/niveles.json';
 
 //console.log("config", config);
 
-const niveles = ["Prescolar", "Primaria", "Secundaria", "Educación intercultural", "Educación Jóvenes y adultos", "Programa Nacional de Ferias", "Programa Bandera Azul"];
-const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes plásticas"];
+const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes Plásticas"];
 const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios sociales", "Artes plásticas"];
 
 export default function FormEnviarRecurso() {
@@ -83,7 +83,7 @@ export default function FormEnviarRecurso() {
             <option defaultValue value={-1} >Seleccione un nivel</option>
             {
               niveles.map((item, i) => (
-                <option key={"nivel" + i} value={i}> {item} </option>
+                <option key={"nivel" + i } value={item.id }> {item.nombre } </option>
               ))
             }
           </select>
@@ -98,7 +98,8 @@ export default function FormEnviarRecurso() {
 
         {
           //ASIGNATURA (MATERIA) POR NIVEL : 
-          (nivel === 1 || nivel === 2) &&
+          // Primaria y secundaria solamente
+          (nivel === 2 || nivel === 3) &&
           (
             <div className="input-group mb-3">
               <div className="input-group-prepend">
@@ -108,7 +109,7 @@ export default function FormEnviarRecurso() {
                 <option defaultValue value={-1} >Seleccione la asignatura</option>
                 {
                   //Caso de primaria
-                  nivel === 1 &&
+                  nivel === 2 &&
                   (
                     asignaturaPrimaria.map((item, i) => (
                       <option key={"asignatura" + i} value={item}> {item} </option>
@@ -117,7 +118,7 @@ export default function FormEnviarRecurso() {
                 }
                 {
                   //Caso de secundaria
-                  nivel === 2 &&
+                  nivel === 3 &&
                   (
                     asignaturaSecundaria.map((item, i) => (
                       <option key={"asignatura" + i} value={item}> {item} </option>

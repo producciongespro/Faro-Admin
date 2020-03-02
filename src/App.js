@@ -1,12 +1,12 @@
 import React, {useState}  from 'react';
 import Inicio from './componentes/Inicio';
-import Prueba from './componentes/Prueba';
+import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 
 
-const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Prueba/>   ]
+const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera /> ]
 
 function App() {
   const [componente, setComponente] = useState(null);
@@ -34,9 +34,7 @@ function App() {
                 componente
               ) :
               (
-                <Inicio/>
-                //<Prueba/>
-                
+                <Inicio/>              
               )
                 
               }          

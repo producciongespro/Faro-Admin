@@ -185,10 +185,10 @@ function VerRecursos() {
                 {
                     esperando ?
                         (
-                            <Tabla array={datosFiltrados} clase="table table-striped sombreado" />
+                            <Tabla array={datosFiltrados} clase="table table-striped sombreado" modo="visor" />
                         ) :
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" />
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped"  modo="visor"/>
                         )
                 }
                 {

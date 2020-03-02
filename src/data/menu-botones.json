@@ -12,12 +12,9 @@
         "descripción": "Muetra los recursos publicados"        
     },
     {
-        "nombre": "Agregar Planes",
-        "descripción": "Agrega plantilla de planeamiento"
-    },
-    {
-        "nombre": "Ver plantillas",
-        "descripción": "Ver plantillas de planeamiento publicadas"        
+        "nombre": "Papelera",
+        "descripción": "Muestra los elementos borrados anterirmente"
     }
+    
 
 ]

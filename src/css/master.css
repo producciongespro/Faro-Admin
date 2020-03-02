@@ -8,3 +8,8 @@ body {
 .sombreado {
     background-color: rgba(0, 0, 0, 0.4);
 }
+
+.contenedor-negro {
+    background-color: rgb(14,17,31);
+    min-height: 400px;
+}

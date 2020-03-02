@@ -92,7 +92,7 @@ export default function FormEnviarRecurso() {
         {
           //Año por nivel          
         }
-        <GrupoCheck nivel={nivel} nombre="anno" />
+        <GrupoCheck nivel={nivel} nombre="anno"  listaAnnos="vacio" />
 
 
 

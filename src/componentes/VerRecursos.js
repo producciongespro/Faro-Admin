@@ -21,14 +21,19 @@ var datosPorNivel = null;
 
 
 function VerRecursos() {
+    //Array filtrado por nivel y materia
     const [datosFiltrados, setDatosFiltrados] = useState(null);
+    //Bandera que indica que la solicitud y retorno de datos están resuletos
     const [datosListos, setDatosListos] = useState(false);
+    //Bandera que se utiliza para tiempo en espera de recuperar un json cuando se ha borrado un registro
     const [esperando, setEsperando] = useState(false);
+    //Objeto que alamacena los campos del registro seleccionado en edición
+    const [detalleRecurso, setDetalleRecurso] = useState(null);
+    //Estado para ocultar o mostrar un modal
     const [show, setShow] = useState(false);
-    //Abrir o cerrar modal
+    //cerrar modal
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
+    
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
         console.log("datosJson", datosJson);
@@ -69,6 +74,16 @@ function VerRecursos() {
                     });                    
                 })                
             });      
+    }
+
+    const handleEditarRecurso =(e)=> {
+        const id = e.target.id;
+        console.log("idItem",id);
+        const tmpRecurso = filtrar(datosPorNivel, "id", id );
+        console.log("tmpRecursos",tmpRecurso);
+        
+        
+        setShow(true);
     }
 
     const handleSeleccionarNivel = (e) => {        
@@ -165,10 +180,10 @@ function VerRecursos() {
                     {
                         esperando ?
                         (                          
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  clase="table table-striped sombreado" />
+                            <Tabla array={datosFiltrados} clase="table table-striped sombreado" />
                         ):
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  handleShow={handleShow} clase="table table-striped" />
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso}  handleShow={handleEditarRecurso} clase="table table-striped" />
                         )
                     }
                     {

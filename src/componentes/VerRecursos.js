@@ -13,7 +13,9 @@ import config from '../config.json';
 var asignaturas = null;
 var idNivel = null;
 var asignatura = "Todas";
+//Json obtenido del servidor
 var datosJson = null;
+//json filtrado por nivel
 var datosPorNivel = null;
 
 
@@ -70,12 +72,14 @@ function VerRecursos() {
     }
 
     const handleSeleccionarNivel = (e) => {        
-        idNivel = e.target.value.toString();        
+        idNivel = parseInt(e.target.value);
         //console.log("indice nivel", idNivel);
         asignaturas = filtrar(niveles, "id", idNivel)[0].asignaturas;
         //console.log("asignaturas",asignaturas);        
         //Filtra array por nivel y lo carga en el estado datosFiltrados:
         datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
+        console.log("datosPorNivel",datosPorNivel);
+        
         setDatosFiltrados(datosPorNivel);
     }
 

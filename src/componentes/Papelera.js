@@ -17,7 +17,7 @@ function Papelera () {
   async function obtenerDatos() {    
     let response = await fetch(config.servidor +'Faro/webservices/obtener_recursos_borrados.php');    
     const tmpArray = await response.json();
-    setDatosJson (tmpArray);   
+    setDatosJson (tmpArray);     
   }
 
   const handleRecuperarRecurso =(e)=>{

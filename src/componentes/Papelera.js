@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
 import Tabla from './Tabla';
+import enviar from '../modulos/enviar';
 import loadingGif from '../assets/img/loading1.gif';
 import config from '../config.json';
 
@@ -14,6 +18,23 @@ function Papelera () {
     let response = await fetch(config.servidor +'Faro/webservices/obtener_recursos_borrados.php');    
     const tmpArray = await response.json();
     setDatosJson (tmpArray);   
+  }
+
+  const handleRecuperarRecurso =(e)=>{
+    //console.log("e.target.id", e.target.id);
+    const data = {
+      "id":e.target.id,
+      "id_usuario": 103
+    }
+    enviar(config.servidor+"Faro/webservices/recuperar_recurso.php", data, function (resp) {
+        
+        alertify
+        .alert( config.nombre+" "+config.version, resp, function(){
+          console.log("ok");          
+        });
+        obtenerDatos();
+      })
+    
   }
 
 
@@ -34,7 +55,7 @@ function Papelera () {
         </div>
           ) : 
           (
-            <Tabla array={datosJson} clase="table table-dark" modo="papelera"/>
+            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso} />
           )
       }
 

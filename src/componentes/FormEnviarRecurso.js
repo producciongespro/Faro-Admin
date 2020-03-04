@@ -11,8 +11,8 @@ import niveles from '../data/niveles.json';
 
 //console.log("config", config);
 
-const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios sociales", "Artes Plásticas"];
-const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios sociales", "Artes plásticas"];
+const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios Sociales", "Artes Plásticas"];
+const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios Sociales", "Artes plásticas"];
 
 export default function FormEnviarRecurso() {
   const [nivel, setNivel] = useState(-1);
@@ -24,10 +24,10 @@ export default function FormEnviarRecurso() {
     const valorescheck = obtenerValoresCheck("anno");
     data.anno = valorescheck;
     data.id_usuario = "2";
-    enviar( config.servidor + "faro/webservices/registrar_recurso.php", data, function (respuesta) {
+    enviar( config.servidor + "faro/webservices/registrar_recurso.php", data, function (resp) {
       alertify.alert(
                 config.nombre+" "+config.version, 
-                respuesta, 
+                resp.msj, 
                 function(){ 
                   console.log("ok");                  
                  }

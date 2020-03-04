@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import { useForm } from 'react-hook-form';
 import MyContext from '../modulos/MyContext';
 import alertify from 'alertifyjs';
@@ -12,11 +12,10 @@ import './Login.css';
 
 function Login() {
     const { usuario, setUsuario } = useContext(MyContext);
-
     const { register, handleSubmit, errors } = useForm();
     
     const onSubmit = data => {
-        console.log("data", data );
+        //console.log("data", data );
         enviar(config.servidor+"Faro/webservices/login.php", data, function (resp) { 
             console.log("respuesta", resp);
             if (resp.error) {
@@ -39,11 +38,7 @@ function Login() {
     }
     console.log(errors);
     
-    useEffect(()=>{
-        console.log("usuario",usuario);
-        
-    })
-  
+     
     return (
        <div className="container-login">        
             <div className="container">

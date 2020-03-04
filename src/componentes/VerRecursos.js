@@ -65,9 +65,9 @@ function VerRecursos() {
 
         alertify.confirm("¿Desea realmente eliminar el recurso?",
             function () {
-                enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (param) {
+                enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (resp) {
                     //console.log("param",param);  
-                    alertify.success(param);
+                    alertify.success(resp.msj);
                     setEsperando(true);
                     obtenerDatos(function () {
                         //Array filtrado Por nivel

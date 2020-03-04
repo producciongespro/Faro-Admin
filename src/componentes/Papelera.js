@@ -29,7 +29,7 @@ function Papelera () {
     enviar(config.servidor+"Faro/webservices/recuperar_recurso.php", data, function (resp) {
         
         alertify
-        .alert( config.nombre+" "+config.version, resp, function(){
+        .alert( config.nombre, resp.msj, function(){
           console.log("ok");          
         });
         obtenerDatos();

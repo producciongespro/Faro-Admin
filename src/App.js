@@ -3,11 +3,10 @@ import MyContext from './modulos/MyContext';
 import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
+import Encabezado from './componentes/Encabezado';
 import Login from './componentes/Login';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
-
-console.log("MyContext",MyContext._currentValue.usuario );
 
 const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera /> ]
 
@@ -26,9 +25,7 @@ function App() {
   const AdminPanel =()=> {
     return (
       <React.Fragment>
-      <div className="jumbotron">
-        <h1>Admin</h1>
-      </div>
+        <Encabezado/>
       <div className="container">
         <div className="row">
           <div className="col-4">
@@ -56,9 +53,11 @@ function App() {
   return (    
        <MyContext.Provider value={value}> 
        {
-         console.log("value.usuario.isAcesado",value.usuario.isAccesado)
-         
+        //console.log("value.usuario.isAcesado",value.usuario.isAccesado)
        }              
+       {
+        //console.log( "usuario desde APP", value.usuario ) 
+      }
         {                       
            value.usuario.isAccesado !== true ?
           (

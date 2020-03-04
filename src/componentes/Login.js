@@ -1,17 +1,28 @@
 import React, { useState, useContext } from 'react';
-import Sesion from '../contexto/sesion';
+import MyContext from '../modulos/MyContext';
 import './Login.css';
 
 
 
 function Login(props) {
 
-    //const { usuario, setUsuario } = useContext(Sesion);
+    const { usuario, setUsuario } = useContext(MyContext);
+
+    const acceder =(e)=> {
+        e.preventDefault();
+        const datosUsuario = {
+            correo: "Pepito",
+            idUsuario: "456",
+            tipoUsuario: "admin",
+            isAccesado : true
+        };            
+        setUsuario(datosUsuario);      
+    }
 
     return (
        <div className="container-login">
            {
-               console.log("usuario")
+               console.log("usuario desde login:", usuario )
                
            }
             <div className="container">
@@ -25,7 +36,7 @@ function Login(props) {
                         </div>
                     </div>
                     <div className="card-body">
-                        <form>
+                        <form onSubmit={acceder}>
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-user"></i></span>
@@ -43,7 +54,7 @@ function Login(props) {
                                 <input type="checkbox" />Rocordarme
 					</div>
                             <div className="form-group">
-                                <input type="submit" value="Login" className="btn float-right login_btn" />
+                                <input type="submit"  value="Login" className="btn float-right login_btn" />
                             </div>
                         </form>
                     </div>

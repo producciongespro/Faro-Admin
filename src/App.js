@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import Sesion from './contexto/sesion';
+import MyContext from './modulos/MyContext';
 import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
@@ -7,13 +7,14 @@ import Login from './componentes/Login';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 
+console.log("MyContext",MyContext._currentValue.usuario );
 
 const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera /> ]
 
 function App() {
   const [componente, setComponente] = useState(null);    
-  const [usuario, setUsuario] = useState({correo:"", idUsuario:"",tipoUsuario:"", isAcesado: false});
-  const valorSesion = { usuario, setUsuario };
+  const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);
+  const value = { usuario, setUsuario };
 
 
   const handleCargarComponentes = (e) => {
@@ -53,9 +54,13 @@ function App() {
 
 
   return (    
-       <Sesion.Provider valorSesion={valorSesion}>               
+       <MyContext.Provider value={value}> 
+       {
+         console.log("value.usuario.isAcesado",value.usuario.isAccesado)
+         
+       }              
         {                       
-           valorSesion.usuario.isAcesado !== true ?
+           value.usuario.isAccesado !== true ?
           (
             <Login />
           ) :
@@ -63,7 +68,7 @@ function App() {
             <AdminPanel />
           )           
         }
-        </Sesion.Provider>        
+        </MyContext.Provider>        
       );
 }
 

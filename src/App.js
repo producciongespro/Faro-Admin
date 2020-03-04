@@ -11,9 +11,7 @@ import VerRecursos from './componentes/VerRecursos';
 const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera /> ]
 
 function App() {
-  const [componente, setComponente] = useState(null);  
-
-  //const { usuario, setUsuario } = useContext(Sesion);
+  const [componente, setComponente] = useState(null);    
   const [usuario, setUsuario] = useState({correo:"", idUsuario:"",tipoUsuario:"", isAcesado: false});
   const valorSesion = { usuario, setUsuario };
 
@@ -54,21 +52,18 @@ function App() {
   }
 
 
-  return (
-    <Sesion.Provider valorSesion={valorSesion}>
-      {
-        console.log("VALOR", valorSesion.usuario.isAcesado)        
-      }
-        {                   
-          valorSesion.usuario.isAcesado !== true ?
+  return (    
+       <Sesion.Provider valorSesion={valorSesion}>               
+        {                       
+           valorSesion.usuario.isAcesado !== true ?
           (
             <Login />
           ) :
           (
             <AdminPanel />
-          )
+          )           
         }
-        </Sesion.Provider>    
+        </Sesion.Provider>        
       );
 }
 

@@ -21,13 +21,13 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.social_icon span{
+.social_icon .span-login {
 font-size: 60px;
 margin-left: 10px;
 color: #FFC312;
 }
 
-.social_icon span:hover{
+.social_icon .span-login:hover{
 color: white;
 cursor: pointer;
 }
@@ -42,7 +42,7 @@ right: 20px;
 top: -45px;
 }
 
-.input-group-prepend span{
+.input-group-prepend .span-login{
 width: 50px;
 background-color: #FFC312;
 color: black;

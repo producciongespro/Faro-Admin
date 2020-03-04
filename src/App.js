@@ -16,10 +16,10 @@ function App() {
   const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);
   const value = { usuario, setUsuario };
 
-
+ 
   const handleCargarComponentes = (e) => {
     //console.log(e.target.value);    
-    setComponente( componentes[e.target.value] );
+    setComponente( componentes[e.target.value] ); 
   }
 
 

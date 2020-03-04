@@ -1,30 +1,51 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import MyContext from '../modulos/MyContext';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
+import enviar from '../modulos/enviar';
+import config from '../config.json';
 import './Login.css';
 
 
 
-function Login(props) {
-
+function Login() {
     const { usuario, setUsuario } = useContext(MyContext);
 
-    const acceder =(e)=> {
-        e.preventDefault();
-        const datosUsuario = {
-            correo: "Pepito",
-            idUsuario: "456",
-            tipoUsuario: "admin",
-            isAccesado : true
-        };            
-        setUsuario(datosUsuario);      
+    const { register, handleSubmit, errors } = useForm();
+    
+    const onSubmit = data => {
+        console.log("data", data );
+        enviar(config.servidor+"Faro/webservices/login.php", data, function (resp) { 
+            console.log("respuesta", resp);
+            if (resp.error) {
+                console.log("error:", resp.error_msg);
+                alertify
+                .alert( "Error "+ config.nombre,  resp.error_msg, function(){
+                    console.log("Ok");                    
+                });
+                
+            } else {
+               const  datosUsuario = {
+                    correo: resp.usuario,
+                    idUsuario: resp.id,
+                    tipoUsuario: "admin",
+                    isAccesado : true
+                };             
+                setUsuario(datosUsuario);      
+            }
+         } )          
     }
-
+    console.log(errors);
+    
+    useEffect(()=>{
+        console.log("usuario",usuario);
+        
+    })
+  
     return (
-       <div className="container-login">
-           {
-               console.log("usuario desde login:", usuario )
-               
-           }
+       <div className="container-login">        
             <div className="container">
             <br/>
             <div className="d-flex justify-content-center h-100">
@@ -36,25 +57,25 @@ function Login(props) {
                         </div>
                     </div>
                     <div className="card-body">
-                        <form onSubmit={acceder}>
+                        <form onSubmit={handleSubmit(onSubmit)} >
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" autoComplete="username" className="form-control" placeholder="Correo del MEP" />
+                                <input ref={register({required: true})}  type="text" autoComplete="username"  defaultValue="luis@correo.de" name="usuario" className="form-control" placeholder="Correo del MEP" />
 
                             </div>
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" autoComplete="current-password" className="form-control" placeholder="Contraseña" />
+                                <input ref={register({required: true})} name="clave" type="password" autoComplete="current-password" defaultValue="123" className="form-control" placeholder="Contraseña" />
                             </div>
                             <div className="row align-items-center remember">
                                 <input type="checkbox" />Rocordarme
 					</div>
                             <div className="form-group">
-                                <input type="submit"  value="Login" className="btn float-right login_btn" />
+                                <input type="submit"  value="Acceder" className="btn float-right login_btn" />
                             </div>
                         </form>
                     </div>

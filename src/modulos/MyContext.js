@@ -2,8 +2,7 @@ import React from 'react';
 
 // set the defaults
 const MyContext = React.createContext({
-    usuario : {
-      direccion: "guada",
+    usuario : {      
       correo: "",
       idUsuario: "",
       tipoUsuario: "",

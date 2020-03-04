@@ -5,7 +5,8 @@ import './Login.css';
 function Login(props) {
 
     return (
-        <div className="container">
+       <div className="container-login">
+            <div className="container">
             <br/>
             <div className="d-flex justify-content-center h-100">
                 <div className="card">
@@ -49,6 +50,7 @@ function Login(props) {
                 </div>
             </div>
         </div>
+       </div>
     )
 
 }

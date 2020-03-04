@@ -2,6 +2,7 @@ import React, {useState}  from 'react';
 import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
+import Login from './componentes/Login';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 
@@ -10,6 +11,7 @@ const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera
 
 function App() {
   const [componente, setComponente] = useState(null);
+  const [isAccesado, setIsAccesado ] = useState(false);
 
   const handleCargarComponentes = (e) => {
     //console.log(e.target.value);    
@@ -17,8 +19,9 @@ function App() {
   }
 
 
-  return (
-    <React.Fragment>
+  const AdminPanel =()=> {
+    return (
+      <React.Fragment>
       <div className="jumbotron">
         <h1>Admin</h1>
       </div>
@@ -41,8 +44,19 @@ function App() {
           </div>
         </div>
       </div>
-
     </React.Fragment>
+    )
+  }
+
+
+  return (
+    isAccesado !== true ?
+    (
+      <Login />
+    ) :
+    (
+      <AdminPanel />
+    )    
   );
 }
 

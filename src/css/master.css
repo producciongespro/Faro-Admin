@@ -13,3 +13,19 @@ body {
     background-color: rgb(14,17,31);
     min-height: 400px;
 }
+
+.e-mouse {
+    cursor: pointer;
+}
+
+.color-turq:hover {
+    background-color: #23a2b8;
+}
+
+.color-rojo:hover {
+    background-color: #dc3545;
+}
+
+.over-grande:hover {
+    transform: scale(1.5,1.5);
+}

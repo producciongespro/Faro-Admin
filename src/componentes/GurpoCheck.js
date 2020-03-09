@@ -67,8 +67,8 @@ function GrupoCheck(props) {
       var tmpChk;
       let encontrado = false;      
       for (let index = 0; index < listaAnnos.length; index++) {
-        console.log("listaAnnos[index]",listaAnnos[index]);
-        console.log("props.value",props.value);       
+        //console.log("listaAnnos[index]",listaAnnos[index]);
+        //console.log("props.value",props.value);       
         
         if (listaAnnos[index] === props.value) {
           encontrado = true

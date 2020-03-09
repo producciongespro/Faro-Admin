@@ -59,6 +59,9 @@ function VerRecursos() {
 
     })
 
+    const onSubmit = data => console.log(data);
+    console.log(errors);
+
     const handleEliminarRecurso = (e) => {
         const id = e.target.id;
         const data = { "id": id, "id_usuario": "106" };
@@ -81,13 +84,11 @@ function VerRecursos() {
     }
 
     const handleEditarRecurso = (e) => {
-        const id = e.target.id;
-        //console.log("idItem", id);
+        const id = e.target.dataset.origen;
+        console.log("idItem", id);
         const tmpRecurso = filtrar(datosPorNivel, "id", id);
-        //console.log("tmpRecursos", tmpRecurso[0]);
+        console.log("tmpRecursos", tmpRecurso[0]);
         setDetalleRecurso(tmpRecurso[0]);
-
-
         setShow(true);
     }
 
@@ -188,87 +189,139 @@ function VerRecursos() {
                             <Tabla array={datosFiltrados} clase="table table-striped sombreado" modo="visor" />
                         ) :
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped"  modo="visor"/>
+                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" modo="visor" />
                         )
                 }
                 {
                     //MODAL
                 }
-                <Modal show={show} onHide={handleClose}>
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    size="lg"
+                >
                     <Modal.Header closeButton>
-                        <Modal.Title>Edición</Modal.Title>
+                        <Modal.Title>Edición de registro</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {
                             detalleRecurso !== null &&
                             (
-                                <form action="" method="post">
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" id="spnNombreRecurso">Nombre del recurso</span>
+                                <React.Fragment>
+                                    <div className="row">
+                                        <div className="col-12 text-center">
+                                            <a href={detalleRecurso.url} target="_blank" rel="noopener noreferrer" >
+                                                <img src={detalleRecurso.img_educatico} alt="Imagen del recurso" />
+                                            </a>
                                         </div>
-                                        <input type="text" className="form-control" placeholder="Nombre" defaultValue={detalleRecurso.nombre} aria-describedby="spnNombreRecurso" />
                                     </div>
+                                    <hr />
+                                    <form onSubmit={handleSubmit(onSubmit)}>
 
-                                    <div className="input-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text">Descripción:</span>
-                                        </div>
-                                        <textarea className="form-control" defaultValue={detalleRecurso.descripcion} aria-label="With textarea"></textarea>
-                                    </div>
-                                    <br />
-                                    {
-                                        //URL
-                                    }
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" >URL</span>
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="url"
-                                            id="txtUrl"
-                                            className="form-control"
-                                            aria-label="Default"
-                                            placeholder="Escriba la dirección web del recurso en Educatico."
-                                            defaultValue={detalleRecurso.url}
-                                            ref={register({ required: true })}
-                                        />
-                                    </div>
-                                    {errors.url && <p className="error">URL requerido</p>}
+                                        {
+                                            detalleRecurso.materia !== undefined &&
+                                            <div className="input-group mb-3">
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text" id="spnAsignatura">Asignatura</span>
+                                                </div>
+                                                <input name="materia" ref={register} type="text" className="form-control" readOnly defaultValue={detalleRecurso.materia} aria-describedby="spnAsignatura" />
+                                            </div>
+                                        }
 
-                                                                {
-                                    //Año por nivel          
-                                    }
-                                    <GrupoCheck nivel= { parseInt(detalleRecurso.id_nivel) } nombre="anno" listaAnnos={detalleRecurso.anno} />
-
-                                    {
-                                        //URL IMAGEN
-                                    }
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" >URL Imagen</span>
+                                        <div className="input-group mb-3">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" id="spnNombreRecurso">Nombre del recurso</span>
+                                            </div>
+                                            <input name="nombre" ref={register} type="text" className="form-control" placeholder="Nombre" defaultValue={detalleRecurso.nombre} aria-describedby="spnNombreRecurso" />
                                         </div>
-                                        <input
-                                            type="text"
-                                            name="img_educatico"
-                                            id="txtUrlImagen"
-                                            className="form-control"
-                                            aria-label="Default"
-                                            placeholder="Coloque la dirección web de la imagen miniatura del recurso."
-                                            defaultValue={detalleRecurso.img_educatico}
-                                            ref={register({ required: true })}
-                                        />
-                                    </div>
-                                    {errors.url && <p className="error">URL requerido</p>}
-                                </form>
+
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text">Descripción:</span>
+                                            </div>
+                                            <textarea name="descripcion" ref={register} className="form-control" defaultValue={detalleRecurso.descripcion} aria-label="With textarea"></textarea>
+                                        </div>
+                                        <br />
+                                        {
+                                            //URL
+                                        }
+                                        <div className="input-group mb-3">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" >URL</span>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                name="url"
+                                                id="txtUrl"
+                                                className="form-control"
+                                                aria-label="Default"
+                                                placeholder="Escriba la dirección web del recurso en Educatico."
+                                                defaultValue={detalleRecurso.url}
+                                                ref={register({ required: true })}
+                                            />
+                                        </div>
+                                        {errors.url && <p className="error">URL requerido</p>}
+
+                                        {
+                                            //Año por nivel                                      
+                                        }
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" >Año:  </span>
+                                            &nbsp; &nbsp;
+                                            <GrupoCheck nivel={parseInt(detalleRecurso.id_nivel)} nombre="anno" listaAnnos={detalleRecurso.anno} />
+                                        </div>
+                                        <br />
+                                        {
+                                            //URL IMAGEN
+                                        }
+                                        <div className="input-group mb-3">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" >URL Imagen</span>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                name="img_educatico"
+                                                id="txtUrlImagen"
+                                                className="form-control"
+                                                aria-label="Default"
+                                                placeholder="Coloque la dirección web de la imagen miniatura del recurso."
+                                                defaultValue={detalleRecurso.img_educatico}
+                                                ref={register({ required: true })}
+                                            />
+                                        </div>
+                                        {errors.url && <p className="error">URL requerido</p>}
+                                        
+
+
+                                        {
+                                            //Apoyo educativo
+                                        }
+                                        <div className="pretty p-switch p-fill">
+                                            <input type="checkbox"
+                                                id="chkApoyo"
+                                                name="apoyo"
+                                                ref={register}
+                                            />
+                                            <div className="state">
+                                                <label>Apoyo educativo</label>
+                                            </div>
+                                        </div>
+
+                                        <hr/>
+                                        <div className="row">
+                                            <div className="col-12 text-right">
+                                                <button className="btn btn-info btn-lg btn-block" type="submit">
+                                                    Guardar datos <i className="far fa-save"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </React.Fragment>
                             )
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
-                            <i className="far fa-save"></i>
-                        </Button>
+
                     </Modal.Footer>
                 </Modal>
 

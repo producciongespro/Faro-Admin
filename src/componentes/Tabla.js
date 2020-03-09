@@ -48,21 +48,21 @@ function Tabla(props) {
  
                                 {
                                     props.modo === "papelera" &&   
-                                    <td className="text-center">
-                                            <i id={item.id} onClick={props.handleRecuperarRecurso} className="fas fa-recycle"></i>
+                                    <td className="text-center" id={item.id} onClick={props.handleRecuperarRecurso}>
+                                            <i  className="fas fa-recycle"></i>
                                     </td>                                    
                                 } 
                                 {
                                     props.modo === "visor" &&   
-                                     <td>
-                                     <i id={item.id} onClick={props.handleShow} className="fas fa-pencil-alt"></i>
+                                     <td data-origen={item.id} className="text-center e-mouse color-turq" onClick={props.handleShow}>
+                                     <i data-origen={item.id} className="fas fa-pencil-alt over-grande"></i>
                                     </td>
 
                                 }
                                 {
                                     props.modo === "visor" &&   
-                                    <td className="text-center" >
-                                        <i id={item.id} onClick={props.handleEliminarRecurso} className="far fa-trash-alt"></i>
+                                    <td id={item.id} className="text-center e-mouse color-rojo" onClick={props.handleEliminarRecurso} >
+                                        <i   className="far fa-trash-alt over-grande"></i>
                                     </td>
                                 }                                                                  
                                         

@@ -59,20 +59,32 @@ function VerRecursos() {
     }, []);
 
     useEffect(() => {
-        //console.log("Datos filtrados:", datosFiltrados);         
+        console.log("Datos filtrados:", datosFiltrados);         
         //console.log("En Espera", esperando);
 
     })
 
-    const onSubmit = data => {       
-        data.id_usuario= usuario.idUsuario;
-        data.id_nivel= detalleRecurso.id_nivel;
-        data.id= detalleRecurso.id;
-        data.anno= obtenerValoresCheck("anno");
+    const onSubmit = data => {
+        data.id_usuario = usuario.idUsuario;
+        data.id_nivel = detalleRecurso.id_nivel;
+        data.id = detalleRecurso.id;
+        data.anno = obtenerValoresCheck("anno");
         console.log(data);
-        enviar( config.servidor + "Faro/webservices/actualizar_recurso.php", data, function (resp) { 
-            console.log("respueste", resp);            
-         } )
+        enviar(config.servidor + "Faro/webservices/actualizar_recurso.php", data, function (resp) {
+            console.log("respueste", resp);
+            handleClose();
+            alertify
+                .alert( config.nombre, resp.msj, function () {
+                    console.log("OK");                    
+                });
+                obtenerDatos(function () {
+                    //Array filtrado Por nivel
+                    datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
+                    //Asignatura
+                    filtrarPorAsignatura();
+                    setEsperando(false);
+                });
+        })
     }
     //console.log(errors);
 
@@ -304,7 +316,7 @@ function VerRecursos() {
                                             />
                                         </div>
                                         {errors.url && <p className="error">URL requerido</p>}
-                                        
+
 
 
                                         {
@@ -321,7 +333,7 @@ function VerRecursos() {
                                             </div>
                                         </div>
 
-                                        <hr/>
+                                        <hr />
                                         <div className="row">
                                             <div className="col-12 text-right">
                                                 <button className="btn btn-info btn-lg btn-block" type="submit">

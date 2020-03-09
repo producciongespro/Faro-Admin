@@ -5,10 +5,11 @@ import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
 import Encabezado from './componentes/Encabezado';
 import Login from './componentes/Login';
+import Bitacora from './componentes/Bitacora';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 
-const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera /> ]
+const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera />, <Bitacora /> ]
 
 function App() {
   const [componente, setComponente] = useState(null);    

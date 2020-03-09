@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import MyContext from '../modulos/MyContext';
 import { useForm } from 'react-hook-form';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import Tabla from './Tabla';
 import GrupoCheck from './GurpoCheck';
 import alertify from 'alertifyjs';
@@ -8,6 +9,7 @@ import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
+import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
 import niveles from '../data/niveles.json';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
@@ -31,8 +33,10 @@ function VerRecursos() {
     const [esperando, setEsperando] = useState(false);
     //Objeto que alamacena los campos del registro seleccionado en edición
     const [detalleRecurso, setDetalleRecurso] = useState(null);
-    //Validación form mediante Context Hooks
-    const { register, handleSubmit, errors, getValues } = useForm();
+    //Validación form mediante Validation Hooks
+    const { register, handleSubmit, errors } = useForm();
+    // Context hook: DAtos globales de la aplicación
+    const { usuario } = useContext(MyContext);
     //Estado para ocultar o mostrar un modal
     const [show, setShow] = useState(false);
     //cerrar modal
@@ -47,7 +51,8 @@ function VerRecursos() {
 
 
     useEffect(() => {
-        // console.log("Componente montado");
+        console.log("Componente montado");
+        //console.log("Usuario", usuario.idUsuario);        
         obtenerDatos(function () {
             setDatosListos(true);
         });
@@ -59,8 +64,17 @@ function VerRecursos() {
 
     })
 
-    const onSubmit = data => console.log(data);
-    console.log(errors);
+    const onSubmit = data => {       
+        data.id_usuario= usuario.idUsuario;
+        data.id_nivel= detalleRecurso.id_nivel;
+        data.id= detalleRecurso.id;
+        data.anno= obtenerValoresCheck("anno");
+        console.log(data);
+        enviar( config.servidor + "Faro/webservices/actualizar_recurso.php", data, function (resp) { 
+            console.log("respueste", resp);            
+         } )
+    }
+    //console.log(errors);
 
     const handleEliminarRecurso = (e) => {
         const id = e.target.id;

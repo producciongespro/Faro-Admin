@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import MyContext from '../modulos/MyContext';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
@@ -17,26 +18,34 @@ const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química"
 export default function FormEnviarRecurso() {
   const [nivel, setNivel] = useState(-1);
   const { register, handleSubmit, errors, getValues } = useForm();
+  const { usuario } = useContext(MyContext);
 
 
   const onSubmit = data => {
-    console.log( "Antes del append", data);
-    const valorescheck = obtenerValoresCheck("anno");
-    data.anno = valorescheck;
-    data.id_usuario = "2";
-    enviar( config.servidor + "faro/webservices/registrar_recurso.php", data, function (resp) {
-      alertify.alert(
-                config.nombre+" "+config.version, 
-                resp.msj, 
-                function(){ 
-                  console.log("ok");                  
-                 }
-                );
-      } );
-    //console.log("DATA 2", data);
     
+    const valoresCheck = obtenerValoresCheck("anno");
+    console.log("valorescheck", valoresCheck);    
+
+    if (valoresCheck) {
+      data.anno = valoresCheck;
+      data.id_usuario = usuario.idUsuario;
+      console.log( "data", data);      
+      enviar( config.servidor + "faro/webservices/registrar_recurso.php", data, function (resp) {
+        alertify.alert(
+                  config.nombre+" "+config.version, 
+                  resp.msj, 
+                  function(){ 
+                    console.log("ok");                  
+                   }
+                  );
+        } );   
+      
+    }  else {     
+      alertify.alert (config.nombre, "Debe seleccionar al menos un año." );
+    } 
+   
   }
-  console.log(errors);
+  //console.log(errors);
 
 
   const obtenerNivel = () => {

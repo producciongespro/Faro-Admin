@@ -326,6 +326,7 @@ function VerRecursos() {
                                             <input type="checkbox"
                                                 id="chkApoyo"
                                                 name="apoyo"
+                                                defaultChecked={ parseInt(detalleRecurso.apoyos) }
                                                 ref={register}
                                             />
                                             <div className="state">

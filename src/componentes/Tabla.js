@@ -37,9 +37,16 @@ function Tabla(props) {
                         props.array.map((item, i) => (
                             <tr key={"recurso" + i}>
                                 <th scope="row">{i + 1}</th>
-                                <td >{item.nombre}</td>
                                 {
-                                    props.modo === "papelera" &&   
+                                    props.modo==="bitacora" &&
+                                    <td >{item.nombre_comun}</td>
+                                }
+                                {
+                                    (props.modo === "papelera" || props.modo === "visor" ) && 
+                                    <td >{item.nombre}</td>
+                                }
+                                {
+                                    props.modo === "papelera" &&                                       
                                     <td className="text-center">
                                             {item.materia}
                                     </td>                                    

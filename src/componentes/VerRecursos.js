@@ -89,7 +89,7 @@ function VerRecursos() {
     //console.log(errors);
 
     const handleEliminarRecurso = (e) => {
-        const id = e.target.id;
+        const id = e.target.dataset.origen;
         const data = { "id": id, "id_usuario": "106" };
 
         alertify.confirm("¿Desea realmente eliminar el recurso?",

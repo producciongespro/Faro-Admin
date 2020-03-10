@@ -68,8 +68,8 @@ function Tabla(props) {
                                 }
                                 {
                                     props.modo === "visor" &&   
-                                    <td id={item.id} className="text-center e-mouse color-rojo" onClick={props.handleEliminarRecurso} >
-                                        <i   className="far fa-trash-alt over-grande"></i>
+                                    <td data-origen={item.id} className="text-center e-mouse color-rojo" onClick={props.handleEliminarRecurso} >
+                                        <i data-origen={item.id}  className="far fa-trash-alt over-grande"></i>
                                     </td>
                                 }                                                                  
                                         

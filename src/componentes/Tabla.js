@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 function Tabla(props) {
     return (
@@ -6,23 +7,57 @@ function Tabla(props) {
             <thead>
                 <tr>
                     <th className="text-center" scope="col">#</th>
-                    <th className="text-center" scope="col">Nombre</th>
                     {
+                         // VISOR - PAPELERA - BITACORA
+                        (props.modo === "visor" || props.modo === "papelera" || props.modo === "bitacora" ) && 
+                        <th className="text-center" scope="col">Recurso</th>
+                    }
+                    {
+                        //PAPELERA
                         props.modo === "papelera" &&                    
                         <th className="text-center" scope="col"> Asignatura </th>                        
                     }
-                    <th className="text-center" scope="col">Año</th>                                                 
                     {
-                        props.modo === "visor" &&                    
-                        <th  className="text-center" scope="col"> Editar </th>
+                        // VISOR - PAPELERA
+                        (props.modo === "visor" || props.modo === "papelera") &&                    
+                        <th className="text-center" scope="col">Año</th>                                                 
                     }
+
+                    
                     {
-                        props.modo === "visor" &&                    
+                        //VISOR
+                        props.modo === "visor" &&                              
+                            <th  className="text-center" scope="col"> Editar </th>                            
+                    }
+
+                    {
+                        //VISOR
+                        props.modo === "visor" &&                              
                         <th className="text-center" scope="col"> Eliminar </th>
                     }
+
+                    
                     {
+                        //PAPELERA
                         props.modo === "papelera" &&                    
                         <th className="text-center" scope="col"> Recuperar </th>                        
+                    }
+
+                    {
+                        //BITACORA
+                        props.modo === "bitacora" &&                    
+                        <th className="text-center" scope="col"> Evento </th>   
+                    }
+                    {
+                        //BITACORA
+                        props.modo === "bitacora" &&                    
+                        <th className="text-center" scope="col"> Responsable </th>   
+                    }
+
+                    {
+                        //BITACORA
+                        props.modo === "bitacora" &&                    
+                        <th className="text-center" scope="col"> Fecha </th>   
                     }
                     
                             
@@ -36,13 +71,9 @@ function Tabla(props) {
                     (
                         props.array.map((item, i) => (
                             <tr key={"recurso" + i}>
-                                <th scope="row">{i + 1}</th>
+                                <th scope="row">{i + 1}</th>                                
                                 {
-                                    props.modo==="bitacora" &&
-                                    <td >{item.nombre_comun}</td>
-                                }
-                                {
-                                    (props.modo === "papelera" || props.modo === "visor" ) && 
+                                    (props.modo === "papelera" || props.modo === "visor" || props.modo === "bitacora" ) && 
                                     <td >{item.nombre}</td>
                                 }
                                 {
@@ -51,7 +82,10 @@ function Tabla(props) {
                                             {item.materia}
                                     </td>                                    
                                 }
-                                <td className="text-center" >{item.anno}</td>
+                                {
+                                    (props.modo === "papelera" || props.modo === "visor" ) && 
+                                    <td className="text-center" >{item.anno}</td>
+                                }
  
                                 {
                                     props.modo === "papelera" &&   
@@ -70,6 +104,27 @@ function Tabla(props) {
                                     props.modo === "visor" &&   
                                     <td data-origen={item.id} className="text-center e-mouse color-rojo" onClick={props.handleEliminarRecurso} >
                                         <i data-origen={item.id}  className="far fa-trash-alt over-grande"></i>
+                                    </td>
+                                } 
+
+                                {
+                                    props.modo === "bitacora" &&   
+                                    <td  className="text-center "  >
+                                        {item.evento}
+                                    </td>
+                                }                                                                  
+
+                                {
+                                    props.modo === "bitacora" &&   
+                                    <td  className="text-center "  >
+                                        {item.usuario}
+                                    </td>
+                                }                                                                  
+
+                                {
+                                    props.modo === "bitacora" &&   
+                                    <td  className="text-center "  >
+                                        {moment(item.fecha_evento).fromNow()}
                                     </td>
                                 }                                                                  
                                         

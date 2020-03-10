@@ -26,7 +26,8 @@ function Login() {
                 });
                 
             } else {
-               const  datosUsuario = {                    
+               const  datosUsuario = { 
+                    correo: resp.usuario,                   
                     idUsuario: resp.id,
                     tipoUsuario: "admin",
                     isAccesado : true                    

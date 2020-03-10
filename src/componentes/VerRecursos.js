@@ -45,8 +45,7 @@ function VerRecursos() {
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
         //console.log("datosJson", datosJson);
-        cb()
-        //TODO: niveles = await obtener("http://localhost/Faro-Admin/src/data/niveles.php")        
+        cb();        
     }
 
 
@@ -65,19 +64,31 @@ function VerRecursos() {
     })
 
     const onSubmit = data => {
+        //Se agregan unos datos que no están en el form
         data.id_usuario = usuario.idUsuario;
         data.id_nivel = detalleRecurso.id_nivel;
         data.id = detalleRecurso.id;
+
+        //Obtiene los valores de los check años;
         data.anno = obtenerValoresCheck("anno");
+
+        //Valor obtenido del data mediante Validate hook
         console.log(data);
         enviar(config.servidor + "Faro/webservices/actualizar_recurso.php", data, function (resp) {
-            console.log("respueste", resp);
+            //CALBACK que se ejecuta una vez que termina la petición de envio al servidor
+            //console.log("respueste", resp);
+            //1- Cierra el modal
             handleClose();
+            //2-Carga el mnsj
             alertify
                 .alert( config.nombre, resp.msj, function () {
-                    console.log("OK");                    
+                    console.log("OK");                                        
                 });
+            //3 - Llama nuevamente obtener datos y con un CALBACK de filtrado
+            // (llama a los datos filtrados)
                 obtenerDatos(function () {
+                    //CAlback del segundo obtener datos
+                    //Que se ejecuta una vez que a obtendio los datos ACTUALIZADOS (editados)
                     //Array filtrado Por nivel
                     datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
                     //Asignatura

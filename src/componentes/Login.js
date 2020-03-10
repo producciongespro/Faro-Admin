@@ -26,13 +26,12 @@ function Login() {
                 });
                 
             } else {
-               const  datosUsuario = {
-                    correo: resp.usuario,
+               const  datosUsuario = {                    
                     idUsuario: resp.id,
                     tipoUsuario: "admin",
-                    isAccesado : true
+                    isAccesado : true                    
                 };             
-                setUsuario(datosUsuario);      
+               setUsuario(datosUsuario);                     
             }
          } )          
     }

@@ -7,10 +7,7 @@ const MyContext = React.createContext({
       idUsuario: "",
       tipoUsuario: "",
       isAccesado: false},    
-    setUsuario : () => {},
-    saludo: {
-      texto: "Hola a todos"
-    }
+    setUsuario : () => {} 
 });
 
 export default MyContext;

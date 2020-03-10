@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import MyContext from '../modulos/MyContext';
 import { useForm } from 'react-hook-form';
+import { Modal } from 'react-bootstrap';
 import Tabla from './Tabla';
 import GrupoCheck from './GurpoCheck';
 import alertify from 'alertifyjs';
@@ -35,8 +36,11 @@ function VerRecursos() {
     //Validación form mediante Validation Hooks
     const { register, handleSubmit, errors } = useForm();
     // Context hook: DAtos globales de la aplicación
-    const { usuario } = useContext(MyContext);    
-    
+    const { usuario } = useContext(MyContext);
+    //Estado para ocultar o mostrar un modal
+    const [show, setShow] = useState(false);
+    //cerrar modal
+    const handleClose = () => setShow(false);
 
     async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
@@ -239,6 +243,7 @@ function VerRecursos() {
                                     </div>
                                     <hr />
                                     <form onSubmit={handleSubmit(onSubmit)}>
+
                                         {
                                             detalleRecurso.materia !== undefined &&
                                             <div className="input-group mb-3">

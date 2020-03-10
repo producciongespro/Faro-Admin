@@ -6,8 +6,11 @@ const MyContext = React.createContext({
       correo: "",
       idUsuario: "",
       tipoUsuario: "",
-      isAccesado: false},
-    setUsuario : () => {}
+      isAccesado: false},    
+    setUsuario : () => {},
+    saludo: {
+      texto: "Hola a todos"
+    }
 });
 
 export default MyContext;

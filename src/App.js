@@ -13,8 +13,9 @@ const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera
 
 function App() {
   const [componente, setComponente] = useState(null);    
-  const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);
-  const value = { usuario, setUsuario };
+  const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);  
+  const [saludo] = useState(MyContext._currentValue.saludo);  
+  const contextUsuario = { usuario, setUsuario };
 
  
   const handleCargarComponentes = (e) => {
@@ -52,15 +53,19 @@ function App() {
 
 
   return (    
-       <MyContext.Provider value={value}> 
+       <MyContext.Provider value={contextUsuario}  > 
        {
         //console.log("value.usuario.isAcesado",value.usuario.isAccesado)
        }              
        {
-        //console.log( "usuario desde APP", value.usuario ) 
+        console.log( "usuario usr desde APP", contextUsuario ) 
+      }
+      {
+        console.log("saludo", saludo)
+        
       }
         {                       
-           value.usuario.isAccesado !== true ?
+           contextUsuario.usuario.isAccesado !== true ?
           (
             <Login />
           ) :

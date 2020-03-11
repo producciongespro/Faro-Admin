@@ -59,9 +59,7 @@ function VerRecursos() {
     }, []);
 
     useEffect(() => {
-        console.log("Datos filtrados:", datosFiltrados);         
-        //console.log("En Espera", esperando);
-
+        console.log("Datos filtrados:", datosFiltrados);                 
     })
 
     const onSubmit = data => {

@@ -26,21 +26,24 @@ function Login() {
                 });
                 
             } else {
-               const  datosUsuario = {
-                    correo: resp.usuario,
+               const  datosUsuario = { 
+                    correo: resp.usuario,                   
                     idUsuario: resp.id,
                     tipoUsuario: "admin",
-                    isAccesado : true
+                    isAccesado : true                    
                 };             
-                setUsuario(datosUsuario);      
+               setUsuario(datosUsuario);                     
             }
          } )          
     }
-    console.log(errors);
-    
+    console.log("Errores", errors);    
      
     return (
        <div className="container-login">        
+       {
+           console.log("Usuario en login", usuario)
+           
+       }
             <div className="container">
             <br/>
             <div className="d-flex justify-content-center h-100">
@@ -53,13 +56,13 @@ function Login() {
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleSubmit(onSubmit)} >
-                            <div className="input-group form-group">
+                            {errors.usuario && <span className="text-danger"  >Debe escribir su usuario</span> }
+                            <div className="input-group form-group">                                
                                 <div className="input-group-prepend">
-                                    <span className="input-group-text span-login"><i className="fas fa-user"></i></span>
+                                    <span className="input-group-text span-login"><i className="fas fa-user"></i></span>                                    
                                 </div>
-                                <input ref={register({required: true})}  type="text" autoComplete="username"  defaultValue="luis@correo.de" name="usuario" className="form-control" placeholder="Correo del MEP" />
-
-                            </div>
+                                <input ref={register({required: true})}  type="text" autoComplete="username"  defaultValue="luis@correo.de" name="usuario" className="form-control" placeholder="Correo del MEP" />                                
+                            </div>                            
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-key"></i></span>

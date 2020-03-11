@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React, {useState }  from 'react';
 import MyContext from './modulos/MyContext';
 import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
@@ -9,14 +9,16 @@ import Bitacora from './componentes/Bitacora';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 
+
 const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera />, <Bitacora /> ]
 
 function App() {
-  const [componente, setComponente] = useState(null);    
-  const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);
-  const value = { usuario, setUsuario };
+  const [componente, setComponente] = useState(null);   
+  const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);    
+  const contextUsuario = { usuario, setUsuario };
 
- 
+
+
   const handleCargarComponentes = (e) => {
     //console.log(e.target.value);    
     setComponente( componentes[e.target.value] ); 
@@ -52,15 +54,15 @@ function App() {
 
 
   return (    
-       <MyContext.Provider value={value}> 
+       <MyContext.Provider value={contextUsuario}  > 
+
        {
-        //console.log("value.usuario.isAcesado",value.usuario.isAccesado)
-       }              
-       {
-        //console.log( "usuario desde APP", value.usuario ) 
-      }
+         console.log("Contexto usuario desde APP", contextUsuario.usuario )
+         
+       }  
+  
         {                       
-           value.usuario.isAccesado !== true ?
+           contextUsuario.usuario.isAccesado !== true ?
           (
             <Login />
           ) :

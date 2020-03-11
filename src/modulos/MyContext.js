@@ -6,8 +6,8 @@ const MyContext = React.createContext({
       correo: "",
       idUsuario: "",
       tipoUsuario: "",
-      isAccesado: false},
-    setUsuario : () => {}
+      isAccesado: false},    
+    setUsuario : () => {} 
 });
 
 export default MyContext;

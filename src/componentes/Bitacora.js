@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-//import config from '../config';
+import config from '../config';
 import Tabla from '../componentes/Tabla';
 
 function Bitacora () {
@@ -10,7 +10,7 @@ function Bitacora () {
     },[]);
 
     async function obtener () {
-        let response = await fetch('https://mundologan.xyz/ws/buscadot/obtener.php');        
+        let response = await fetch(config.servidor+"Faro/webservices/obtener_bitacora.php");        
         console.log(response);
         setDataJson(await response.json());        
     }

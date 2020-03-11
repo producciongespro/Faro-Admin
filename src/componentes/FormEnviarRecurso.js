@@ -23,8 +23,14 @@ export default function FormEnviarRecurso() {
 
   const onSubmit = data => {
     
-    const valoresCheck = obtenerValoresCheck("anno");
-    console.log("valorescheck", valoresCheck);    
+    let valoresCheck = obtenerValoresCheck("anno");
+    console.log("valorescheck:", valoresCheck);    
+    console.log("nivel",nivel);
+
+    if (nivel === 1) {
+      valoresCheck = "vacio"
+    };
+  
 
     if (valoresCheck) {
       data.anno = valoresCheck;
@@ -38,8 +44,7 @@ export default function FormEnviarRecurso() {
                     console.log("ok");                  
                    }
                   );
-        } );   
-      
+        } );        
     }  else {     
       alertify.alert (config.nombre, "Debe seleccionar al menos un año." );
     } 

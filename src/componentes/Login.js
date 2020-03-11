@@ -11,13 +11,13 @@ import './Login.css';
 
 
 function Login() {
-    const { usuario, setUsuario } = useContext(MyContext);
+    const { setUsuario } = useContext(MyContext);
     const { register, handleSubmit, errors } = useForm();
     
     const onSubmit = data => {
         //console.log("data", data );
         enviar(config.servidor+"Faro/webservices/login.php", data, function (resp) { 
-            console.log("respuesta", resp);
+            //console.log("respuesta", resp);
             if (resp.error) {
                 console.log("error:", resp.error_msg);
                 alertify
@@ -36,12 +36,12 @@ function Login() {
             }
          } )          
     }
-    console.log("Errores", errors);    
+    //console.log("Errores", errors);    
      
     return (
        <div className="container-login">        
        {
-           console.log("Usuario en login", usuario)
+           //console.log("Usuario en login", usuario)
            
        }
             <div className="container">

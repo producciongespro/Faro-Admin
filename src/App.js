@@ -57,7 +57,7 @@ function App() {
        <MyContext.Provider value={contextUsuario}  > 
 
        {
-         console.log("Contexto usuario desde APP", contextUsuario.usuario )
+        // console.log("Contexto usuario desde APP", contextUsuario.usuario )
          
        }  
   

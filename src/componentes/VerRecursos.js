@@ -58,7 +58,7 @@ function VerRecursos() {
     }, []);
 
     useEffect(() => {
-        console.log("Datos filtrados:", datosFiltrados);                 
+        //console.log("Datos filtrados:", datosFiltrados);                 
     })
 
     const onSubmit = data => {
@@ -120,9 +120,9 @@ function VerRecursos() {
 
     const handleEditarRecurso = (e) => {
         const id = e.target.dataset.origen;
-        console.log("idItem", id);
+        //console.log("idItem", id);
         const tmpRecurso = filtrar(datosPorNivel, "id", id);
-        console.log("tmpRecursos", tmpRecurso[0]);
+        //console.log("tmpRecursos", tmpRecurso[0]);
         setDetalleRecurso(tmpRecurso[0]);
         setShow(true);
     }
@@ -134,7 +134,7 @@ function VerRecursos() {
         //console.log("asignaturas",asignaturas);        
         //Filtra array por nivel y lo carga en el estado datosFiltrados:
         datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
-        console.log("datosPorNivel", datosPorNivel);
+        //console.log("datosPorNivel", datosPorNivel);
 
         setDatosFiltrados(datosPorNivel);
     }

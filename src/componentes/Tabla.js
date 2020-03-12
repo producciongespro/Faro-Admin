@@ -89,8 +89,8 @@ function Tabla(props) {
  
                                 {
                                     props.modo === "papelera" &&   
-                                    <td className="text-center" id={item.id} onClick={props.handleRecuperarRecurso}>
-                                            <i  className="fas fa-recycle"></i>
+                                    <td className="text-center" data-origen={item.id} onClick={props.handleRecuperarRecurso}>
+                                            <i data-origen={item.id} className="fas fa-recycle"></i>
                                     </td>                                    
                                 } 
                                 {

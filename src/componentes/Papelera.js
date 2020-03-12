@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
@@ -6,9 +6,13 @@ import Tabla from './Tabla';
 import enviar from '../modulos/enviar';
 import loadingGif from '../assets/img/loading1.gif';
 import config from '../config.json';
+import MyContext from '../modulos/MyContext';
+
 
 function Papelera () {     
     const [datosJson, setDatosJson ] = useState(null);
+    const { usuario } = useContext(MyContext);
+
 
   useEffect(() => {
     obtenerDatos();
@@ -21,13 +25,15 @@ function Papelera () {
   }
 
   const handleRecuperarRecurso =(e)=>{
-    //console.log("e.target.id", e.target.id);
+    //console.log("e.target.id", e.target);
     const data = {
-      "id":e.target.id,
-      "id_usuario": 103
+      "id":e.target.dataset.origen,
+      "id_usuario": usuario.idUsuario
     }
-    enviar(config.servidor+"Faro/webservices/recuperar_recurso.php", data, function (resp) {
-        
+    console.log("Data",data);   
+    
+  enviar(config.servidor+"Faro/webservices/recuperar_recurso.php", data, function (resp) { 
+        console.log("resp",resp);           
         alertify
         .alert( config.nombre, resp.msj, function(){
           console.log("ok");          

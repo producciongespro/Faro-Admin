@@ -296,15 +296,19 @@ function VerRecursos() {
                                             />
                                         </div>
                                         {errors.url && <p className="error">URL requerido</p>}
-
+{
+    console.log("idNivel",idNivel)
+    
+}
                                         {
                                             //Año por nivel                                      
+                                            (idNivel === 2 || idNivel === 3) &&
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text" >Año:  </span>
+                                                    &nbsp; &nbsp;
+                                                    <GrupoCheck nivel={parseInt(detalleRecurso.id_nivel)} nombre="anno" listaAnnos={detalleRecurso.anno} />
+                                                </div>
                                         }
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" >Año:  </span>
-                                            &nbsp; &nbsp;
-                                            <GrupoCheck nivel={parseInt(detalleRecurso.id_nivel)} nombre="anno" listaAnnos={detalleRecurso.anno} />
-                                        </div>
                                         <br />
                                         {
                                             //URL IMAGEN

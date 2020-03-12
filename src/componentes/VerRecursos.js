@@ -59,6 +59,7 @@ function VerRecursos() {
 
     useEffect(() => {
         //console.log("Datos filtrados:", datosFiltrados);                 
+        //console.log("Detalle recurso", detalleRecurso);        
     })
 
     const onSubmit = data => {
@@ -296,10 +297,6 @@ function VerRecursos() {
                                             />
                                         </div>
                                         {errors.url && <p className="error">URL requerido</p>}
-{
-    console.log("idNivel",idNivel)
-    
-}
                                         {
                                             //Año por nivel                                      
                                             (idNivel === 2 || idNivel === 3) &&

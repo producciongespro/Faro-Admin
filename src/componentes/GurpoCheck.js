@@ -35,7 +35,7 @@ const annosSecundaria = [
   },
   {
     "id": 8,
-    "nombre": "Ocatavo"
+    "nombre": "Octavo"
   },
   {
     "id": 9,
@@ -68,8 +68,7 @@ function GrupoCheck(props) {
       let encontrado = false;      
       for (let index = 0; index < listaAnnos.length; index++) {
         //console.log("listaAnnos[index]",listaAnnos[index]);
-        //console.log("props.value",props.value);       
-        
+        //console.log("props.value",props.value);               
         if (listaAnnos[index] === props.value) {
           encontrado = true
           tmpChk = <input  
@@ -115,7 +114,7 @@ function GrupoCheck(props) {
         (
           annosSecundaria.map((item, i) => (
             <div key={"secundaria"+i} className="pretty p-default">
-              <input type="checkbox" value={item.nombre} name={props.nombre} />
+              <Chk  value={item.nombre} name={props.nombre }  />                            
               <div className="state p-primary">
                 <label>{item.nombre}</label>
               </div>

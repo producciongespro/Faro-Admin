@@ -30,7 +30,7 @@ function Papelera () {
       "id":e.target.dataset.origen,
       "id_usuario": usuario.idUsuario
     }
-    console.log("Data",data);   
+    //console.log("Data",data);   
     
   enviar(config.servidor+"Faro/webservices/recuperar_recurso.php", data, function (resp) { 
         console.log("resp",resp);           

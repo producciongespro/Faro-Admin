@@ -100,8 +100,8 @@ function VerRecursos() {
 
     const handleEliminarRecurso = (e) => {
         const id = e.target.dataset.origen;
-        const data = { "id": id, "id_usuario": "106" };
-
+        const data = { "id": id, "id_usuario": usuario.idUsuario };
+        console.log("data a eliminar",data);       
         alertify.confirm("¿Desea realmente eliminar el recurso?",
             function () {
                 enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (resp) {

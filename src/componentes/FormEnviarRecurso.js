@@ -27,7 +27,7 @@ export default function FormEnviarRecurso() {
     console.log("valorescheck:", valoresCheck);    
     console.log("nivel",nivel);
 
-    if (nivel === 1) {
+    if (nivel === 1 || nivel === 4 || nivel === 5 || nivel === 6 || nivel === 7) {
       valoresCheck = "vacio"
     };
   

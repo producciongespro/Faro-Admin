@@ -47,8 +47,8 @@ function VerRecursos() {
     async function obtenerDatos() {
         datosJson = await obtener(config.servidor + "Faro/webservices/obtener_recursos.php");
         niveles = await obtener(config.servidor + "Faro/webservices/obtener_niveles.php");
-        asignaturaPrimaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_primaria");
-        asignaturaSecundaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_secundaria");
+        asignaturaPrimaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_primaria");
+        asignaturaSecundaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_secundaria");
         //console.log("datosJson", datosJson);
         setDatosListos(true);
     }

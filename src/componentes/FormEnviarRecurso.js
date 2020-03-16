@@ -10,28 +10,33 @@ import enviar from '../modulos/enviar';
 import config from '../config.json';
 import obtener from '../modulos/obtener';
 
+//Arrays 
 var niveles=null;
 var asignaturaPrimaria=null;
 var asignaturaSecundaria=null;
+var programasAe=null;
 
 export default function FormEnviarRecurso() {
-  const [nivel, setNivel] = useState(-1);
+  const [idNivel, setIdNivel] = useState(-1);
   const [isReady, setIsReady] = useState(false);
-  const { register, handleSubmit, errors, getValues } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const { usuario } = useContext(MyContext);
 
 
   async function obtenerDatos() {
     niveles = await obtener(config.servidor + "faro/webservices/obtener_niveles.php");
     console.log("niveles", niveles);
-    asignaturaPrimaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_primaria");
-    asignaturaSecundaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_secundaria");
+    asignaturaPrimaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_primaria");    
+    asignaturaSecundaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_secundaria");
+    programasAe = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=programas_ae");
     setIsReady(true);
 }
 
 
 useEffect (()=>{
   obtenerDatos();
+  console.log("nivel",idNivel);
+  
 })
 
 
@@ -40,10 +45,10 @@ useEffect (()=>{
   const onSubmit = data => {
     
     let valoresCheck = obtenerValoresCheck("anno");
-    console.log("valorescheck:", valoresCheck);    
-    console.log("nivel",nivel);
+    //console.log("valorescheck:", valoresCheck);    
+    //console.log("nivel",idNivel);
 
-    if (nivel === 1 || nivel === 4 || nivel === 5 || nivel === 6 || nivel === 7) {
+    if (idNivel === 1 || idNivel === 4 || idNivel === 5 || idNivel === 6 || idNivel === 7) {
       valoresCheck = "vacio"
     };
   
@@ -69,8 +74,8 @@ useEffect (()=>{
   //console.log(errors);
 
 
-  const seleccionarNivel = () => {
-    setNivel(parseInt(getValues().id_nivel));
+  const seleccionarNivel = (e) => {
+    setIdNivel(parseInt(e.target.value));
   }
 
   const handleValidarEducatico =(e)=>{
@@ -125,24 +130,29 @@ useEffect (()=>{
         {
           //Año por nivel          
         }
-        <GrupoCheck nivel={nivel} nombre="anno"  listaAnnos="vacio" />
+        <GrupoCheck nivel={idNivel} nombre="anno"  listaAnnos="vacio" />
 
 
 
         {
           //ASIGNATURA (MATERIA) POR NIVEL : 
-          // Primaria y secundaria solamente
-          (nivel === 2 || nivel === 3) &&
+          // Primaria y secundaria solamente y agenda estudiantil
+          (idNivel === 2 || idNivel === 3 || idNivel === 7 ) &&
           (
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="selMateria">Asignatura</label>
+                {
+                  (idNivel === 2 || idNivel === 3 ) && <label className="input-group-text" htmlFor="selMateria">Asignatura</label>
+                }
+                {
+                  idNivel === 7 && <label className="input-group-text" htmlFor="selMateria">Programa</label>
+                }
               </div>
               <select className="custom-select" name="materia" id="selMateria" ref={register({ required: true })} >
                 <option defaultValue value={-1} >Seleccione la asignatura</option>
                 {
                   //Caso de primaria
-                  nivel === 2 &&
+                  idNivel === 2 &&
                   (
                     asignaturaPrimaria.map((item, i) => (
                       <option key={"asignatura" + i} value={item.nombre}> {item.nombre } </option>
@@ -151,10 +161,20 @@ useEffect (()=>{
                 }
                 {
                   //Caso de secundaria
-                  nivel === 3 &&
+                  idNivel === 3 &&
                   (
                     asignaturaSecundaria.map((item, i) => (
                       <option key={"asignatura" + i} value={item.nombre}> {item.nombre } </option>
+                    ))
+                  )
+                }
+
+                {
+                  //Caso de agenda estudiantil
+                  idNivel === 7 &&
+                  (
+                    programasAe.map((item, i) => (
+                      <option key={"asignatura" + i} value={item.nombrePrograma}> {item.nombrePrograma } </option>
                     ))
                   )
                 }

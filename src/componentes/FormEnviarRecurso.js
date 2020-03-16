@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import MyContext from '../modulos/MyContext';
 import alertify from 'alertifyjs';
@@ -8,17 +8,33 @@ import GrupoCheck from './GurpoCheck';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
-import niveles from '../data/niveles.json';
+import obtener from '../modulos/obtener';
 
-//console.log("config", config);
-
-const asignaturaPrimaria = ["Matemática", "Ciencias", "Español", "Estudios Sociales", "Artes Plásticas"];
-const asignaturaSecundaria = ["Matemática", "Ciencias", "Biología", "Química", "Español", "Estudios Sociales", "Artes plásticas"];
+var niveles=null;
+var asignaturaPrimaria=null;
+var asignaturaSecundaria=null;
 
 export default function FormEnviarRecurso() {
   const [nivel, setNivel] = useState(-1);
+  const [isReady, setIsReady] = useState(false);
   const { register, handleSubmit, errors, getValues } = useForm();
   const { usuario } = useContext(MyContext);
+
+
+  async function obtenerDatos() {
+    niveles = await obtener(config.servidor + "faro/webservices/obtener_niveles.php");
+    console.log("niveles", niveles);
+    asignaturaPrimaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_primaria");
+    asignaturaSecundaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_secundaria");
+    setIsReady(true);
+}
+
+
+useEffect (()=>{
+  obtenerDatos();
+})
+
+
 
 
   const onSubmit = data => {
@@ -53,7 +69,7 @@ export default function FormEnviarRecurso() {
   //console.log(errors);
 
 
-  const obtenerNivel = () => {
+  const seleccionarNivel = () => {
     setNivel(parseInt(getValues().id_nivel));
   }
 
@@ -82,10 +98,13 @@ export default function FormEnviarRecurso() {
         Admin/Agregar recursos
       </div>
 
+    {
+      !!!isReady ?
+        <span>Cargando información</span>
+        :
+
 
       <form onSubmit={handleSubmit(onSubmit)}>
-
-
         {
           //NIVEL: 
         }
@@ -93,11 +112,11 @@ export default function FormEnviarRecurso() {
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="selNivel">Nivel</label>
           </div>
-          <select className="custom-select" name="id_nivel" ref={register} onChange={obtenerNivel}>
+          <select className="custom-select" name="id_nivel" ref={register} onChange={seleccionarNivel}>
             <option defaultValue value={-1} >Seleccione un nivel</option>
             {
               niveles.map((item, i) => (
-                <option key={"nivel" + i } value={item.id }> {item.nombre } </option>
+                <option key={"nivel" + i } value={item.id }> {item.nombreNivel } </option>
               ))
             }
           </select>
@@ -126,7 +145,7 @@ export default function FormEnviarRecurso() {
                   nivel === 2 &&
                   (
                     asignaturaPrimaria.map((item, i) => (
-                      <option key={"asignatura" + i} value={item}> {item} </option>
+                      <option key={"asignatura" + i} value={item.nombre}> {item.nombre } </option>
                     ))
                   )
                 }
@@ -135,7 +154,7 @@ export default function FormEnviarRecurso() {
                   nivel === 3 &&
                   (
                     asignaturaSecundaria.map((item, i) => (
-                      <option key={"asignatura" + i} value={item}> {item} </option>
+                      <option key={"asignatura" + i} value={item.nombre}> {item.nombre } </option>
                     ))
                   )
                 }
@@ -236,6 +255,7 @@ export default function FormEnviarRecurso() {
 
         
       </form>
+          }
 
     </React.Fragment>
   );

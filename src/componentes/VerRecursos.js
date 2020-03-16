@@ -10,21 +10,23 @@ import 'alertifyjs/build/css/themes/default.min.css';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
-import niveles from '../data/niveles.json';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
 
-var asignaturas = null;
-var idNivel = null;
-var asignatura = "Todas";
+var niveles=null;
+var asignatura="Todas";
+var asignaturaPrimaria=null;
+var asignaturaSecundaria=null;
+
 //Json obtenido del servidor
-var datosJson = null;
+var datosJson=null;
 //json filtrado por nivel
-var datosPorNivel = null;
+var datosPorNivel=null;
 
 
 
 function VerRecursos() {
+    const [idNivel, setIdNivel] = useState(-1);
     //Array filtrado por nivel y materia
     const [datosFiltrados, setDatosFiltrados] = useState(null);
     //Bandera que indica que la solicitud y retorno de datos están resuletos
@@ -42,19 +44,20 @@ function VerRecursos() {
     //cerrar modal
     const handleClose = () => setShow(false);
 
-    async function obtenerDatos(cb) {
-        datosJson = await obtener(config.servidor + "faro/webservices/obtener_recursos.php");
+    async function obtenerDatos() {
+        datosJson = await obtener(config.servidor + "Faro/webservices/obtener_recursos.php");
+        niveles = await obtener(config.servidor + "Faro/webservices/obtener_niveles.php");
+        asignaturaPrimaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_primaria");
+        asignaturaSecundaria = await obtener(config.servidor + "faro/webservices/obtener_asignaturas.php?nivel=asignaturas_secundaria");
         //console.log("datosJson", datosJson);
-        cb();        
+        setDatosListos(true);
     }
 
 
     useEffect(() => {
         console.log("Componente montado");
         //console.log("Usuario", usuario.idUsuario);        
-        obtenerDatos(function () {
-            setDatosListos(true);
-        });
+        obtenerDatos();
     }, []);
 
     useEffect(() => {
@@ -129,14 +132,14 @@ function VerRecursos() {
     }
 
     const handleSeleccionarNivel = (e) => {
-        idNivel = parseInt(e.target.value);
-        //console.log("indice nivel", idNivel);
-        asignaturas = filtrar(niveles, "id", idNivel)[0].asignaturas;
+        let tmpIdNivel = parseInt(e.target.value);
+        //console.log("indice nivel", tmpIdNivel);
+        setIdNivel(tmpIdNivel);
+        
         //console.log("asignaturas",asignaturas);        
         //Filtra array por nivel y lo carga en el estado datosFiltrados:
-        datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
+        datosPorNivel = filtrar(datosJson, "id_nivel", tmpIdNivel);
         //console.log("datosPorNivel", datosPorNivel);
-
         setDatosFiltrados(datosPorNivel);
     }
 
@@ -184,7 +187,7 @@ function VerRecursos() {
                                 <option defaultValue>Seleccione un nivel</option>
                                 {
                                     niveles.map((item, i) => (
-                                        <option key={"Nivel" + i} value={item.id}> {item.nombre} </option>
+                                        <option key={"Nivel" + i} value={item.id}> {item.nombreNivel} </option>
                                     ))
                                 }
                             </select>
@@ -205,9 +208,15 @@ function VerRecursos() {
                             >
                                 <option defaultValue value="Todas">Todas</option>
                                 {
-                                    asignaturas !== null &&
-                                    asignaturas.map((item, i) => (
-                                        <option key={"asignaturas" + i} value={item}> {item} </option>
+                                    idNivel === 2 &&                                    
+                                    asignaturaPrimaria.map((item, i) => (
+                                        <option key={"asignaturas" + i} value={item.nombre}> {item.nombre } </option>
+                                    ))
+                                }
+                                {
+                                    idNivel === 3 &&                                    
+                                    asignaturaSecundaria.map((item, i) => (
+                                        <option key={"asignaturas" + i} value={item.nombre}> {item.nombre } </option>
                                     ))
                                 }
                             </select>

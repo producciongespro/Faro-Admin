@@ -74,7 +74,12 @@ function VerRecursos() {
         data.id = detalleRecurso.id;
 
         //Obtiene los valores de los check años;
-        data.anno = obtenerValoresCheck("anno");
+        //Validacion si el nivel presenta año:
+        if (idNivel === 2 || idNivel === 3 ) {
+            data.anno=obtenerValoresCheck("anno");
+        } else {
+            data.anno="vacio"
+        }
 
         //Valor obtenido del data mediante Validate hook
         console.log(data);

@@ -18,9 +18,16 @@ function Tabla(props) {
                         <th className="text-center" scope="col"> Asignatura </th>                        
                     }
                     {
+                        console.log("idNivel",props.idNivel)
+                        
+                    }
+                    {
                         // VISOR - PAPELERA
-                        (props.modo === "visor" || props.modo === "papelera") &&                    
-                        <th className="text-center" scope="col">Año</th>                                                 
+                        (props.idNivel === 2 || props.idNivel === 3) &&
+                        (
+                            (props.modo === "visor" || props.modo === "papelera") &&                    
+                                <th className="text-center" scope="col">Año</th>                            
+                        )                     
                     }
 
                     
@@ -83,8 +90,11 @@ function Tabla(props) {
                                     </td>                                    
                                 }
                                 {
-                                    (props.modo === "papelera" || props.modo === "visor" ) && 
-                                    <td className="text-center" >{item.anno}</td>
+                                     (props.idNivel === 2 || props.idNivel === 3) &&
+                                        (
+                                            (props.modo === "papelera" || props.modo === "visor" ) && 
+                                                <td className="text-center" >{item.anno}</td>
+                                        )
                                 }
  
                                 {

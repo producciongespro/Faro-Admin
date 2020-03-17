@@ -13,16 +13,16 @@ import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
 
-var niveles=null;
-var asignatura="Todas";
-var asignaturaPrimaria=null;
-var asignaturaSecundaria=null;
-var programasAe=null;
+var niveles = null;
+var asignatura = "Todas";
+var asignaturaPrimaria = null;
+var asignaturaSecundaria = null;
+var programasAe = null;
 
 //Json obtenido del servidor
-var datosJson=null;
+var datosJson = null;
 //json filtrado por nivel
-var datosPorNivel=null;
+var datosPorNivel = null;
 
 
 
@@ -85,20 +85,20 @@ function VerRecursos() {
             handleClose();
             //2-Carga el mnsj
             alertify
-                .alert( config.nombre, resp.msj, function () {
-                    console.log("OK");                                        
+                .alert(config.nombre, resp.msj, function () {
+                    console.log("OK");
                 });
             //3 - Llama nuevamente obtener datos y con un CALBACK de filtrado
             // (llama a los datos filtrados)
-                obtenerDatos(function () {
-                    //CAlback del segundo obtener datos
-                    //Que se ejecuta una vez que a obtendio los datos ACTUALIZADOS (editados)
-                    //Array filtrado Por nivel
-                    datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
-                    //Asignatura
-                    filtrarPorAsignatura();
-                    setEsperando(false);
-                });
+            obtenerDatos(function () {
+                //CAlback del segundo obtener datos
+                //Que se ejecuta una vez que a obtendio los datos ACTUALIZADOS (editados)
+                //Array filtrado Por nivel
+                datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
+                //Asignatura
+                filtrarPorAsignatura();
+                setEsperando(false);
+            });
         })
     }
     //console.log(errors);
@@ -106,7 +106,7 @@ function VerRecursos() {
     const handleEliminarRecurso = (e) => {
         const id = e.target.dataset.origen;
         const data = { "id": id, "id_usuario": usuario.idUsuario };
-        console.log("data a eliminar",data);       
+        console.log("data a eliminar", data);
         alertify.confirm("¿Desea realmente eliminar el recurso?",
             function () {
                 enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (resp) {
@@ -137,7 +137,7 @@ function VerRecursos() {
         let tmpIdNivel = parseInt(e.target.value);
         //console.log("indice nivel", tmpIdNivel);
         setIdNivel(tmpIdNivel);
-        
+
         //console.log("asignaturas",asignaturas);        
         //Filtra array por nivel y lo carga en el estado datosFiltrados:
         datosPorNivel = filtrar(datosJson, "id_nivel", tmpIdNivel);
@@ -199,45 +199,47 @@ function VerRecursos() {
                         // Select de asignatura (materia)
                     }
                     <div className="col-4">
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                                <label className="input-group-text" htmlFor="selAsignatura">
+                        {
+                            (idNivel === 2 || idNivel === 3 || idNivel === 7) &&
+                            <div className="input-group mb-3">
+                                <div className="input-group-prepend">
+                                    <label className="input-group-text" htmlFor="selAsignatura">
+                                        {
+                                            idNivel !== 7 ?
+                                                <span>Asigntaura</span>
+                                                :
+                                                <span>Programa</span>
+                                        }
+                                    </label>
+                                </div>
+                                <select
+                                    className="custom-select"
+                                    id="selAsigntaura"
+                                    onChange={handleSeleccionarAsignatura}
+                                >
+                                    <option defaultValue value="Todas">Todas</option>
                                     {
-                                        idNivel !== 7 ?
-                                        <span>Asigntaura</span>
-                                        :
-                                        <span>Programa</span>
+                                        idNivel === 2 &&
+                                        asignaturaPrimaria.map((item, i) => (
+                                            <option key={"asignaturas" + i} value={item.nombre}> {item.nombre} </option>
+                                        ))
                                     }
-                                </label>
+                                    {
+                                        idNivel === 3 &&
+                                        asignaturaSecundaria.map((item, i) => (
+                                            <option key={"asignaturas" + i} value={item.nombre}> {item.nombre} </option>
+                                        ))
+                                    }
+                                    {
+                                        //Agenda educativa
+                                        idNivel === 7 &&
+                                        programasAe.map((item, i) => (
+                                            <option key={"programasAe" + i} value={item.nombrePrograma}> {item.nombrePrograma} </option>
+                                        ))
+                                    }
+                                </select>
                             </div>
-                            <select
-                                className="custom-select"
-                                id="selAsigntaura"
-                                onChange={handleSeleccionarAsignatura}
-                            >
-                                <option defaultValue value="Todas">Todas</option>
-                                {
-                                    idNivel === 2 &&                                    
-                                    asignaturaPrimaria.map((item, i) => (
-                                        <option key={"asignaturas" + i} value={item.nombre}> {item.nombre } </option>
-                                    ))
-                                }
-                                {
-                                    idNivel === 3 &&                                    
-                                    asignaturaSecundaria.map((item, i) => (
-                                        <option key={"asignaturas" + i} value={item.nombre}> {item.nombre } </option>
-                                    ))
-                                }                                
-                                {
-                                    //Agenda educativa
-                                    idNivel === 7 &&                                    
-                                    programasAe.map((item, i) => (
-                                        <option key={"programasAe" + i} value={item.nombrePrograma}> {item.nombrePrograma } </option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-
+                        }
                     </div>
 
                     {
@@ -250,7 +252,7 @@ function VerRecursos() {
                             <Tabla array={datosFiltrados} clase="table table-striped sombreado" modo="visor" />
                         ) :
                         (
-                            <Tabla array={datosFiltrados} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" modo="visor" />
+                            <Tabla array={datosFiltrados} idNivel={idNivel} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" modo="visor" />
                         )
                 }
                 {
@@ -325,11 +327,11 @@ function VerRecursos() {
                                         {
                                             //Año por nivel                                      
                                             (idNivel === 2 || idNivel === 3) &&
-                                                <div className="input-group-prepend">
-                                                    <span className="input-group-text" >Año:  </span>
-                                                    &nbsp; &nbsp;
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text" >Año:  </span>
+                                                &nbsp; &nbsp;
                                                     <GrupoCheck nivel={parseInt(detalleRecurso.id_nivel)} nombre="anno" listaAnnos={detalleRecurso.anno} />
-                                                </div>
+                                            </div>
                                         }
                                         <br />
                                         {
@@ -361,7 +363,7 @@ function VerRecursos() {
                                             <input type="checkbox"
                                                 id="chkApoyo"
                                                 name="apoyo"
-                                                defaultChecked={ parseInt(detalleRecurso.apoyos) }
+                                                defaultChecked={parseInt(detalleRecurso.apoyos)}
                                                 ref={register}
                                             />
                                             <div className="state">

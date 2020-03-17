@@ -17,6 +17,7 @@ var niveles=null;
 var asignatura="Todas";
 var asignaturaPrimaria=null;
 var asignaturaSecundaria=null;
+var programasAe=null;
 
 //Json obtenido del servidor
 var datosJson=null;
@@ -49,6 +50,7 @@ function VerRecursos() {
         niveles = await obtener(config.servidor + "Faro/webservices/obtener_niveles.php");
         asignaturaPrimaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_primaria");
         asignaturaSecundaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_secundaria");
+        programasAe = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=programas_ae");
         //console.log("datosJson", datosJson);
         setDatosListos(true);
     }
@@ -199,7 +201,14 @@ function VerRecursos() {
                     <div className="col-4">
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
-                                <label className="input-group-text" htmlFor="selAsignatura">Asigntaura</label>
+                                <label className="input-group-text" htmlFor="selAsignatura">
+                                    {
+                                        idNivel !== 7 ?
+                                        <span>Asigntaura</span>
+                                        :
+                                        <span>Programa</span>
+                                    }
+                                </label>
                             </div>
                             <select
                                 className="custom-select"
@@ -217,6 +226,13 @@ function VerRecursos() {
                                     idNivel === 3 &&                                    
                                     asignaturaSecundaria.map((item, i) => (
                                         <option key={"asignaturas" + i} value={item.nombre}> {item.nombre } </option>
+                                    ))
+                                }                                
+                                {
+                                    //Agenda educativa
+                                    idNivel === 7 &&                                    
+                                    programasAe.map((item, i) => (
+                                        <option key={"programasAe" + i} value={item.nombrePrograma}> {item.nombrePrograma } </option>
                                     ))
                                 }
                             </select>

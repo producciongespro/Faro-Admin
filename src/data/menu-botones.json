@@ -6,23 +6,28 @@
                     [
                         {
                             "nombre": "Inicio",
-                            "descripción": "inicio de la aplicación"
+                            "descripción": "inicio de la aplicación",
+                            "comp": "Inicio"
                         },
                         {
                             "nombre": "Agregar recursos",
-                            "descripción": "Agrega recursos..."
+                            "descripción": "Agrega recursos...",
+                            "comp": "FormEnviarRecurso"
                         },
                         {
                             "nombre": "Ver recursos",
-                            "descripción": "Muetra los recursos publicados"        
+                            "descripción": "Muetra los recursos publicados",
+                            "comp": "VerRecursos"
                         },
                         {
                             "nombre": "Papelera",
-                            "descripción": "Muestra los elementos borrados anterirmente"
+                            "descripción": "Muestra los elementos borrados anterirmente",
+                            "comp": "Papelera"
                         },
                         {
                             "nombre": "Bitácora",
-                            "descripción": "Muestra los elementos borrados anterirmente"
+                            "descripción": "Muestra los elementos borrados anterirmente",
+                            "comp": "Bitacora"
                         }
                     ]
     },

@@ -8,9 +8,9 @@ import Login from './componentes/Login';
 import Bitacora from './componentes/Bitacora';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
+import ContenedorListados from './componentes/ContenedorListados';
 
 
-const componentes = [ <Inicio/>, <FormEnviarRecurso/>, <VerRecursos/>, <Papelera />, <Bitacora /> ]
 
 function App() {
   const [componente, setComponente] = useState(null);   
@@ -20,8 +20,31 @@ function App() {
 
 
   const handleCargarComponentes = (e) => {
-    //console.log(e.target.value);    
-    setComponente( componentes[e.target.value] ); 
+    console.log("Parametro recibido", e.target.dataset.comp);    
+    
+
+    switch (e.target.dataset.comp) {
+      case "Inicio":        
+        setComponente(<Inicio /> )
+      break;
+      case "FormEnviarRecurso":        
+        setComponente(<FormEnviarRecurso /> )
+      break;
+      case "VerRecursos":        
+        setComponente(<VerRecursos /> )
+      break;      
+      case "Papelera":        
+        setComponente(<Papelera /> )
+      break;
+      case "Bitacora":        
+        setComponente(<Bitacora /> )
+      break;
+    
+      default:
+        console.log("Opción en botones fuera de rango");        
+        break;
+    }
+
   }
 
 

@@ -29,10 +29,7 @@ function Encabezado() {
                 <div className="col-10">
                     { usuario.idTipoUsuario === 1 && <h2>Administración de Recursos </h2>}
                     { usuario.idTipoUsuario === 2 && <h2>Administración de Desarrollo profesional </h2>}
-                    { usuario.idTipoUsuario === 3 && <h2>Administración de Plantillas de planeamiento </h2>}
-                    <span>
-                        Usuario actual: <strong>{usuario.correo}</strong>
-                    </span>
+                    { usuario.idTipoUsuario === 3 && <h2>Administración de Plantillas de planeamiento </h2>}                    
                 </div>
 
                 {

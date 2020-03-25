@@ -14,7 +14,7 @@ function Menu (props) {
                 
                
                arrayBotones.map((item, i)=>(
-                    <button onClick={props.handleCargarComponentes} value={i}  className="btn btn-outline-info btn-block" key={"btn"+i} >  {item.nombre}  </button>
+                    <button onClick={props.handleCargarComponentes} data-comp={item.comp }  className="btn btn-outline-info btn-block" key={"btn"+i} >  {item.nombre}  </button>
                 ))
                
             }

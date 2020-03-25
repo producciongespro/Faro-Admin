@@ -26,8 +26,7 @@ function Login() {
                 });
                 
             } else {
-               console.log("resp", resp);
-               
+               //console.log("resp", resp);               
                 const  datosUsuario = { 
                     correo: resp.usuario, 
                     nombre: resp.nombre,

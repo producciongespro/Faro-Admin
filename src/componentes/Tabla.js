@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 function Tabla(props) {
+    console.log("*****************idNivel",props.idNivel);
     return (
         <table id="tblNivel" className={props.clase}>
             <thead>
@@ -112,7 +113,10 @@ function Tabla(props) {
                                 }
                                 {
                                     props.modo === "visor" &&   
-                                    <td data-origen={item.id} className="text-center e-mouse color-rojo" onClick={props.handleEliminarRecurso} >
+                                    <td 
+                                    data-origen={item.id} 
+                                    className="text-center e-mouse color-rojo" 
+                                    onClick={props.handleEliminarRecurso} >
                                         <i data-origen={item.id}  className="far fa-trash-alt over-grande"></i>
                                     </td>
                                 } 

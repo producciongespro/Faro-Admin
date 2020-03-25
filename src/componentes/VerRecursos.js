@@ -45,29 +45,42 @@ function VerRecursos() {
     //cerrar modal
     const handleClose = () => setShow(false);
 
-    async function obtenerDatos() {
+    async function obtenerDatos(cb) {
         datosJson = await obtener(config.servidor + "Faro/webservices/obtener_recursos.php");
+        //console.log("datosJson",datosJson);        
         niveles = await obtener(config.servidor + "Faro/webservices/obtener_niveles.php");
+        //console.log("niveles",niveles);        
         asignaturaPrimaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_primaria");
+        //console.log("asignaturaPrimaria",asignaturaPrimaria);        
         asignaturaSecundaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_secundaria");
+        //console.log("asignaturaSecundaria",asignaturaSecundaria);        
         programasAe = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=programas_ae");
-        //console.log("datosJson", datosJson);
+        //console.log("programasAe",programasAe);                
         setDatosListos(true);
+        cb();
+        
     }
 
 
     useEffect(() => {
         console.log("Componente montado");
         //console.log("Usuario", usuario.idUsuario);        
-        obtenerDatos();
+        obtenerDatos(function () {
+            console.log("Proceso de recopilado de datos finalizado");            
+        });
     }, []);
 
     useEffect(() => {
+        console.log("esperando",esperando);
+        console.log("datosListos",datosListos);
+        
+        
         //console.log("Datos filtrados:", datosFiltrados);                 
         //console.log("Detalle recurso", detalleRecurso);        
     })
 
     const onSubmit = data => {
+        //Método para acutalizar un recurso********************
         //Se agregan unos datos que no están en el form
         data.id_usuario = usuario.idUsuario;
         data.id_nivel = detalleRecurso.id_nivel;
@@ -95,36 +108,34 @@ function VerRecursos() {
                 });
             //3 - Llama nuevamente obtener datos y con un CALBACK de filtrado
             // (llama a los datos filtrados)
-            obtenerDatos(function () {
-                //CAlback del segundo obtener datos
-                //Que se ejecuta una vez que a obtendio los datos ACTUALIZADOS (editados)
-                //Array filtrado Por nivel
-                datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
-                //Asignatura
+            obtenerDatos(function () { 
+                datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);            
                 filtrarPorAsignatura();
-                setEsperando(false);
-            });
+                setEsperando(false);                
+             });            
+            
         })
     }
     //console.log(errors);
 
     const handleEliminarRecurso = (e) => {
-        const id = e.target.dataset.origen;
-        const data = { "id": id, "id_usuario": usuario.idUsuario };
-        console.log("data a eliminar", data);
+        setEsperando(true);
+        const id = e.target.dataset.origen;       
+        const registroBorrar = { "id": id, "id_usuario": usuario.idUsuario };
+        console.log("data a eliminar", registroBorrar);
         alertify.confirm("¿Desea realmente eliminar el recurso?",
             function () {
-                enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", data, function (resp) {
+                enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", registroBorrar, function (resp) {
                     //console.log("param",param);  
-                    alertify.success(resp.msj);
-                    setEsperando(true);
-                    obtenerDatos(function () {
+                    alertify.success(resp.msj);                    
+                    obtenerDatos(function () { 
                         //Array filtrado Por nivel
                         datosPorNivel = filtrar(datosJson, "id_nivel", idNivel);
-                        //Asignatura
+                        console.log("datosPorNiveldespues de borrar: ",datosPorNivel);                                            
                         filtrarPorAsignatura();
                         setEsperando(false);
-                    });
+                     });
+                     
                 })
             });
     }
@@ -139,8 +150,7 @@ function VerRecursos() {
     }
 
     const handleSeleccionarNivel = (e) => {
-        let tmpIdNivel = parseInt(e.target.value);
-        //console.log("indice nivel", tmpIdNivel);
+        let tmpIdNivel = parseInt(e.target.value);               
         setIdNivel(tmpIdNivel);
 
         //console.log("asignaturas",asignaturas);        
@@ -254,7 +264,7 @@ function VerRecursos() {
                 {
                     esperando ?
                         (
-                            <Tabla array={datosFiltrados} clase="table table-striped sombreado" modo="visor" />
+                            <Tabla array={datosFiltrados} idNivel={idNivel} clase="table table-striped sombreado" modo="visor" />
                         ) :
                         (
                             <Tabla array={datosFiltrados} idNivel={idNivel} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" modo="visor" />

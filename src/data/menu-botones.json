@@ -1,23 +1,84 @@
-[
+[    
     {
-        "nombre": "Inicio",
-        "descripción": "inicio de la aplicación"
+        "idTipo": 1,
+        "etiqueta": "Recursos",
+        "botones" :
+                    [
+                        {
+                            "nombre": "Inicio",
+                            "descripción": "inicio de la aplicación"
+                        },
+                        {
+                            "nombre": "Agregar recursos",
+                            "descripción": "Agrega recursos..."
+                        },
+                        {
+                            "nombre": "Ver recursos",
+                            "descripción": "Muetra los recursos publicados"        
+                        },
+                        {
+                            "nombre": "Papelera",
+                            "descripción": "Muestra los elementos borrados anterirmente"
+                        },
+                        {
+                            "nombre": "Bitácora",
+                            "descripción": "Muestra los elementos borrados anterirmente"
+                        }
+                    ]
     },
     {
-        "nombre": "Agregar recursos",
-        "descripción": "Agrega recursos..."
+        "idTipo": 2,
+        "etiqueta": "Desarrollo profesional",
+        "botones" :
+                    [
+                        {
+                            "nombre": "Inicio",
+                            "descripción": "inicio de la aplicación"
+                        },
+                        {
+                            "nombre": "Cursos virtuales",
+                            "descripción": "Agrega cursos virtuales..."
+                        },
+                        {
+                            "nombre": "Recursos digitales",
+                            "descripción": "Herramientas para docentes"        
+                        },
+                        {
+                            "nombre": "Videoteca",
+                            "descripción": "Videoteca"
+                        },
+                        {
+                            "nombre": "Otras ofertas",
+                            "descripción": "otras"
+                        }
+                    ]
     },
     {
-        "nombre": "Ver recursos",
-        "descripción": "Muetra los recursos publicados"        
-    },
-    {
-        "nombre": "Papelera",
-        "descripción": "Muestra los elementos borrados anterirmente"
-    },
-    {
-        "nombre": "Bitácora",
-        "descripción": "Muestra los elementos borrados anterirmente"
+        "idTipo": 3,
+        "etiqueta": "Plantillas planeamiento",
+        "botones" :
+                    [
+                        {
+                            "nombre": "Inicio",
+                            "descripción": "inicio de la aplicación"
+                        },
+                        {
+                            "nombre": "Primaria",
+                            "descripción": "Agrega cursos virtuales..."
+                        },
+                        {
+                            "nombre": "Secundaria",
+                            "descripción": "Herramientas para docentes"        
+                        },
+                        {
+                            "nombre": "Educación adultos",
+                            "descripción": "Videoteca"
+                        },
+                        {
+                            "nombre": "Unidocentes",
+                            "descripción": "otras"
+                        }
+                    ]
     }
     
 

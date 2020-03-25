@@ -26,12 +26,18 @@ function Login() {
                 });
                 
             } else {
-               const  datosUsuario = { 
-                    correo: resp.usuario,                   
+               console.log("resp", resp);
+               
+                const  datosUsuario = { 
+                    correo: resp.usuario, 
+                    nombre: resp.nombre,
+                    apellido1: resp.apellido1,                  
+                    apellido2: resp.apellido2,
                     idUsuario: resp.id,
-                    tipoUsuario: "admin",
+                    idTipoUsuario: resp.idTipoUsuario,
+                    etiquetaTipoUsuario : resp.etiquetaTipoUsuario,
                     isAccesado : true                    
-                };             
+                };                             
                setUsuario(datosUsuario);                     
             }
          } )          
@@ -40,10 +46,7 @@ function Login() {
      
     return (
        <div className="container-login">        
-       {
-           //console.log("Usuario en login", usuario)
-           
-       }
+       
             <div className="container">
             <br/>
             <div className="d-flex justify-content-center h-100">

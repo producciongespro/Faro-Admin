@@ -1,13 +1,22 @@
-import React  from 'react';
+import React, {useContext}  from 'react';
 import botones from '../data/menu-botones.json';
+import MyContext from '../modulos/MyContext';
+import filtrar from '../modulos/filtrar';
 
-function Menu (props) {   
+function Menu (props) { 
+    const { usuario} = useContext(MyContext);  
+    const arrayBotones = filtrar(botones, "idTipo", usuario.idTipoUsuario )[0].botones;
+    
     return (
         <React.Fragment>
             {
-                botones.map((item, i)=>(
+               // console.log(arrayBotones)
+                
+               
+               arrayBotones.map((item, i)=>(
                     <button onClick={props.handleCargarComponentes} value={i}  className="btn btn-outline-info btn-block" key={"btn"+i} >  {item.nombre}  </button>
                 ))
+               
             }
         </React.Fragment>
     )

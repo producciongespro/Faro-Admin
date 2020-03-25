@@ -5,7 +5,11 @@ const MyContext = React.createContext({
     usuario : {      
       correo: "",
       idUsuario: "",
-      tipoUsuario: "",
+      nombre: "",
+      apellido1: "",
+      apellido2: "",
+      idTipoUsuario: "",
+      etiquetaTipoUsuario: "",
       isAccesado: false},    
     setUsuario : () => {} 
 });

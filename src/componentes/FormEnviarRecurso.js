@@ -48,6 +48,8 @@ export default function FormEnviarRecurso() {
     //console.log("valorescheck:", valoresCheck);    
     //console.log("nivel",idNivel);
 
+    //En caso de niveles que no sean primaria ni secudnaria, el nivel no es requrido por lo que se 
+    //fuerza a vacio para envio en BD
     if (idNivel === 1 || idNivel === 4 || idNivel === 5 || idNivel === 6 || idNivel === 7) {
       valoresCheck = "vacio"
     };
@@ -83,17 +85,13 @@ export default function FormEnviarRecurso() {
     //console.log("Valor obtenido", str);    
     const patt = new RegExp("www.mep.go.cr/educatico");
     const res = patt.test(str);
-    //console.log("Resultado", res);
-    if (idNivel !== 7) {
-      //Se omite la validación de educatico en caso de agenda estudiantil para efectos de pruebas
+    //console.log("Resultado", res);          
       if (res !== true) {
         alertify
           .alert("La url del recruso debe provenir de educatico.", function () {
             console.log("Aceptar");
           });
-      }
-    }
-
+      }    
   }
 
 

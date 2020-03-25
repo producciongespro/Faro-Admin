@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 
+
 function Tabla(props) {
     console.log("*****************idNivel",props.idNivel);
+    moment.locale('es');
     return (
         <table id="tblNivel" className={props.clase}>
             <thead>
@@ -75,7 +77,7 @@ function Tabla(props) {
             </thead>
             <tbody>
                 {
-                    props.array !== null &&
+                    props.array  &&
                     (
                         props.array.map((item, i) => (
                             <tr key={"recurso" + i}>

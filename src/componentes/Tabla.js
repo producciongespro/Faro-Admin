@@ -1,9 +1,10 @@
 import React from 'react';
 import moment from 'moment';
+import 'moment/locale/es';
 
 
 function Tabla(props) {
-    console.log("*****************idNivel",props.idNivel);
+    //console.log("*****************idNivel",props.idNivel);
     moment.locale('es');
     return (
         <table id="tblNivel" className={props.clase}>
@@ -20,10 +21,7 @@ function Tabla(props) {
                         props.modo === "papelera" &&                    
                         <th className="text-center" scope="col"> Asignatura </th>                        
                     }
-                    {
-                        console.log("idNivel",props.idNivel)
-                        
-                    }
+                    
                     {
                         // VISOR - PAPELERA
                         (props.idNivel === 2 || props.idNivel === 3) &&

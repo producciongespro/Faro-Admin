@@ -24,11 +24,11 @@ export default function FormEnviarRecurso() {
 
 
   async function obtenerDatos() {
-    niveles = await obtener(config.servidor + "faro/webservices/obtener_niveles.php");
+    niveles = await obtener(config.servidor + "obtener_niveles.php");
     console.log("niveles", niveles);
-    asignaturaPrimaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_primaria");
-    asignaturaSecundaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_secundaria");
-    programasAe = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=programas_ae");
+    asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
+    asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
+    programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
     setIsReady(true);
   }
 
@@ -59,7 +59,7 @@ export default function FormEnviarRecurso() {
       data.anno = valoresCheck;
       data.id_usuario = usuario.idUsuario;
       console.log("data", data);
-      enviar(config.servidor + "faro/webservices/registrar_recurso.php", data, function (resp) {
+      enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
         alertify.alert(
           config.nombre + " " + config.version,
           resp.msj,

@@ -10,7 +10,7 @@ function Bitacora () {
     },[]);
 
     async function obtener () {
-        let response = await fetch(config.servidor+"Faro/webservices/obtener_bitacora.php");        
+        let response = await fetch(config.servidor+"obtener_bitacora.php");        
         console.log(response);
         setDataJson(await response.json());        
     }

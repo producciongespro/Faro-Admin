@@ -16,7 +16,7 @@ function Login() {
     
     const onSubmit = data => {
         //console.log("data", data );
-        enviar(config.servidor+"Faro/webservices/login.php", data, function (resp) { 
+        enviar(config.servidor+"login.php", data, function (resp) { 
             //console.log("respuesta", resp);
             if (resp.error) {
                 console.log("error:", resp.error_msg);

@@ -19,7 +19,7 @@ function Papelera () {
   }, [])
 
   async function obtenerDatos() {    
-    let response = await fetch(config.servidor +'Faro/webservices/obtener_recursos_borrados.php');    
+    let response = await fetch(config.servidor +'obtener_recursos_borrados.php');    
     const tmpArray = await response.json();
     setDatosJson (tmpArray);     
   }
@@ -32,7 +32,7 @@ function Papelera () {
     }
     //console.log("Data",data);   
     
-  enviar(config.servidor+"Faro/webservices/recuperar_recurso.php", data, function (resp) { 
+  enviar(config.servidor+"recuperar_recurso.php", data, function (resp) { 
         console.log("resp",resp);           
         alertify
         .alert( config.nombre, resp.msj, function(){

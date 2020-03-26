@@ -46,15 +46,15 @@ function VerRecursos() {
     const handleClose = () => setShow(false);
 
     async function obtenerDatos(cb) {
-        datosJson = await obtener(config.servidor + "Faro/webservices/obtener_recursos.php");
+        datosJson = await obtener(config.servidor + "obtener_recursos.php");
         //console.log("datosJson",datosJson);        
-        niveles = await obtener(config.servidor + "Faro/webservices/obtener_niveles.php");
+        niveles = await obtener(config.servidor + "obtener_niveles.php");
         //console.log("niveles",niveles);        
-        asignaturaPrimaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_primaria");
+        asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
         //console.log("asignaturaPrimaria",asignaturaPrimaria);        
-        asignaturaSecundaria = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=asignaturas_secundaria");
+        asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
         //console.log("asignaturaSecundaria",asignaturaSecundaria);        
-        programasAe = await obtener(config.servidor + "Faro/webservices/obtener_tabla.php?tabla=programas_ae");
+        programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
         //console.log("programasAe",programasAe);                
         setDatosListos(true);
         cb();
@@ -96,7 +96,7 @@ function VerRecursos() {
 
         //Valor obtenido del data mediante Validate hook
         console.log(data);
-        enviar(config.servidor + "Faro/webservices/actualizar_recurso.php", data, function (resp) {
+        enviar(config.servidor + "actualizar_recurso.php", data, function (resp) {
             //CALBACK que se ejecuta una vez que termina la petición de envio al servidor
             //console.log("respueste", resp);
             //1- Cierra el modal
@@ -125,7 +125,7 @@ function VerRecursos() {
         console.log("data a eliminar", registroBorrar);
         alertify.confirm("¿Desea realmente eliminar el recurso?",
             function () {
-                enviar(config.servidor + "Faro/webservices/eliminar_recurso.php", registroBorrar, function (resp) {
+                enviar(config.servidor + "eliminar_recurso.php", registroBorrar, function (resp) {
                     //console.log("param",param);  
                     alertify.success(resp.msj);                    
                     obtenerDatos(function () { 

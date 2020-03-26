@@ -38,23 +38,32 @@
                     [
                         {
                             "nombre": "Inicio",
-                            "descripción": "inicio de la aplicación"
+                            "descripción": "inicio de la aplicación",
+                            "comp": "Inicio"
                         },
                         {
                             "nombre": "Cursos virtuales",
-                            "descripción": "Agrega cursos virtuales..."
+                            "descripción": "Agrega cursos virtuales...",
+                            "comp":"ContenedorListados",
+                            "modo": "Cursos virtuales"
                         },
                         {
                             "nombre": "Recursos digitales",
-                            "descripción": "Herramientas para docentes"        
+                            "descripción": "Herramientas para docentes",
+                            "comp":"ContenedorListados",
+                            "modo": "Recursos digitales"
                         },
                         {
                             "nombre": "Videoteca",
-                            "descripción": "Videoteca"
+                            "descripción": "Videoteca",
+                            "comp":"ContenedorListados",
+                            "modo": "Videoteca"
                         },
                         {
                             "nombre": "Otras ofertas",
-                            "descripción": "otras"
+                            "descripción": "otras",
+                            "comp":"ContenedorListados",
+                            "modo": "Otras ofertas"
                         }
                     ]
     },

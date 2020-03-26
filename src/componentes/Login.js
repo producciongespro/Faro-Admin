@@ -63,7 +63,7 @@ function Login() {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-user"></i></span>                                    
                                 </div>
-                                <input ref={register({required: true})}  type="text" autoComplete="username"  defaultValue="paty@correo.de" name="usuario" className="form-control" placeholder="Correo del MEP" />                                
+                                <input ref={register({required: true})}  type="text" autoComplete="username"  defaultValue="oscar@correo.de" name="usuario" className="form-control" placeholder="Correo del MEP" />                                
                             </div>                            
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">

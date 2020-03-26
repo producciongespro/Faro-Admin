@@ -3,12 +3,11 @@ import React from 'react';
 
 function ContenedorListados (props) {
 
-
-
+  
     return (
         <div className="row">
             <div className="col-sm-12">
-                <h6>Listado</h6>
+                <h4>{props.modo}</h4>
             </div>
         </div>
     );

@@ -264,10 +264,10 @@ function VerRecursos() {
                 {
                     esperando ?
                         (
-                            <Tabla array={datosFiltrados} idNivel={idNivel} clase="table table-striped sombreado" modo="visor" />
+                            <Tabla array={datosFiltrados} idNivel={idNivel} asignatura={asignatura} clase="table table-striped sombreado" modo="visor" />
                         ) :
                         (
-                            <Tabla array={datosFiltrados} idNivel={idNivel} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" modo="visor" />
+                            <Tabla array={datosFiltrados} idNivel={idNivel} asignatura={asignatura} handleEliminarRecurso={handleEliminarRecurso} handleShow={handleEditarRecurso} clase="table table-striped" modo="visor" />
                         )
                 }
                 {

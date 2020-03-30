@@ -36,16 +36,22 @@ function Tabla(props) {
                         (props.idNivel === 2 || props.idNivel === 3) &&
                         (
                             (props.modo === "visor" || props.modo === "papelera") &&                    
-                                <th className="text-center" scope="col">Asignatura</th>                            
+                                (
+                                    props.asignatura === "Todas" &&
+                                    <th className="text-center" scope="col">Asignatura</th>                            
+                                )
                         )                     
                     }
 
                     {
-                        // VISOR - PAPELERA: Asignatura
+                        // VISOR - PAPELERA: programa para Agenda educativa
                         (props.idNivel === 7 ) &&
                         (
                             (props.modo === "visor" || props.modo === "papelera") &&                    
-                                <th className="text-center" scope="col">Programa</th>                            
+                            (
+                                props.asignatura === "Todas" &&
+                                    <th className="text-center" scope="col">Programa</th>                            
+                            )
                         )                     
                     }
 
@@ -122,7 +128,10 @@ function Tabla(props) {
                                     (props.idNivel === 2 || props.idNivel === 3  || props.idNivel === 7 ) &&
                                     (
                                         (props.modo === "visor" || props.modo === "papelera") &&                    
-                                            <th className="text-center"> {item.materia} </th>
+                                                (
+                                                    props.asignatura === "Todas" &&
+                                                    <th className="text-center"> {item.materia} </th>
+                                                )
                                     )                     
                                 }
 

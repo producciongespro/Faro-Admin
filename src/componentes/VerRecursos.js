@@ -63,20 +63,20 @@ function VerRecursos() {
 
 
     useEffect(() => {
-        console.log("Componente montado");
+        //console.log("Componente montado");
         //console.log("Usuario", usuario.idUsuario);        
         obtenerDatos(function () {
-            console.log("Proceso de recopilado de datos finalizado");            
+            //console.log("Proceso de recopilado de datos finalizado");            
         });
     }, []);
 
     useEffect(() => {
-        console.log("esperando",esperando);
-        console.log("datosListos",datosListos);
-        
-        
+        //console.log("esperando",esperando);
+        //console.log("datosListos",datosListos);       
         //console.log("Datos filtrados:", datosFiltrados);                 
         //console.log("Detalle recurso", detalleRecurso);        
+        console.log("Id nivel", idNivel);
+        
     })
 
     const onSubmit = data => {
@@ -104,7 +104,7 @@ function VerRecursos() {
             //2-Carga el mnsj
             alertify
                 .alert(config.nombre, resp.msj, function () {
-                    console.log("OK");
+                    //console.log("OK");
                 });
             //3 - Llama nuevamente obtener datos y con un CALBACK de filtrado
             // (llama a los datos filtrados)
@@ -300,9 +300,18 @@ function VerRecursos() {
                                             detalleRecurso.materia !== undefined &&
                                             <div className="input-group mb-3">
                                                 <div className="input-group-prepend">
-                                                    <span className="input-group-text" id="spnAsignatura">Asignatura</span>
+                                                    {
+                                                        (idNivel === 2 || idNivel === 3) && <span className="input-group-text" id="spnAsignatura">Asignatura</span>
+                                                    }
+                                                    {
+                                                        (idNivel === 7 ) && <span className="input-group-text" id="spnAsignatura">Programa</span>
+                                                    }
+                                                    
                                                 </div>
-                                                <input name="materia" ref={register} type="text" className="form-control" readOnly defaultValue={detalleRecurso.materia} aria-describedby="spnAsignatura" />
+                                                {
+                                                    (idNivel === 2 || idNivel === 3 || idNivel === 7   ) && <input name="materia" ref={register} type="text" className="form-control" readOnly defaultValue={detalleRecurso.materia} aria-describedby="spnAsignatura" />
+                                                }
+                                                
                                             </div>
                                         }
 

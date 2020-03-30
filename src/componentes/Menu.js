@@ -9,7 +9,9 @@ function Menu (props) {
     
     return (
         <React.Fragment>
-            {console.log(arrayBotones)}
+            {
+             //console.log(arrayBotones)
+            }
             {               
                arrayBotones.map((item, i)=>(
                     <button onClick={props.handleCargarComponentes} data-comp={item.comp }  data-modo={item.modo }  className="btn btn-outline-info btn-block" key={"btn"+i} >  {item.nombre}  </button>

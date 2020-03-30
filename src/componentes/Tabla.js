@@ -23,13 +23,32 @@ function Tabla(props) {
                     }
                     
                     {
-                        // VISOR - PAPELERA
+                        // VISOR - PAPELERA: AÑO
                         (props.idNivel === 2 || props.idNivel === 3) &&
                         (
                             (props.modo === "visor" || props.modo === "papelera") &&                    
                                 <th className="text-center" scope="col">Año</th>                            
                         )                     
                     }
+
+                    {
+                        // VISOR - PAPELERA: Asignatura
+                        (props.idNivel === 2 || props.idNivel === 3) &&
+                        (
+                            (props.modo === "visor" || props.modo === "papelera") &&                    
+                                <th className="text-center" scope="col">Asignatura</th>                            
+                        )                     
+                    }
+
+                    {
+                        // VISOR - PAPELERA: Asignatura
+                        (props.idNivel === 7 ) &&
+                        (
+                            (props.modo === "visor" || props.modo === "papelera") &&                    
+                                <th className="text-center" scope="col">Programa</th>                            
+                        )                     
+                    }
+
 
                     
                     {
@@ -97,6 +116,17 @@ function Tabla(props) {
                                                 <td className="text-center" >{item.anno}</td>
                                         )
                                 }
+
+                                {
+                                    // VISOR - PAPELERA: Asignatura en primaria o secundaria / programa en agenda estudiantil
+                                    (props.idNivel === 2 || props.idNivel === 3  || props.idNivel === 7 ) &&
+                                    (
+                                        (props.modo === "visor" || props.modo === "papelera") &&                    
+                                            <th className="text-center"> {item.materia} </th>
+                                    )                     
+                                }
+
+                
  
                                 {
                                     props.modo === "papelera" &&   

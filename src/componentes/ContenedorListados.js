@@ -31,9 +31,20 @@ function ContenedorListados (props) {
         <React.Fragment>
             <div className="row">
             <div className="col-sm-12">
-                <h4>{props.modo}</h4>
+                <h4>{props.modo}</h4>                                
+            </div>            
             </div>
-        </div>
+            <hr/>
+
+            <div className="row">
+                <div className="col-sm-12 text-right">
+                <button className="btn btn-info"> 
+                    <i className="fas fa-plus-circle"></i> Agregar registro                    
+                </button>
+                </div>
+            </div>
+            <br/>
+
         <div className="row">
             <div className="col-sm-12">
                 {

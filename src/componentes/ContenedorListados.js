@@ -1,12 +1,15 @@
-import React, {useEffect}  from 'react';
+import React, {useEffect, useState}  from 'react';
+import TablaContenedor from '../componentes/TablaContenedor';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
 import config from '../config.json';
 
 var datosJson=null;
-var datosFiltrados=null;
+//var datosFiltrados=null;
 
 function ContenedorListados (props) {
+
+    const [ datosFiltrados, setDatosFiltrados ] = useState(false);
 
     async function obtenerDatos (cb) {
         datosJson = await obtener(config.servidor + "obtener_oferta_desarrollo.php");      
@@ -15,19 +18,32 @@ function ContenedorListados (props) {
 
   useEffect(()=>{
         obtenerDatos(function () {
-            //console.log(datosJson);            
-            datosFiltrados = filtrar(datosJson, "oferta", props.modo );
-            console.log(datosFiltrados);
-            
+            console.log("datosJson",datosJson);            
+            setDatosFiltrados( filtrar(datosJson, "oferta", props.modo ));            
         })
-  },[])
+  },[]);
+
+  useEffect(()=>{
+      console.log("datosFiltrados", datosFiltrados);      
+  })
 
     return (
-        <div className="row">
+        <React.Fragment>
+            <div className="row">
             <div className="col-sm-12">
                 <h4>{props.modo}</h4>
             </div>
         </div>
+        <div className="row">
+            <div className="col-sm-12">
+                {
+                    datosFiltrados &&
+                    <TablaContenedor array={datosFiltrados} clase="table table-striped" />
+                }
+                
+            </div>
+        </div>
+        </React.Fragment>
     );
     
 }

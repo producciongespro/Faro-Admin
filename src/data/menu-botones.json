@@ -51,19 +51,19 @@
                             "nombre": "Recursos digitales",
                             "descripción": "Herramientas para docentes",
                             "comp":"ContenedorListados",
-                            "modo": "Recursos digitales"
+                            "modo": "Recursos digitales para educadores"
                         },
                         {
                             "nombre": "Videoteca",
                             "descripción": "Videoteca",
                             "comp":"ContenedorListados",
-                            "modo": "Videoteca"
+                            "modo": "Videoteca IDP"
                         },
                         {
                             "nombre": "Otras ofertas",
                             "descripción": "otras",
                             "comp":"ContenedorListados",
-                            "modo": "Otras ofertas"
+                            "modo": "Otras ofertas formativas disponibles"
                         }
                     ]
     },

@@ -19,7 +19,7 @@ var programasAe = null;
 export default function FormEnviarRecurso() {
   const [idNivel, setIdNivel] = useState(-1);
   const [isReady, setIsReady] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
   const { usuario } = useContext(MyContext);
 
 
@@ -65,6 +65,7 @@ export default function FormEnviarRecurso() {
           resp.msj,
           function () {
             console.log("ok");
+            reset();
           }
         );
       });

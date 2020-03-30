@@ -63,13 +63,13 @@ function Login() {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-user"></i></span>                                    
                                 </div>
-                                <input ref={register({required: true})}  type="text" autoComplete="username"  name="usuario" className="form-control" placeholder="Correo del MEP" />                                
+                                <input ref={register({required: true})}  type="text" autoComplete="username"  name="usuario" className="form-control" placeholder="Correo del MEP" defaultValue="francisco@gespro.cr" />                                
                             </div>                            
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text span-login"><i className="fas fa-key"></i></span>
                                 </div>
-                                <input ref={register({required: true})} name="clave" type="password" autoComplete="current-password" className="form-control" placeholder="Contraseña" />
+                                <input ref={register({required: true})} name="clave" type="password" autoComplete="current-password" className="form-control" placeholder="Contraseña" defaultValue="123" />
                             </div>
                             <div className="row align-items-center remember">
                                 <input type="checkbox" />Rocordarme

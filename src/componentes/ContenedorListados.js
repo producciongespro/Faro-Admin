@@ -1,15 +1,13 @@
 import React, {useEffect, useState}  from 'react';
-import { useForm } from 'react-hook-form';
 import { Modal } from 'react-bootstrap';
-import alertify from 'alertifyjs';
-import 'alertifyjs/build/css/alertify.min.css';
-import 'alertifyjs/build/css/themes/default.min.css';
 import TablaContenedor from '../componentes/TablaContenedor';
+import FormContenedor from '../componentes/FormContenedor';
 import obtener from '../modulos/obtener';
 import filtrar from '../modulos/filtrar';
 import config from '../config.json';
 
 var datosJson=null;
+var subCategorias=null;
 var modo=null;
 //var datosFiltrados=null;
 
@@ -18,15 +16,15 @@ function ContenedorListados (props) {
 
 
     const [ datosFiltrados, setDatosFiltrados ] = useState(false);
-    const [registro, setRegistro] = useState(null);
-    const { register, handleSubmit, errors } = useForm();    
+    const [registro, setRegistro] = useState(null);    
     const [show, setShow] = useState(false);
     //Establece la acción para el formulario: Edición si lo abre desde la tabla o "agregar" si lo abre con el botón agregar registro
     const [accion, setAccion] = useState(null);
     const handleClose = () => setShow(false);
 
     async function obtenerDatos (cb) {
-        datosJson = await obtener(config.servidor + "obtener_oferta_desarrollo.php");      
+        datosJson= await obtener(config.servidor + "obtener_oferta_desarrollo.php");
+        subCategorias= await obtener (config.servidor + "obtener_sub_categorias_odp.php");
         cb();
     }
 
@@ -106,7 +104,7 @@ function ContenedorListados (props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                            <h1>Prueba</h1>
+                                <FormContenedor accion={accion} subCategorias={subCategorias} registro={registro} />
                     </Modal.Body>
                     <Modal.Footer>
 

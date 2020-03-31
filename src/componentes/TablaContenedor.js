@@ -19,10 +19,14 @@ function Tabla(props) {
                         props.array.map((item, i) => (
                             <tr key={"recurso" + i}>
                                 <th scope="row">{i + 1}</th>
-                                <td>{item.nombre}</td>
+                                <td>
+                                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                        {item.nombre}
+                                    </a>
+                                </td>
                                 <td>{item.descripcion}</td>
                                         <td>
-                                            <i id={item.id} onClick={props.handleShow} className="fas fa-pencil-alt"></i>
+                                            <i id={item.id} onClick={props.handleAbrirModal} className="fas fa-pencil-alt"></i>
                                         </td>
                                         <td>
                                             <i id={item.id} onClick={props.handleEliminarRecurso} className="far fa-trash-alt"></i>

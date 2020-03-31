@@ -94,7 +94,13 @@ function FormContenedor(props) {
                         <div className="input-group-prepend">
                             <label className="input-group-text" htmlFor="selSubCategoria">Subcategoría</label>
                         </div>
-                        <select className="custom-select" id="selSubCategoria">
+                        <select 
+                            className="custom-select" 
+                            id="selSubCategoria"
+                            name="subcategoria"                            
+                            defaultValue={devolverPropiedad(props.registro, "sub_categoria")}
+                            ref={register({ required: true })}
+                            >
                             {
                                 props.subCategorias.map((item,i)=>(
                                     <option key={"subcategoria"+i} value={item.sub_categoria} > {item.sub_categoria} </option>
@@ -102,6 +108,26 @@ function FormContenedor(props) {
                             }
                         </select>
                     </div>
+                    <br />
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <label className="input-group-text" htmlFor="selPoblacion">Población</label>
+                        </div>
+                        <select 
+                            className="custom-select" 
+                            id="selPoblacion"
+                            name="poblacionIdp"
+                            defaultValue={devolverPropiedad(props.registro, "poblacion")}
+                            ref={register({ required: true })}
+                            >
+                            {
+                                props.poblacionesIdp.map((item,i)=>(
+                                    <option key={"subcategoria"+i} value={item.nombre} > {item.nombre} </option>
+                                ))
+                            }
+                        </select>
+                    </div>
+
 
 
                 </div>

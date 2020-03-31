@@ -8,6 +8,7 @@ import config from '../config.json';
 
 var datosJson=null;
 var subCategorias=null;
+var poblacionesIdp=null;
 var modo=null;
 //var datosFiltrados=null;
 
@@ -25,6 +26,7 @@ function ContenedorListados (props) {
     async function obtenerDatos (cb) {
         datosJson= await obtener(config.servidor + "obtener_oferta_desarrollo.php");
         subCategorias= await obtener (config.servidor + "obtener_sub_categorias_odp.php");
+        poblacionesIdp= await obtener (config.servidor + "obtener_poblaciones_idp.php");
         cb();
     }
 
@@ -104,7 +106,7 @@ function ContenedorListados (props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                                <FormContenedor accion={accion} subCategorias={subCategorias} registro={registro} />
+                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} />
                     </Modal.Body>
                     <Modal.Footer>
 

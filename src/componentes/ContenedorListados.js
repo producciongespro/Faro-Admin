@@ -106,6 +106,15 @@ function ContenedorListados (props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                                <div className="row">
+                                    <div className="col-sm-12 text-center">
+                                    {
+                                    registro &&                                    
+                                        registro.url_imagen &&
+                                            <img className="img-thumbnail img-previa" src={registro.url_imagen} alt="imagen de recurso" />
+                                    }
+                                    </div>
+                                </div>
                                 <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} />
                     </Modal.Body>
                     <Modal.Footer>

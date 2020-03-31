@@ -29,8 +29,7 @@ function FormContenedor(props) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-                <div className="col-sm-12">
-                    <h6>Formulario</h6>
+                <div className="col-sm-12">                    
                     <div className="input-group flex-nowrap">
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="spnNombre">Nombre</span>

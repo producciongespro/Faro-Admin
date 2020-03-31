@@ -34,3 +34,8 @@
 .over-grande:hover {
     transform: scale(1.5,1.5);
 }
+
+.img-previa {
+    width: 25%;
+    height: auto;
+}

@@ -115,7 +115,7 @@ function ContenedorListados (props) {
                                     }
                                     </div>
                                 </div>
-                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} />
+                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} />
                     </Modal.Body>
                     <Modal.Footer>
 

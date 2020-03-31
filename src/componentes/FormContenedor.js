@@ -10,6 +10,8 @@ function FormContenedor(props) {
 
     const onSubmit = data => {
         console.log("Datos a enviar al servidor", data);
+        console.log("modo", props.modo);
+        
         reset();
     }
     console.log(errors);

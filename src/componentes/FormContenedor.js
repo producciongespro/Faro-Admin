@@ -19,6 +19,7 @@ function FormContenedor(props) {
         console.log("Datos a enviar al servidor", data);      
         enviar (config.servidor+"registrar_odp.php", data, function (resp) { 
             console.log(resp);            
+            alertify.alert(config.nombre, resp.msj);
             reset();
          } )
         

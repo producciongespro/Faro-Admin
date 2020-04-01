@@ -22,7 +22,9 @@ function App() {
   const handleCargarComponentes = (e) => {
     //console.log("Parametro COMP recibido", e.target.dataset.comp);  
     const componente = e.target.dataset.componente;
-    const modo = e.target.dataset.modo;    
+    const idCategoria = e.target.dataset.idcategoria;
+    const modo = e.target.dataset.modo;
+
     
     switch (componente) {
       case "Inicio":        
@@ -41,7 +43,7 @@ function App() {
         setComponente(<Bitacora /> )
       break;      
       case "ContenedorListados":        
-        setComponente(<ContenedorListados  modo={modo} /> )
+        setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} /> )
       break;
     
       default:

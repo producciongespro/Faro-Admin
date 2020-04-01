@@ -41,7 +41,7 @@ function Menu (props) {
             {
             botonesFiltrados &&
                 botonesFiltrados.map((item, i)=>(
-                    <button onClick={props.handleCargarComponentes} data-componente={item.componente }  data-modo={item.modo }  className="btn btn-outline-info btn-block" key={"btn"+i} >  {item.etiqueta}  </button>
+                    <button onClick={props.handleCargarComponentes} data-componente={item.componente }  data-modo={item.modo }  data-idcategoria={item.idCategoria} className="btn btn-outline-info btn-block" key={"btn"+i} >  {item.etiqueta}  </button>
                 ))
                
             }

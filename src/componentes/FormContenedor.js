@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useContext } from 'react';
+import MyContext from '../modulos/MyContext';
 import { useForm } from 'react-hook-form';
+import enviar from '../modulos/enviar';
+import config from '../config.json';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
@@ -7,15 +10,22 @@ import 'alertifyjs/build/css/themes/default.min.css';
 
 function FormContenedor(props) {
     const { register, handleSubmit, errors, reset } = useForm();
+    const { usuario} = useContext(MyContext);  
 
+  
     const onSubmit = data => {
-        console.log("Datos a enviar al servidor", data);
-        console.log("modo", props.modo);
+        data.id_tipo=props.idCategoria;
+        data.usuario = usuario.idUsuario;
+        console.log("Datos a enviar al servidor", data);      
+        enviar (config.servidor+"registrar_odp.php", data, function (resp) { 
+            console.log(resp);            
+            reset();
+         } )
         
-        reset();
     }
     console.log(errors);
 
+    
     const devolverPropiedad = (registro, llave) => {
         //Devuelve una propiedad de registro para renderizarla en el inpout en caso de que sea modo editar
         //En insertar registro no renderiza ningún dato
@@ -29,7 +39,11 @@ function FormContenedor(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}> 
+        {
+            console.log(props.subCategorias)
+            
+        }          
             <div className="row">
                 <div className="col-sm-12">                    
                     <div className="input-group flex-nowrap">
@@ -98,13 +112,13 @@ function FormContenedor(props) {
                         <select 
                             className="custom-select" 
                             id="selSubCategoria"
-                            name="subcategoria"                            
+                            name="id_sub_categoria"                            
                             defaultValue={devolverPropiedad(props.registro, "sub_categoria")}
                             ref={register({ required: true })}
                             >
                             {
                                 props.subCategorias.map((item,i)=>(
-                                    <option key={"subcategoria"+i} value={item.sub_categoria} > {item.sub_categoria} </option>
+                                    <option key={"subcategoria"+i} value={item.id} > {item.sub_categoria} </option>
                                 ))
                             }
                         </select>
@@ -117,7 +131,7 @@ function FormContenedor(props) {
                         <select 
                             className="custom-select" 
                             id="selPoblacion"
-                            name="poblacionIdp"
+                            name="poblacion"
                             defaultValue={devolverPropiedad(props.registro, "poblacion")}
                             ref={register({ required: true })}
                             >

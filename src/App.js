@@ -21,10 +21,10 @@ function App() {
 
   const handleCargarComponentes = (e) => {
     //console.log("Parametro COMP recibido", e.target.dataset.comp);  
-    const comp = e.target.dataset.comp;
+    const componente = e.target.dataset.componente;
     const modo = e.target.dataset.modo;    
     
-    switch (comp) {
+    switch (componente) {
       case "Inicio":        
         setComponente(<Inicio /> )
       break;

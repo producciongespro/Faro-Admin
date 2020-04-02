@@ -43,7 +43,7 @@ function App() {
         setComponente(<Bitacora idTipoUsuario={usuario.idTipoUsuario} /> )
       break;      
       case "ContenedorListados":        
-        setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} /> )
+        setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} idUsuario={usuario.idUsuario} /> )
       break;
     
       default:

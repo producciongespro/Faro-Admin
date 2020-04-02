@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap';
 import TablaContenedor from '../componentes/TablaContenedor';
 import FormContenedor from '../componentes/FormContenedor';
 import obtener from '../modulos/obtener';
+import enviar from '../modulos/enviar';
 import filtrar from '../modulos/filtrar';
 import config from '../config.json';
 
@@ -42,6 +43,19 @@ function ContenedorListados (props) {
       console.log("Registro", registro);
             
   })
+
+  const handleEliminarRegistro =(e)=>{      
+      const dataDel = {
+          "id": e.target.id,
+          "id_usuario": props.idUsuario
+      };
+      console.log("Registro a eliminar", dataDel);
+      
+      enviar ( config.servidor + "eliminar_odp.php", dataDel, function (resp) {
+            console.log("resp",resp.msj );            
+        } )    
+      
+  }
 
   const handleAbrirModal =(e)=> {
       const idRegistro =  e.target.id;
@@ -83,7 +97,7 @@ function ContenedorListados (props) {
             <div className="col-sm-12">
                 {
                     datosFiltrados &&
-                    <TablaContenedor array={datosFiltrados} handleAbrirModal={handleAbrirModal} clase="table table-striped" />
+                    <TablaContenedor array={datosFiltrados} handleEliminarRegistro={handleEliminarRegistro}  handleAbrirModal={handleAbrirModal} clase="table table-striped" />
                 }
                 
             </div>

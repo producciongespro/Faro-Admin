@@ -28,7 +28,7 @@ function Bitacora (props) {
             case 2:
                 setDataJson( filtrar(tmpJson, "tabla", "Oferta Desarrollo") );        
             break;
-            case "3":
+            case 3:
                 console.log("No disponible");
                 
             break;

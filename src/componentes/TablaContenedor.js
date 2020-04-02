@@ -29,7 +29,7 @@ function Tabla(props) {
                                             <i id={item.id} onClick={props.handleAbrirModal} className="fas fa-pencil-alt"></i>
                                         </td>
                                         <td>
-                                            <i id={item.id} onClick={props.handleEliminarRecurso} className="far fa-trash-alt"></i>
+                                            <i id={item.id} onClick={props.handleEliminarRegistro} className="far fa-trash-alt"></i>
                                         </td>                                    
                             </tr>
                         ))

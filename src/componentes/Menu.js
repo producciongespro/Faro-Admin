@@ -14,19 +14,19 @@ function Menu (props) {
     var arrayBotones=null;
 
     useEffect(()=>{
-        console.log("compoente montado, id tipo", usuario.idTipoUsuario);  
-        console.log(config.servidor);              
+        //console.log("compoente montado, id tipo", usuario.idTipoUsuario);  
+        //console.log(config.servidor);              
         obtenerListaBotones();     
     },[]);
 
     useEffect(()=>{
-        console.log("botonesFiltrados",botonesFiltrados);
+        //console.log("botonesFiltrados",botonesFiltrados);
         
     })
 
     async function obtenerListaBotones () {
         arrayBotones= await obtener(config.servidor + 'obtener_menu_botones.php');
-        console.log(arrayBotones);
+        //console.log(arrayBotones);
         setBotonesFiltrados( filtrar(arrayBotones, "idTipoUsuario", usuario.idTipoUsuario.toString() )  );
         
         

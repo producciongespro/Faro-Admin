@@ -40,7 +40,7 @@ function App() {
         setComponente(<Papelera /> )
       break;
       case "Bitacora":        
-        setComponente(<Bitacora /> )
+        setComponente(<Bitacora idTipoUsuario={usuario.idTipoUsuario} /> )
       break;      
       case "ContenedorListados":        
         setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} /> )

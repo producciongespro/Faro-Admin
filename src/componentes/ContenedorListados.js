@@ -6,6 +6,9 @@ import obtener from '../modulos/obtener';
 import enviar from '../modulos/enviar';
 import filtrar from '../modulos/filtrar';
 import config from '../config.json';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
 
 var datosJson=null;
 var subCategorias=null;
@@ -25,9 +28,12 @@ function ContenedorListados (props) {
     const handleClose = () => setShow(false);
 
     async function obtenerDatos (cb) {
-        datosJson= await obtener(config.servidor + "obtener_oferta_desarrollo.php");
-        subCategorias= await obtener (config.servidor + "obtener_sub_categorias_odp.php");
-        poblacionesIdp= await obtener (config.servidor + "obtener_poblaciones_idp.php");
+        datosJson=await obtener(config.servidor + "obtener_oferta_desarrollo.php");
+        //console.log("******datosJson",datosJson);       
+        subCategorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");
+        //console.log("*******subCategorias",subCategorias);        
+        poblacionesIdp=await obtener (config.servidor + "obtener_poblaciones_idp.php");
+        //console.log("*******poblacionesIdp",poblacionesIdp);
         cb();
     }
 
@@ -44,16 +50,28 @@ function ContenedorListados (props) {
             
   })
 
-  const handleEliminarRegistro =(e)=>{      
-      const dataDel = {
+  const handleEliminarRegistro =(e)=>{           
+    let dataDel = {
           "id": e.target.id,
           "id_usuario": props.idUsuario
-      };
-      console.log("Registro a eliminar", dataDel);
-      
-      enviar ( config.servidor + "eliminar_odp.php", dataDel, function (resp) {
-            console.log("resp",resp.msj );            
-        } )    
+    };    
+    //console.log("Registro a eliminar", dataDel);                     
+    alertify.confirm(config.nombre, "¿Desea realemnte eliminar el registro?",
+        function(){
+            enviar ( config.servidor + "eliminar_odp.php", dataDel, function (resp) {
+                //Calback depsués de eliminar un registro:
+                alertify.alert(config.nombre, resp.msj );
+                //REcupera el json actualizado del servidor                 
+                obtenerDatos(function () {
+                    //console.log("datosJson",datosJson);            
+                    setDatosFiltrados( filtrar(datosJson, "oferta", modo ));            
+                })
+            })            
+        },
+        function(){
+            console.log("Operación 'Eliminar' cancelada");      
+        });
+
       
   }
 

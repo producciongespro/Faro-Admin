@@ -20,14 +20,16 @@ function FormContenedor(props) {
                 urlAPI=urlAPI + "registrar_odp.php";    
             break;
             case "editar":
-                urlAPI=urlAPI + "actualizar_odp.php"; 
+                urlAPI=urlAPI + "actualizar_odp.php";
+                //en edición envia el id del registro a editar:
+                data.id=props.registro.id;
             break;
         
             default:
                 break;
         } 
-        console.log("urlARPI",urlAPI);
-        
+        //console.log("urlARPI",urlAPI);
+        //Se agregan las demás propiedades al dataform
         data.id_tipo=props.idCategoria;
         data.usuario = usuario.idUsuario;
         console.log("Datos a enviar al servidor", data);      

@@ -3,39 +3,39 @@ import config from '../config';
 import Tabla from '../componentes/Tabla';
 import filtrar from '../modulos/filtrar';
 
+
 function Bitacora (props) {
     const [datosJson, setDataJson ] = useState(null);
 
     useEffect(()=>{
-        obtener();
+    let urlAPI=config.servidor+"obtener_bitacora.php?tabla=";
+        switch (props.idTipoUsuario) {
+            case 1:
+               urlAPI = urlAPI + "recursos"
+            break;
+            case 2:
+               urlAPI = urlAPI + "desarrollo_profesional"
+            break;
+            case 3:
+                //TODO: ver la tabla correspondiente:
+               //urlAPI = urlAPI + "planes"
+               console.log("tabla no disponible");               
+            break;
+        
+            default:
+                console.log("tipo de usuario fuera de rango" );                
+                break;
+        }
+        obtener(urlAPI);
     },[]);
 
     useEffect(()=>{
         console.log("datosJson",datosJson);        
     })
 
-    async function obtener () {
-        let response = await fetch(config.servidor+"obtener_bitacora.php");                
-        let tmpJson =  await response.json();
-        console.log("json sin finltrar",tmpJson);
-        console.log("props.idTipoUsuario",props.idTipoUsuario);
-        
-        
-        switch (props.idTipoUsuario) {
-            case 1:
-                setDataJson( filtrar(tmpJson, "tabla", "Recursos") );        
-            break;
-            case 2:
-                setDataJson( filtrar(tmpJson, "tabla", "desarrollo_profesional") );        
-            break;
-            case 3:
-                console.log("No disponible");                
-            break;
-                
-            default:
-                console.log("Tipo de usuario no disponible en bitácora");                
-                break;
-        }        
+    async function obtener (urlAPI) {
+        let response = await fetch(urlAPI);                
+        setDataJson(await response.json());               
     }
 
     return (

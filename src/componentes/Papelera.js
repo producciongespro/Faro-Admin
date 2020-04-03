@@ -15,11 +15,24 @@ function Papelera () {
 
 
   useEffect(() => {
-    obtenerDatos();
+    let urlAPI=config.servidor;
+    switch (usuario.idTipoUsuario) {
+      case 1:
+        urlAPI = urlAPI +'obtener_recursos_borrados.php';
+      break;
+      case 2:
+        urlAPI = urlAPI +'obtener_odp_borrado.php';
+      break;
+    
+      default:
+        console.log("id tipo usario fuera de ragno");        
+        break;
+    }
+    obtenerDatos(urlAPI);
   }, [])
 
-  async function obtenerDatos() {    
-    let response = await fetch(config.servidor +'obtener_recursos_borrados.php');    
+  async function obtenerDatos(urlAPI) {    
+    let response = await fetch(urlAPI);    
     const tmpArray = await response.json();
     setDatosJson (tmpArray);     
   }

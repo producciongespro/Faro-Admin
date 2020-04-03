@@ -14,10 +14,24 @@ function FormContenedor(props) {
 
   
     const onSubmit = data => {
+        let urlAPI=config.servidor;        
+        switch (props.accion) {
+            case "agregar":
+                urlAPI=urlAPI + "registrar_odp.php";    
+            break;
+            case "editar":
+                urlAPI=urlAPI + "actualizar_odp.php"; 
+            break;
+        
+            default:
+                break;
+        } 
+        console.log("urlARPI",urlAPI);
+        
         data.id_tipo=props.idCategoria;
         data.usuario = usuario.idUsuario;
         console.log("Datos a enviar al servidor", data);      
-        enviar (config.servidor+"registrar_odp.php", data, function (resp) { 
+        enviar (urlAPI, data, function (resp) { 
             console.log(resp);            
             alertify.alert(config.nombre, resp.msj);
             reset();

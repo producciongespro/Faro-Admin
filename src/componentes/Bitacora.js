@@ -26,20 +26,16 @@ function Bitacora (props) {
                 setDataJson( filtrar(tmpJson, "tabla", "Recursos") );        
             break;
             case 2:
-                setDataJson( filtrar(tmpJson, "tabla", "Oferta Desarrollo") );        
+                setDataJson( filtrar(tmpJson, "tabla", "desarrollo_profesional") );        
             break;
             case 3:
-                console.log("No disponible");
-                
+                console.log("No disponible");                
             break;
                 
             default:
                 console.log("Tipo de usuario no disponible en bitácora");                
                 break;
-        }
-
-
-        
+        }        
     }
 
     return (

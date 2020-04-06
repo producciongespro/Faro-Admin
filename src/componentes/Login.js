@@ -16,17 +16,10 @@ function Login() {
     
     const onSubmit = data => {
         //console.log("data", data );
+      try {
         enviar(config.servidor+"login.php", data, function (resp) { 
-            //console.log("respuesta", resp);
-            if (resp.error) {
-                console.log("error:", resp.error_msg);
-                alertify
-                .alert( "Error "+ config.nombre,  resp.error_msg, function(){
-                    console.log("Ok");                    
-                });
-                
-            } else {
-               //console.log("resp", resp);               
+            console.log("respuesta", resp.conectado);
+            if (resp.conectado) {
                 const  datosUsuario = { 
                     correo: resp.usuario, 
                     nombre: resp.nombre,
@@ -36,10 +29,28 @@ function Login() {
                     idTipoUsuario: resp.idTipoUsuario,
                     etiquetaTipoUsuario : resp.etiquetaTipoUsuario,
                     isAccesado : true                    
-                };                             
-               setUsuario(datosUsuario);                     
+                    };                             
+                setUsuario(datosUsuario);              
+            } else {                
+                console.log("error:", resp.error_msg);
+                let msjServer;
+                if (resp.error_msg) {
+                    msjServer = resp.error_msg;
+                }else {
+                    msjServer="Problemas de conexión con la base de datos. Error 405"
+                }
+                alertify
+                .alert( "Error "+ config.nombre,  msjServer, function(){
+                    console.log("Ok");                    
+                });      
             }
-         } )          
+         } ) 
+      }
+      catch(error) {
+        console.error(error);
+        // expected output: ReferenceError: nonExistentFunction is not defined
+        // Note - error messages will vary depending on browser
+      }
     }
     //console.log("Errores", errors);    
      

@@ -18,7 +18,7 @@ function Tabla(props) {
                     }
                     {
                         //PAPELERA
-                        props.modo === "papelera" &&                    
+                        (props.modo === "papelera" && props.idTipoUsuario !== 2)  &&                    
                         <th className="text-center" scope="col"> Asignatura </th>                        
                     }
                     
@@ -110,10 +110,12 @@ function Tabla(props) {
                                     <td >{item.nombre}</td>
                                 }
                                 {
+                                    /* TODO: Verificar si se puede eliminar en modo recursos
                                     props.modo === "papelera" &&                                       
                                     <td className="text-center">
-                                            {item.materia}
+                                         {item.materia}
                                     </td>                                    
+                                    */
                                 }
                                 {
                                      (props.idNivel === 2 || props.idNivel === 3) &&

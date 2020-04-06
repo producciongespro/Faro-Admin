@@ -74,7 +74,7 @@ function Papelera () {
         </div>
           ) : 
           (
-            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso} />
+            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso}  idTipoUsuario={usuario.idTipoUsuario} />
           )
       }
 

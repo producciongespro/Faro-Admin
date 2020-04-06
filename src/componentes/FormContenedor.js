@@ -34,13 +34,13 @@ function FormContenedor(props) {
         data.usuario = usuario.idUsuario;
         console.log("Datos a enviar al servidor", data);      
         
-        /*
+        
         enviar (urlAPI, data, function (resp) { 
             console.log(resp);            
             alertify.alert(config.nombre, resp.msj);
             reset();
          } )
-         */
+        
         
     }
     console.log(errors);

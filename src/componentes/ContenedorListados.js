@@ -53,9 +53,9 @@ function ContenedorListados (props) {
   const handleEliminarRegistro =(e)=>{           
     let dataDel = {
           "id": e.target.id,
-          "id_usuario": props.idUsuario
+          "id_usuario": props.idUsuario          
     };    
-    //console.log("Registro a eliminar", dataDel);                     
+    console.log("Registro a eliminar", dataDel);                     
     alertify.confirm(config.nombre, "¿Desea realemnte eliminar el registro?",
         function(){
             enviar ( config.servidor + "eliminar_odp.php", dataDel, function (resp) {

@@ -8,27 +8,39 @@ import loadingGif from '../assets/img/loading1.gif';
 import config from '../config.json';
 import MyContext from '../modulos/MyContext';
 
-
+//Rutas absolutas de los API dependiendo del modo (ODP - Recursos - plantillas plan, ...)
+var urlObtenerBorrados;
+var urlRecuperarBorrados;
 function Papelera () {     
     const [datosJson, setDatosJson ] = useState(null);
     const { usuario } = useContext(MyContext);
 
 
   useEffect(() => {
-    let urlAPI=config.servidor;
+    //Reset de variables
+    urlObtenerBorrados=config.servidor;    
+    urlRecuperarBorrados=config.servidor; 
+
     switch (usuario.idTipoUsuario) {
       case 1:
-        urlAPI = urlAPI +'obtener_recursos_borrados.php';
+        //Recursos
+        urlObtenerBorrados=urlObtenerBorrados +'obtener_recursos_borrados.php';
+        urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_recurso.php';
       break;
       case 2:
-        urlAPI = urlAPI +'obtener_odp_borrado.php';
+        //ODP
+        urlObtenerBorrados = urlObtenerBorrados +'obtener_odp_borrado.php';
+        urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_odp_borrado.php';
       break;
     
       default:
         console.log("id tipo usario fuera de ragno");        
         break;
     }
-    obtenerDatos(urlAPI);
+    console.log("urlObtenerBorrados",urlObtenerBorrados);
+    console.log("urlRecuperarBorrados",urlRecuperarBorrados);
+        
+    obtenerDatos(urlObtenerBorrados);
   }, [])
 
   async function obtenerDatos(urlAPI) {    
@@ -41,19 +53,18 @@ function Papelera () {
     //console.log("e.target.id", e.target);
     const data = {
       "id":e.target.dataset.origen,
-      "id_usuario": usuario.idUsuario
+      "usuario": usuario.idUsuario      
     }
-    //console.log("Data",data);   
-    
-  enviar(config.servidor+"recuperar_recurso.php", data, function (resp) { 
+    //console.log("Dato a recuperar:",data);     
+    enviar(urlRecuperarBorrados, data, function (resp) { 
         console.log("resp",resp);           
         alertify
         .alert( config.nombre, resp.msj, function(){
           console.log("ok");          
         });
-        obtenerDatos();
+        obtenerDatos(urlObtenerBorrados);
       })
-    
+  
   }
 
 

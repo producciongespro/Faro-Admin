@@ -43,8 +43,8 @@ export default function FormEnviarRecurso() {
 
 
   const onSubmit = data => {
-
-    let valoresCheck = obtenerValoresCheck("anno");
+    let materiaLleno=false;
+    let valoresCheck=obtenerValoresCheck("anno");
     //console.log("valorescheck:", valoresCheck);    
     //console.log("nivel",idNivel);
 
@@ -54,8 +54,25 @@ export default function FormEnviarRecurso() {
       valoresCheck = "vacio"
     };
 
+    console.log("************data materia",data.materia);
+    
 
-    if (valoresCheck) {
+    if (idNivel === 2 || idNivel === 3 || idNivel === 7) {
+      if (parseInt(data.materia) === -1) {
+        materiaLleno=false;
+      } else {
+        materiaLleno=true;
+      }     
+    }
+
+    console.log("-----------------Validación de datos:");    
+    console.log("materiaLleno",materiaLleno);
+    console.log("valoresCheck",valoresCheck);
+    console.log("idNivel",idNivel);
+
+
+  //Validación de años en caso de ser necesario    
+    if (valoresCheck && materiaLleno ) {
       data.anno = valoresCheck;
       data.id_usuario = usuario.idUsuario;
       console.log("data", data);
@@ -70,11 +87,11 @@ export default function FormEnviarRecurso() {
         );
       });
     } else {
-      alertify.alert(config.nombre, "Debe seleccionar al menos un año.");
+      alertify.alert(config.nombre, "Debe seleccionar al menos un año y seleccionar la asignatura correspondiente.");
     }
 
   }
-  //console.log(errors);
+  console.log("errores", errors);
 
 
   const seleccionarNivel = (e) => {
@@ -150,7 +167,12 @@ export default function FormEnviarRecurso() {
                       idNivel === 7 && <label className="input-group-text" htmlFor="selMateria">Programa</label>
                     }
                   </div>
-                  <select className="custom-select" name="materia" id="selMateria" ref={register({ required: true })} >
+                  <select 
+                  className="custom-select" 
+                  name="materia" 
+                  id="selMateria" 
+                  ref={register({ required: true })} 
+                  >
                     <option defaultValue value={-1} >Seleccione la asignatura</option>
                     {
                       //Caso de primaria

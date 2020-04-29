@@ -6,5 +6,5 @@
     "servidorLocal": "http://localhost/Faro/webservices/",
     "assetsLocal": "http://localhost/Faro/asset/",
     "servidorProduccion": "https://www.cajadeherramientas.mep.go.cr/webservices/",
-    "assetsProduccion": "https://cajadeherramientas.mep.go.cr/Faro/asset/"
+    "assetsProduccion": "https://cajadeherramientas.mep.go.cr/Faro/asset/"    
 }

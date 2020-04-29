@@ -14,6 +14,7 @@ var datosJson=null;
 var subCategorias=null;
 var poblacionesIdp=null;
 var modo=null;
+var urlImg=config.assets+"img/7_desarrollo_prof/";
 //var datosFiltrados=null;
 
 function ContenedorListados (props) {
@@ -143,7 +144,7 @@ function ContenedorListados (props) {
                                     {
                                     registro &&                                    
                                         registro.url_imagen &&
-                                            <img className="img-thumbnail img-previa" src={registro.url_imagen} alt="imagen de recurso" />
+                                            <img className="img-thumbnail img-previa" src={urlImg+registro.url_imagen} alt="imagen de recurso" />
                                     }
                                     </div>
                                 </div>

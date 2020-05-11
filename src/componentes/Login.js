@@ -13,13 +13,17 @@ import './Login.css';
 function Login() {
     const { setUsuario } = useContext(MyContext);
     const { register, handleSubmit, errors } = useForm();
-    
+    const urlLogin= config.servidor+"login.php"
+        
     const onSubmit = data => {
-        //console.log("data", data );
+        console.log("data", data );
+        console.log("urlLogin",urlLogin);
+        
       try {
-        enviar(config.servidor+"login.php", data, function (resp) { 
+        enviar(urlLogin, data, function (resp) { 
             console.log("respuesta", resp.conectado);
-            if (resp.conectado) {
+            //if (resp.conectado) {
+            if (true) {
                 const  datosUsuario = { 
                     correo: resp.usuario, 
                     nombre: resp.nombre,

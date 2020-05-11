@@ -46,7 +46,7 @@ function VerRecursos() {
     const handleClose = () => setShow(false);
 
     async function obtenerDatos(cb) {
-        //datosJson = await obtener(config.servidor + "obtener_recursos.php");
+        datosJson = await obtener(config.servidor + "obtener_recursos.php");
         console.log("datosJson",datosJson);        
         niveles = await obtener(config.servidor + "obtener_niveles.php");
         console.log("niveles",niveles);        

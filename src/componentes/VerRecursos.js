@@ -46,16 +46,16 @@ function VerRecursos() {
     const handleClose = () => setShow(false);
 
     async function obtenerDatos(cb) {
-        datosJson = await obtener(config.servidor + "obtener_recursos.php");
-        //console.log("datosJson",datosJson);        
+        //datosJson = await obtener(config.servidor + "obtener_recursos.php");
+        console.log("datosJson",datosJson);        
         niveles = await obtener(config.servidor + "obtener_niveles.php");
-        //console.log("niveles",niveles);        
+        console.log("niveles",niveles);        
         asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
-        //console.log("asignaturaPrimaria",asignaturaPrimaria);        
+        console.log("asignaturaPrimaria",asignaturaPrimaria);        
         asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
-        //console.log("asignaturaSecundaria",asignaturaSecundaria);        
+        console.log("asignaturaSecundaria",asignaturaSecundaria);        
         programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
-        //console.log("programasAe",programasAe);                
+        console.log("programasAe",programasAe);                
         setDatosListos(true);
         cb();
         

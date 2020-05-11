@@ -22,8 +22,7 @@ function Login() {
       try {
         enviar(urlLogin, data, function (resp) { 
             console.log("respuesta", resp.conectado);
-            //if (resp.conectado) {
-            if (true) {
+            if (resp.conectado) {            
                 const  datosUsuario = { 
                     correo: resp.usuario, 
                     nombre: resp.nombre,

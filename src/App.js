@@ -25,6 +25,16 @@ function App() {
     const idCategoria = e.target.dataset.idcategoria;
     const modo = e.target.dataset.modo;
 
+    //idCategoria: Es el tipo de DOP por ejmplo: Cursos virtuales, videoteca, etc
+    console.log("idCategoria",idCategoria);
+    //Obtiene el modo relacionado on la tabla modo de IDP de acuerdo a la categoría
+    console.log("modo",modo);
+    //Componente seleccionado
+    console.log("componente",componente);
+    
+    
+    
+
     
     switch (componente) {
       case "Inicio":        

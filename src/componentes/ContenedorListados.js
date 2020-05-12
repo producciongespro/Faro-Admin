@@ -47,7 +47,7 @@ function ContenedorListados (props) {
 
   useEffect(()=>{
       //console.log("datosFiltrados", datosFiltrados);
-      console.log("Registro", registro);
+      //console.log("Registro", registro);
             
   })
 

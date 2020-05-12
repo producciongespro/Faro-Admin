@@ -17,7 +17,7 @@ function Menu (props) {
         //console.log("compoente montado, id tipo", usuario.idTipoUsuario);  
         //console.log(config.servidor);              
         obtenerListaBotones();     
-    },[]);
+    },[] );
 
     useEffect(()=>{
        // console.log("botonesFiltrados",botonesFiltrados);

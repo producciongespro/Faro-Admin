@@ -7,7 +7,9 @@ function Bitacora (props) {
     const [datosJson, setDataJson ] = useState(null);
 
     useEffect(()=>{
-    let urlAPI=config.servidor+"obtener_bitacora.php?tabla="+props.idTipoUsuario;        
+        //console.log("props.idTipoUsuario",props.idTipoUsuario);
+        
+    let urlAPI=config.servidor+"obtener_bitacora2.php?tabla="+props.idTipoUsuario;        
         obtener(urlAPI);
     },[]);
 

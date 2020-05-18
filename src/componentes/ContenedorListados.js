@@ -30,7 +30,7 @@ function ContenedorListados (props) {
 
     async function obtenerDatos (cb) {
         datosJson=await obtener(config.servidor + "obtener_oferta_desarrollo.php");
-        console.log("******datosJson",datosJson);       
+        //console.log("******datosJson",datosJson);       
         subCategorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");
         //console.log("*******subCategorias",subCategorias);        
         poblacionesIdp=await obtener (config.servidor + "obtener_poblaciones_idp.php");

@@ -28,6 +28,15 @@ function ContenedorListados (props) {
     const [accion, setAccion] = useState(null);
     const handleClose = () => setShow(false);
 
+    const handleRecargar=()=> {
+        //recarga la tabla una vez que se haya actualizado un registro  o se haya insertado uno.
+        setShow(false);
+        obtenerDatos(function () {
+            //console.log("datosJson",datosJson);            
+            setDatosFiltrados( filtrar(datosJson, "oferta", modo ));            
+        })  
+    }
+
     async function obtenerDatos (cb) {
         datosJson=await obtener(config.servidor + "obtener_oferta_desarrollo.php");
         //console.log("******datosJson",datosJson);       
@@ -148,7 +157,7 @@ function ContenedorListados (props) {
                                     }
                                     </div>
                                 </div>
-                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria } />
+                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria }  handleRecargar={handleRecargar}   />
                     </Modal.Body>
                     <Modal.Footer>
 

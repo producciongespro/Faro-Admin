@@ -38,7 +38,11 @@ function FormContenedor(props) {
         enviar(urlAPI, data, function (resp) {
             console.log(resp);
             alertify.alert(config.nombre, resp.msj);
+            //Resetea los datos del formulario
             reset();
+            //Cierra el modal que contiene el formualrio
+            //y recargar la tabla
+            props.handleRecargar();
         })
 
 
@@ -66,9 +70,12 @@ function FormContenedor(props) {
             }
             <div className="row">
                 <div className="col-sm-12">
-                    <div className="input-group flex-nowrap">
+                    <div className="input-group flex-nowrap">                    
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="spnNombre">Nombre</span>
+                            <span className="input-group-text" id="spnNombre">
+                                {errors.nombre && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Nombre 
+                            </span>
                         </div>
                         <input
                             type="text"
@@ -77,13 +84,16 @@ function FormContenedor(props) {
                             defaultValue={devolverPropiedad(props.registro, "nombre")}
                             name="nombre"
                             ref={register({ required: true })}
-                        />
-                    </div>
-                    <br />
+                        />                        
+                    </div>                    
+                    <br />                    
 
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text">Descripción</span>
+                            <span className="input-group-text">
+                                {errors.descripcion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Descripción
+                            </span>
                         </div>
                         <textarea
                             id="txtDesc"
@@ -99,7 +109,10 @@ function FormContenedor(props) {
 
                     <div className="input-group flex-nowrap">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" >Url</span>
+                            <span className="input-group-text" >
+                                {errors.url && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Url 
+                            </span>
                         </div>
                         <input
                             type="text"
@@ -149,7 +162,10 @@ function FormContenedor(props) {
                     <br />
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="selSubCategoria">Subcategoría</label>
+                            <label className="input-group-text" htmlFor="selSubCategoria">
+                                {errors.id_sub_categoria && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Subcategoría
+                            </label>
                         </div>
                         <select
                             className="custom-select"
@@ -168,7 +184,10 @@ function FormContenedor(props) {
                     <br />
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="selPoblacion">Población</label>
+                            <label className="input-group-text" htmlFor="selPoblacion">
+                            {errors.poblacion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Población
+                            </label>
                         </div>
                         <select
                             className="custom-select"

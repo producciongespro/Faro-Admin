@@ -82,7 +82,7 @@ function Login() {
                                     type="text" autoComplete="username"  
                                     name="usuario" className="form-control" 
                                     placeholder="Correo del MEP"                                     
-                                    defaultValue="luis@correo.de"                                     
+                                    defaultValue="luis.chacon.campos@mep.go.cr"                                     
                                     />                                
                             </div>                            
                             <div className="input-group form-group">

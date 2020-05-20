@@ -46,9 +46,20 @@ function FormContenedor(props) {
         })
 
 
-    }
-    console.log(errors);
-
+    }     
+    console.log("errors",errors);
+    
+    
+    
+     const mostrarMensaje =()=> {
+        //console.log( "lleno", Object.keys(errors).length !== 0 )
+            //Verifica si el objeto tiene al menos una propiedad para lanzar el alert
+            //Esto evita que se lance el "alert" cuadno se carga el formulario
+            if (Object.keys(errors).length !== 0) {
+                alertify.alert(config.nombre, "Debe completar todos los campos requeridos");        
+            }
+     }
+    
 
     const devolverPropiedad = (registro, llave) => {
         //Devuelve una propiedad de registro para renderizarla en el inpout en caso de que sea modo editar
@@ -65,7 +76,7 @@ function FormContenedor(props) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {
-                console.log(props.subCategorias)
+               // console.log(props.subCategorias)
 
             }
             <div className="row">
@@ -209,9 +220,17 @@ function FormContenedor(props) {
                 </div>
             </div>
             <br />
+            <div className="row">                
+                {
+                    Object.keys(errors).length !== 0 && 
+                        <div className="col-md-8 offset-md-2 alert alert-danger" role="alert">
+                            Debe competar los datos requeridos.
+                        </div>
+                }                
+            </div>
             <div className="row">
                 <div className="col-sm-12 text-right">
-                    <button type="submit" className="btn btn-outline-info">
+                    <button type="submit" className="btn btn-outline-info"  >
                         {
                             props.accion === "editar" && <span>Guardar cambios</span>
                         }

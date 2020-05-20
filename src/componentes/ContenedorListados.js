@@ -140,10 +140,20 @@ function ContenedorListados (props) {
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {
-                                accion === "editar" && <span>Edición de registro</span>
+                                accion === "editar" && 
+                                    <span>
+                                    Edición de registro de {props.modo}
+                                    </span>
                             }
                             {
-                                accion === "agregar" && <span>Ingreso de registro</span>
+                                accion === "agregar" && 
+                                    <span>
+                                        Ingreso de registro de {props.modo}
+                                    </span>
+                            }
+                            {
+                                console.log("props.idCategoria ",props.modo )
+                                
                             }
                         </Modal.Title>
                     </Modal.Header>

@@ -17,7 +17,8 @@ var asignaturaSecundaria = null;
 var programasAe = null;
 
 export default function FormEnviarRecurso() {
-  const [idNivel, setIdNivel] = useState(-1);
+  const [idNivel, setIdNivel]= useState(-1);
+  const [idPrograma, setIdPrograma]= useState(0);
   const [isReady, setIsReady] = useState(false);
   const { register, handleSubmit, errors, reset } = useForm();
   const { usuario } = useContext(MyContext);
@@ -132,7 +133,7 @@ export default function FormEnviarRecurso() {
             {
               //NIVEL: 
             }
-            <div className="input-group mb-3">
+            <div className="input-group mb-3">           
               <div className="input-group-prepend">
                 <label className="input-group-text" htmlFor="selNivel">Nivel</label>
               </div>

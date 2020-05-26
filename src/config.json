@@ -1,8 +1,8 @@
 {
     "version": "1.0.1",
     "nombre": "Administración de Caja de Herramientas",
-    "servidor": "https://pruebarecursos.mep.go.cr/test-faroadmin/",
-    "assets": "https://pruebarecursos.mep.go.cr/test-faroadmin/asset/",
+    "servidor": "http://localhost/Faro/webservices/",
+    "assets": "http://localhost/Faro/asset/",
     "LOCAL": "-------------",
     "servidor-Local": "http://localhost/Faro/webservices/",
     "assetsLocal": "http://localhost/Faro/asset/",

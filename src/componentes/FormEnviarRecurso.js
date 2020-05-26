@@ -15,6 +15,7 @@ var niveles = null;
 var asignaturaPrimaria = null;
 var asignaturaSecundaria = null;
 var programasAe = null;
+var subprogramasAe= null; 
 
 export default function FormEnviarRecurso() {
   const [idNivel, setIdNivel]= useState(-1);
@@ -26,10 +27,11 @@ export default function FormEnviarRecurso() {
 
   async function obtenerDatos() {
     niveles = await obtener(config.servidor + "obtener_niveles.php");
-    console.log("niveles", niveles);
+    //console.log("niveles", niveles);
     asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
     asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
     programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
+    subprogramasAe= await obtener(config.servidor + "obtener_subprogramas_ae.php");
     setIsReady(true);
   }
 
@@ -92,10 +94,10 @@ export default function FormEnviarRecurso() {
     }
 
   }
-  console.log("errores", errors);
+  //console.log("errores", errors);
 
 
-  const seleccionarNivel = (e) => {
+  const handleSeleccionarNivel = (e) => {
     setIdNivel(parseInt(e.target.value));
   }
 
@@ -111,6 +113,11 @@ export default function FormEnviarRecurso() {
             console.log("Aceptar");
           });
       }    
+  }
+
+  const handleSeleccionarPrograma =(e)=> {
+      console.log("e.target.value", e.target.value);
+      setIdPrograma(e.target.value);      
   }
 
 
@@ -137,7 +144,7 @@ export default function FormEnviarRecurso() {
               <div className="input-group-prepend">
                 <label className="input-group-text" htmlFor="selNivel">Nivel</label>
               </div>
-              <select className="custom-select" name="id_nivel" ref={register} onChange={seleccionarNivel}>
+              <select className="custom-select" name="id_nivel" ref={register} onChange={handleSeleccionarNivel}>
                 <option defaultValue value={-1} >Seleccione un nivel</option>
                 {
                   niveles.map((item, i) => (
@@ -169,7 +176,8 @@ export default function FormEnviarRecurso() {
                     }
                   </div>
                   <select 
-                  className="custom-select" 
+                  className="custom-select"
+                  onClick= {handleSeleccionarPrograma} 
                   name="materia" 
                   id="selMateria" 
                   ref={register({ required: true })} 
@@ -199,7 +207,7 @@ export default function FormEnviarRecurso() {
                       idNivel === 7 &&
                       (
                         programasAe.map((item, i) => (
-                          <option key={"asignatura" + i} value={item.nombrePrograma}> {item.nombrePrograma} </option>
+                          <option key={"asignatura" + i} value={item.idPrograma}> {item.nombrePrograma} </option>
                         ))
                       )
                     }
@@ -207,6 +215,30 @@ export default function FormEnviarRecurso() {
                 </div>
               )
             }
+
+
+          {
+            //SUBPROGRAMA: 
+            idPrograma === "1" && (              
+              <div className="input-group mb-3">           
+              <div className="input-group-prepend">
+                <label className="input-group-text" htmlFor="selSubprograma">Subprograma</label>
+              </div>
+              <select className="custom-select" 
+                id="selSubprograma"
+                name="subprograma" 
+                ref={register} 
+                >
+                <option defaultValue value={-1} >Seleccione un subprograma</option>
+                {
+                  subprogramasAe.map((item, i) => (
+                    <option key={"nivelasasas" + i} value={item.idSubprograma}> {item.nombreSubprograma} </option>
+                  ))
+                }
+              </select>
+            </div>
+            )           
+          }
 
             {
               //NOMBRE: 

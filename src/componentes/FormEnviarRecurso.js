@@ -78,7 +78,8 @@ export default function FormEnviarRecurso() {
     if (valoresCheck && materiaLleno ) {
       data.anno = valoresCheck;
       data.id_usuario = usuario.idUsuario;
-      console.log("data", data);
+      console.log("datos a enviar al servidor:", data);
+     /*
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
         alertify.alert(
           config.nombre + " " + config.version,
@@ -88,10 +89,11 @@ export default function FormEnviarRecurso() {
             reset();
           }
         );
-      });
+      }); */
     } else {
       alertify.alert(config.nombre, "Debe seleccionar al menos un año y seleccionar la asignatura correspondiente.");
     }
+  
 
   }
   //console.log("errores", errors);

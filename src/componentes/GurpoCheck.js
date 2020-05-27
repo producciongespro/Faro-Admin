@@ -55,14 +55,26 @@ const annosSecundaria = [
   }
 
 ];
+var niveles=null;
+
 
 function GrupoCheck(props) {
     //console.log("************Props de Grupocheck", props.nivel); 
     //console.log("************Props de Grupocheck listaAnnos", props.listaAnnos);
-    var listaAnnos =  props.listaAnnos.split(',');
+    var listaAnnos =  props.listaAnnos.split(',');    
     //console.log("listaAnnos",listaAnnos);
+
+    /*En caso de que el usuario escoga todos los niveles, se renderiza los niveles desde primatria hasta Agenda estudiantil, entre otros    
+    Se
+    */ 
+    niveles= props.niveles;
+    console.log("niveles", niveles);
     
     
+/*
+  CArga decheck en el modo editar:
+  recibe mediante parametros la lista de la tabla y los que están check 
+*/
     var Chk = (props)=>{
       var tmpChk;
       let encontrado = false;      
@@ -117,6 +129,21 @@ function GrupoCheck(props) {
               <Chk  value={item.nombre} name={props.nombre }  />                            
               <div className="state p-primary">
                 <label>{item.nombre}</label>
+              </div>
+            </div>
+          ))
+        )
+      }
+
+{
+  // Para todos los niveles
+        (props.nivel === 0) &&
+        (
+          niveles.map((item, i) => (
+            <div key={"niveles"+i} className="pretty p-default">
+              <Chk  value={item.id} name={props.nombre }  />                            
+              <div className="state p-primary">
+                <label>{item.nombreNivel}</label>
               </div>
             </div>
           ))

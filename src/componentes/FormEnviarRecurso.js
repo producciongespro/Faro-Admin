@@ -148,6 +148,7 @@ export default function FormEnviarRecurso() {
               </div>
               <select className="custom-select" name="id_nivel" ref={register} onChange={handleSeleccionarNivel}>
                 <option defaultValue value={-1} >Seleccione un nivel</option>
+                <option value={0} >Todos los niveles</option>
                 {
                   niveles.map((item, i) => (
                     <option key={"nivel" + i} value={item.id}> {item.nombreNivel} </option>
@@ -159,7 +160,7 @@ export default function FormEnviarRecurso() {
             {
               //Año por nivel          
             }
-            <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
+            <GrupoCheck nivel={idNivel} niveles={niveles} nombre="anno" listaAnnos="vacio" />
 
 
 

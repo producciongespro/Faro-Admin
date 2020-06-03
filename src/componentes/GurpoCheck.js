@@ -55,7 +55,28 @@ const annosSecundaria = [
   }
 
 ];
-var niveles=null;
+var niveles=[
+  {
+    "id": 1,
+    "nombreNivel": "Preescolar"
+  },
+  {
+    "id": 2,
+    "nombreNivel": "Primaria"
+  },
+  {
+    "id": 3,
+    "nombreNivel": "Secundaria"
+  },
+  {
+    "id": 4,
+    "nombreNivel": "Educación intercultural"
+  },
+  {
+    "id": 5,
+    "nombreNivel": "Educación jóvenes y adultos"
+  }
+];
 
 
 function GrupoCheck(props) {
@@ -67,7 +88,7 @@ function GrupoCheck(props) {
     /*En caso de que el usuario escoga todos los niveles, se renderiza los niveles desde primatria hasta Agenda estudiantil, entre otros    
     Se
     */ 
-    niveles= props.niveles;
+    //niveles= props.niveles;
     console.log("niveles", niveles);
     
     

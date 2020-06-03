@@ -161,7 +161,7 @@ export default function FormEnviarRecurso() {
             {
               //Año por nivel          
             }
-            <GrupoCheck nivel={idNivel} niveles={niveles} nombre="anno" listaAnnos="vacio" />
+            <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
 
 
 

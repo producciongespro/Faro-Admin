@@ -257,7 +257,7 @@ export default function FormEnviarRecurso() {
 
             {
               //SUBPROGRAMA: 
-              idPrograma === "1" && (
+              (idNivel === 7 && idPrograma === "1") && (
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
                     <label className="input-group-text" htmlFor="selSubprograma">Subprograma</label>

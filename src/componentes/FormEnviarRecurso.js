@@ -42,6 +42,7 @@ export default function FormEnviarRecurso() {
 
   })
 
+  
 
 
 
@@ -80,8 +81,10 @@ export default function FormEnviarRecurso() {
       data.anno = valoresCheck;
       data.id_usuario = usuario.idUsuario;
       console.log("datos a enviar al servidor:", data);
-     /*
+     
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
+        console.log("*****************resp", resp);
+        
         alertify.alert(
           config.nombre + " " + config.version,
           resp.msj,
@@ -90,7 +93,7 @@ export default function FormEnviarRecurso() {
             reset();
           }
         );
-      }); */
+      });
     } else {
       alertify.alert(config.nombre, "Debe seleccionar al menos un año y seleccionar la asignatura correspondiente.");
     }
@@ -106,7 +109,7 @@ export default function FormEnviarRecurso() {
 
   const handleValidarEducatico = (e) => {
     const str = e.target.value;
-    //console.log("Valor obtenido", str);    
+    console.log("Valor obtenido", str);    
     const patt = new RegExp("www.mep.go.cr/educatico");
     const res = patt.test(str);
     //console.log("Resultado", res);          
@@ -158,10 +161,8 @@ export default function FormEnviarRecurso() {
               </select>
             </div>
 
-            {
-              //Año por nivel          
-            }
-            <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
+           
+            
 
 
 
@@ -180,7 +181,7 @@ export default function FormEnviarRecurso() {
                     }
                   </div>
                   <select 
-                  className="custom-select"
+                  className="custom-select"                  
                   onClick= {handleSeleccionarPrograma} 
                   name="materia" 
                   id="selMateria" 
@@ -211,7 +212,7 @@ export default function FormEnviarRecurso() {
                       idNivel === 7 &&
                       (
                         programasAe.map((item, i) => (
-                          <option key={"asignatura" + i} value={item.idPrograma}> {item.nombrePrograma} </option>
+                          <option key={"programaae" + i} value={item.idPrograma}> {item.nombrePrograma} </option>
                         ))
                       )
                     }
@@ -219,6 +220,16 @@ export default function FormEnviarRecurso() {
                 </div>
               )
             }
+
+
+            {
+              //Año por nivel          
+            }
+            <div className="row">
+              <div className="col-sm-12">
+                  <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
+              </div>
+            </div>
 
 
           {

@@ -15,11 +15,11 @@ var niveles = null;
 var asignaturaPrimaria = null;
 var asignaturaSecundaria = null;
 var programasAe = null;
-var subprogramasAe= null; 
+var subprogramasAe = null;
 
 export default function FormEnviarRecurso() {
-  const [idNivel, setIdNivel]= useState(-1);
-  const [idPrograma, setIdPrograma]= useState(0);
+  const [idNivel, setIdNivel] = useState(-1);
+  const [idPrograma, setIdPrograma] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const { register, handleSubmit, errors, reset } = useForm();
   const { usuario } = useContext(MyContext);
@@ -31,7 +31,7 @@ export default function FormEnviarRecurso() {
     asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
     asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
     programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
-    subprogramasAe= await obtener(config.servidor + "obtener_subprogramas_ae.php");
+    subprogramasAe = await obtener(config.servidor + "obtener_subprogramas_ae.php");
     setIsReady(true);
   }
 
@@ -42,13 +42,13 @@ export default function FormEnviarRecurso() {
 
   })
 
-  
+
 
 
 
   const onSubmit = data => {
-    let materiaLleno=false;
-    let valoresCheck=obtenerValoresCheck("anno");
+    let materiaLleno = false;
+    let valoresCheck = obtenerValoresCheck("anno");
     //console.log("valorescheck:", valoresCheck);    
     //console.log("nivel",idNivel);
 
@@ -58,34 +58,41 @@ export default function FormEnviarRecurso() {
       valoresCheck = "vacio"
     };
 
-    console.log("************data materia",data.materia);
-    
+    console.log("************data materia", data.materia);
+
 
     if (idNivel === 2 || idNivel === 3 || idNivel === 7) {
       if (parseInt(data.materia) === -1) {
-        materiaLleno=false;
+        materiaLleno = false;
       } else {
-        materiaLleno=true;
-      }     
+        materiaLleno = true;
+      }
     }
 
-    console.log("-----------------Validación de datos:");    
-    console.log("materiaLleno",materiaLleno);
-    console.log("valoresCheck",valoresCheck);
-    console.log("idNivel",idNivel);
+    console.log("-----------------Validación de datos:");
+    console.log("materiaLleno", materiaLleno);
+    console.log("valoresCheck", valoresCheck);
+    console.log("idNivel", idNivel);
 
 
-  //Validación de años en caso de ser necesario    
+    //Validación de años en caso de ser necesario    
     //if (valoresCheck && materiaLleno ) {
-    if (materiaLleno ) {
-      data.anno= valoresCheck;
-      data.tabla= "recursos";
+    if (materiaLleno) {
+      data.anno = valoresCheck;
+      //Envio de la variable tabla a PHP
+      // Si es agenda estudiantil (id 7) carga carga recursos de agenda estudiantil, caso contrario
+      // carga recursos genérico
+      if (idNivel === 7) {
+        data.tabla = "recursos_ae";
+      } else {
+        data.tabla = "recursos";
+      }
+
       data.id_usuario = usuario.idUsuario;
       console.log("datos a enviar al servidor:", data);
-     
+
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
-        console.log("*****************resp", resp);
-        
+        console.log("resp------------->", resp);
         alertify.alert(
           config.nombre + " " + config.version,
           resp.msj,
@@ -98,7 +105,7 @@ export default function FormEnviarRecurso() {
     } else {
       alertify.alert(config.nombre, "Debe seleccionar al menos un año y seleccionar la asignatura correspondiente.");
     }
-  
+
 
   }
   //console.log("errores", errors);
@@ -110,21 +117,21 @@ export default function FormEnviarRecurso() {
 
   const handleValidarEducatico = (e) => {
     const str = e.target.value;
-    console.log("Valor obtenido", str);    
+    console.log("Valor obtenido", str);
     const patt = new RegExp("www.mep.go.cr/educatico");
     const res = patt.test(str);
     //console.log("Resultado", res);          
-      if (res !== true) {
-        alertify
-          .alert("La url del recruso debe provenir de educatico.", function () {
-            console.log("Aceptar");
-          });
-      }    
+    if (res !== true) {
+      alertify
+        .alert("La url del recruso debe provenir de educatico.", function () {
+          console.log("Aceptar");
+        });
+    }
   }
 
-  const handleSeleccionarPrograma =(e)=> {
-      console.log("e.target.value", e.target.value);
-      setIdPrograma(e.target.value);      
+  const handleSeleccionarPrograma = (e) => {
+    console.log("e.target.value", e.target.value);
+    setIdPrograma(e.target.value);
   }
 
 
@@ -147,7 +154,7 @@ export default function FormEnviarRecurso() {
             {
               //NIVEL: 
             }
-            <div className="input-group mb-3">           
+            <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <label className="input-group-text" htmlFor="selNivel">Nivel</label>
               </div>
@@ -162,31 +169,25 @@ export default function FormEnviarRecurso() {
               </select>
             </div>
 
-           
-            
+
+
 
 
 
             {
               //ASIGNATURA (MATERIA) POR NIVEL : 
-              // Primaria y secundaria solamente y agenda estudiantil
-              (idNivel === 2 || idNivel === 3 || idNivel === 7) &&
+              // Primaria y secundaria solamente 
+              (idNivel === 2 || idNivel === 3) &&
               (
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
-                    {
-                      (idNivel === 2 || idNivel === 3) && <label className="input-group-text" htmlFor="selMateria">Asignatura</label>
-                    }
-                    {
-                      idNivel === 7 && <label className="input-group-text" htmlFor="selMateria">Programa</label>
-                    }
+                    <label className="input-group-text" htmlFor="selMateria">Asignatura</label>
                   </div>
-                  <select 
-                  className="custom-select"                  
-                  onClick= {handleSeleccionarPrograma} 
-                  name="materia" 
-                  id="selMateria" 
-                  ref={register({ required: true })} 
+                  <select
+                    className="custom-select"
+                    name="materia"
+                    id="selMateria"
+                    ref={register({ required: true })}
                   >
                     <option defaultValue value={-1} >Seleccione la asignatura</option>
                     {
@@ -208,14 +209,35 @@ export default function FormEnviarRecurso() {
                       )
                     }
 
+
+                  </select>
+                </div>
+              )
+            }
+
+
+
+            {
+              //PROGRAMA EN ELE CASO DE AGENDA ESTUDIANTIL : 
+              // solamente agenda estudiantil
+              (idNivel === 7) &&
+              (
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" htmlFor="selMateria">Programa</label>
+                  </div>
+                  <select
+                    className="custom-select"
+                    onClick={handleSeleccionarPrograma}
+                    name="idPrograma"
+                    id="selPrograma"
+                    ref={register({ required: true })}
+                  >
+                    <option defaultValue value={-1} >Seleccione el programa </option>
                     {
-                      //Caso de agenda estudiantil
-                      idNivel === 7 &&
-                      (
-                        programasAe.map((item, i) => (
-                          <option key={"programaae" + i} value={item.idPrograma}> {item.nombrePrograma} </option>
-                        ))
-                      )
+                      programasAe.map((item, i) => (
+                        <option key={"programaae" + i} value={item.idPrograma}> {item.nombrePrograma} </option>
+                      ))
                     }
                   </select>
                 </div>
@@ -228,33 +250,33 @@ export default function FormEnviarRecurso() {
             }
             <div className="row">
               <div className="col-sm-12">
-                  <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
+                <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
               </div>
             </div>
 
 
-          {
-            //SUBPROGRAMA: 
-            idPrograma === "1" && (              
-              <div className="input-group mb-3">           
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="selSubprograma">Subprograma</label>
-              </div>
-              <select className="custom-select" 
-                id="selSubprograma"
-                name="subprograma" 
-                ref={register} 
-                >
-                <option defaultValue value={-1} >Seleccione un subprograma</option>
-                {
-                  subprogramasAe.map((item, i) => (
-                    <option key={"nivelasasas" + i} value={item.idSubprograma}> {item.nombreSubprograma} </option>
-                  ))
-                }
-              </select>
-            </div>
-            )           
-          }
+            {
+              //SUBPROGRAMA: 
+              idPrograma === "1" && (
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" htmlFor="selSubprograma">Subprograma</label>
+                  </div>
+                  <select className="custom-select"
+                    id="selSubprograma"
+                    name="idSubprograma"
+                    ref={register}
+                  >
+                    <option defaultValue value={-1} >Seleccione un subprograma</option>
+                    {
+                      subprogramasAe.map((item, i) => (
+                        <option key={"subprograma" + i} value={item.idSubprograma}> {item.nombreSubprograma} </option>
+                      ))
+                    }
+                  </select>
+                </div>
+              )
+            }
 
             {
               //NOMBRE: 

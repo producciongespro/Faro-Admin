@@ -77,7 +77,7 @@ export default function FormEnviarRecurso() {
 
     //Validación de años en caso de ser necesario    
     //if (valoresCheck && materiaLleno ) {
-    if (materiaLleno) {
+    if (materiaLleno ) {
       data.anno = valoresCheck;
       //Envio de la variable tabla a PHP
       // Si es agenda estudiantil (id 7) carga carga recursos de agenda estudiantil, caso contrario
@@ -117,7 +117,7 @@ export default function FormEnviarRecurso() {
 
   const handleValidarEducatico = (e) => {
     const str = e.target.value;
-    console.log("Valor obtenido", str);
+    //console.log("Valor obtenido", str);
     const patt = new RegExp("www.mep.go.cr/educatico");
     const res = patt.test(str);
     //console.log("Resultado", res);          

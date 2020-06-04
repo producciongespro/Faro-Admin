@@ -89,7 +89,7 @@ function GrupoCheck(props) {
     Se
     */ 
     //niveles= props.niveles;
-    console.log("niveles", niveles);
+    //console.log("niveles", niveles);
     
     
 /*

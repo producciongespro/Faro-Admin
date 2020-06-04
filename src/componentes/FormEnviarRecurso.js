@@ -78,7 +78,8 @@ export default function FormEnviarRecurso() {
   //Validación de años en caso de ser necesario    
     //if (valoresCheck && materiaLleno ) {
     if (materiaLleno ) {
-      data.anno = valoresCheck;
+      data.anno= valoresCheck;
+      data.tabla= "recursos";
       data.id_usuario = usuario.idUsuario;
       console.log("datos a enviar al servidor:", data);
      

@@ -39,3 +39,8 @@
     width: 25%;
     height: auto;
 }
+
+.error {
+    font-weight: bold;
+    color: #dc3545;
+}

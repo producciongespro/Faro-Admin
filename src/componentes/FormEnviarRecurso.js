@@ -160,8 +160,13 @@ export default function FormEnviarRecurso() {
               <div className="input-group-prepend">
                 <label className="input-group-text" htmlFor="selNivel">Nivel</label>
               </div>
-              <select className="custom-select" name="id_nivel" ref={register} onChange={handleSeleccionarNivel}>
-                <option defaultValue value={-1} >Seleccione un nivel</option>
+              <select 
+                className="custom-select" 
+                name="id_nivel"                 
+                ref={register({ required: true })}
+                onChange={handleSeleccionarNivel}
+                >
+                <option defaultValue value="" >Seleccione un nivel</option>
                 <option value={0} >Varios niveles</option>
                 {
                   niveles.map((item, i) => (
@@ -170,6 +175,7 @@ export default function FormEnviarRecurso() {
                 }
               </select>
             </div>
+            {errors.id_nivel && <p className="error" >* Nivel requerido</p>}
 
 
 
@@ -289,7 +295,7 @@ export default function FormEnviarRecurso() {
               </div>
               <input type="text" className="form-control" name="nombre" id="txtNombre" aria-label="Default" placeholder="Escriba aquí el nombre del recurso." ref={register({ required: true, max: 32, min: 0, maxLength: 80 })} />
             </div>
-            {errors.nombre && <p className="error" >Nombre requerido</p>}
+            {errors.nombre && <p className="error" >* Nombre requerido</p>}
 
             {
               //URL
@@ -309,7 +315,7 @@ export default function FormEnviarRecurso() {
                 ref={register({ required: true })}
               />
             </div>
-            {errors.url && <p className="error">URL requerido</p>}
+            {errors.url && <p className="error">* URL requerido</p>}
 
 
             {
@@ -329,7 +335,7 @@ export default function FormEnviarRecurso() {
                 ref={register({ required: true })}
               />
             </div>
-            {errors.url && <p className="error">URL requerido</p>}
+            {errors.img_educatico && <p className="error">* URL imagen requerido</p>}
 
 
             {
@@ -345,10 +351,11 @@ export default function FormEnviarRecurso() {
                 className="form-control"
                 aria-label="With textarea"
                 placeholder="Breve descripición del recurso"
-                ref={register}
+                ref={register({ required: true })}
               />
 
             </div>
+            {errors.descripcion && <p className="error">* Descripción requerida</p>}
             <br />
 
 

@@ -48,20 +48,22 @@ export default function FormEnviarRecurso() {
 
   const onSubmit = data => {
     let materiaLleno = false;
+    //Otiene los campos que han sido chequeados por el usuario y los alamcena en una variable
+    //Luego hace el append en el obejto formdata de esa propiedad
     let valoresCheck = obtenerValoresCheck("anno");
     //console.log("valorescheck:", valoresCheck);    
     //console.log("nivel",idNivel);
 
-    //En caso de niveles que no sean primaria ni secudnaria, el nivel no es requrido por lo que se 
+    //En caso de niveles que no sean primaria ni secudnaria, el año no es requrido por lo que se 
     //fuerza a vacio para envio en BD
-    if (idNivel === 1 || idNivel === 4 || idNivel === 5 || idNivel === 6 || idNivel === 7) {
+    if (idNivel === 1 || idNivel === 4 || idNivel === 5 || idNivel === 6 || idNivel === 7  ) {
       valoresCheck = "vacio"
     };
 
     console.log("************data materia", data.materia);
 
-
-    if (idNivel === 2 || idNivel === 3 || idNivel === 7) {
+//Validación para estableccer materia como campo requerido en priamria y secundaria
+    if (idNivel === 2 || idNivel === 3 || idNivel === 7 || idNivel === 0) {
       if (parseInt(data.materia) === -1) {
         materiaLleno = false;
       } else {

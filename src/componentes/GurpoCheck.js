@@ -161,9 +161,9 @@ function GrupoCheck(props) {
         (
           annosPrimaria.map((item, i) => (
             <div key={"primaria"+i} className="pretty p-default">
-              <Chk  value={item} name={props.nombre }  />              
+              <Chk  value={item.nombre} name={props.nombre }  />              
               <div className="state p-primary">
-                <label>{item}</label>
+                <label>{item.nombre }</label>
               </div>
             </div>
           ))

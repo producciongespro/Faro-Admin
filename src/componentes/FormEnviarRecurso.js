@@ -59,14 +59,14 @@ export default function FormEnviarRecurso() {
 
     //En caso de niveles que no sean primaria ni secudnaria, el año no es requrido por lo que se 
     //fuerza a vacio para envio en BD
-    if (idNivel === 1 || idNivel === 4 || idNivel === 5 || idNivel === 6 || idNivel === 7  ) {
+    if (idNivel === 1 || idNivel === 4 || idNivel === 5 || idNivel === 7  ) {
       valoresCheck = "vacio"
     };
 
     console.log("************data materia", data.materia);
 
 //Validación para estableccer materia como campo requerido en priamria y secundaria
-    if (idNivel === 2 || idNivel === 3 || idNivel === 7 || idNivel === 0) {
+    if (idNivel === 2 || idNivel === 3 ||   idNivel === 6 || idNivel === 7 || idNivel === 0) {
       if (parseInt(data.materia) === -1) {
         materiaLleno = false;
       } else {

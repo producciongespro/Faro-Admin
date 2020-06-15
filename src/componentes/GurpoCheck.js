@@ -55,7 +55,7 @@ const annosSecundaria = [
   }
 
 ];
-var niveles=[
+const niveles=[
   {
     "id": 1,
     "nombreNivel": "Preescolar"
@@ -77,6 +77,33 @@ var niveles=[
     "nombreNivel": "Educación jóvenes y adultos"
   }
 ];
+const annosPedagoHosp=[ 
+    {
+      "id": 1,
+      "nombre": "Primero"
+    },
+    {
+      "id": 2,
+      "nombre": "Segundo"
+    },
+    {
+      "id": 3,
+      "nombre": "Tercero"
+    },
+    {
+      "id": 4,
+      "nombre": "Cuarto"
+    },
+    {
+      "id": 5,
+      "nombre": "Quinto"
+    },
+    {
+      "id": 6,
+      "nombre": "Sexto"
+    }
+ ];
+
 
 
 function GrupoCheck(props) {
@@ -134,9 +161,9 @@ function GrupoCheck(props) {
         (
           annosPrimaria.map((item, i) => (
             <div key={"primaria"+i} className="pretty p-default">
-              <Chk  value={item.nombre} name={props.nombre }  />              
+              <Chk  value={item} name={props.nombre }  />              
               <div className="state p-primary">
-                <label>{item.nombre}</label>
+                <label>{item}</label>
               </div>
             </div>
           ))
@@ -148,6 +175,20 @@ function GrupoCheck(props) {
           annosSecundaria.map((item, i) => (
             <div key={"secundaria"+i} className="pretty p-default">
               <Chk  value={item.nombre} name={props.nombre }  />                            
+              <div className="state p-primary">
+                <label>{item.nombre}</label>
+              </div>
+            </div>
+          ))
+        )
+      }      
+          {
+            //**********Pedagogía Hospitalaria */
+        (props.nivel === 6) &&
+        (
+          annosPedagoHosp.map((item, i) => (
+            <div key={"ph"+i} className="pretty p-default">
+              <Chk  value={item.nombre } name={props.nombre }  />                            
               <div className="state p-primary">
                 <label>{item.nombre}</label>
               </div>

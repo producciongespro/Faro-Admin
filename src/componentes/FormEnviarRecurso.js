@@ -12,10 +12,11 @@ import obtener from '../modulos/obtener';
 
 //Arrays 
 var niveles = null;
-var asignaturaPrimaria = null;
-var asignaturaSecundaria = null;
-var programasAe = null;
-var subprogramasAe = null;
+var asignaturaPrimaria= null;
+var asignaturaSecundaria= null;
+var programasAe= null;
+var subprogramasAe= null;
+var asignaturasPedagoHosp= null;
 
 export default function FormEnviarRecurso() {
   const [idNivel, setIdNivel] = useState(-1);
@@ -32,6 +33,7 @@ export default function FormEnviarRecurso() {
     asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
     programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
     subprogramasAe = await obtener(config.servidor + "obtener_subprogramas_ae.php");
+    asignaturasPedagoHosp = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_ph");
     setIsReady(true);
   }
 
@@ -39,6 +41,7 @@ export default function FormEnviarRecurso() {
   useEffect(() => {
     obtenerDatos();
     console.log("nivel", idNivel);
+    //console.log("asignaturasPedagoHosp", asignaturasPedagoHosp);    
 
   })
 
@@ -176,16 +179,10 @@ export default function FormEnviarRecurso() {
               </select>
             </div>
             {errors.id_nivel && <p className="error" >* Nivel requerido</p>}
-
-
-
-
-
-
             {
               //ASIGNATURA (MATERIA) POR NIVEL : 
-              // Primaria y secundaria solamente 
-              (idNivel === 2 || idNivel === 3) &&
+              // Primaria o secundaria o pedagogía hospitalaria solamente.
+              (idNivel === 2 || idNivel === 3 || idNivel === 6 ) &&
               (
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -216,6 +213,15 @@ export default function FormEnviarRecurso() {
                         ))
                       )
                     }
+                         {
+                      //Caso de pedagogia hosp
+                      idNivel === 6 &&
+                      (
+                        asignaturasPedagoHosp.map((item, i) => (
+                          <option key={"asignatura" + i} value={item.nombre}> {item.nombre} </option>
+                        ))
+                      )
+                    }
 
 
                   </select>
@@ -226,7 +232,7 @@ export default function FormEnviarRecurso() {
 
 
             {
-              //PROGRAMA EN ELE CASO DE AGENDA ESTUDIANTIL : 
+              //SELECT PROGRAMA EN EL CASO DE AGENDA ESTUDIANTIL: 
               // solamente agenda estudiantil
               (idNivel === 7) &&
               (

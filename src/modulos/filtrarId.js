@@ -12,19 +12,7 @@ function filtrar (array, llave, valor ) {
             //Pero para ello sedebe indexar el campo materia en recursos
             if ( parseInt( array[index][ llave ]) === valor  ) {
                 tmpData.push(array[index]);
-            } 
-
-                if (llave==="id_nivel") {
-                    if ( parseInt( array[index][ llave ]) === valor  ) {
-                        tmpData.push(array[index]);
-                    }              
-                } else {
-                    if ( array[index][ llave ] === valor  ) {
-                        tmpData.push(array[index]);
-                    }              
-                }
-
-                
+            }   
         }                 
     }
     //console.log("Arreglo retornado", tmpData);    

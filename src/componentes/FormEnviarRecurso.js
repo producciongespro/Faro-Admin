@@ -66,7 +66,7 @@ export default function FormEnviarRecurso() {
     console.log("************data materia", data.materia);
 
 //Validación para estableccer materia como campo requerido en priamria y secundaria
-    if (idNivel === 2 || idNivel === 3 ||   idNivel === 6 || idNivel === 7 || idNivel === 0) {
+    if (idNivel === 2 || idNivel === 3 ||   idNivel === 6 || idNivel === 7 || idNivel === 1 || idNivel === 0 ) {
       if (parseInt(data.materia) === -1) {
         materiaLleno = false;
       } else {
@@ -122,10 +122,10 @@ export default function FormEnviarRecurso() {
 
   const handleValidarEducatico = (e) => {
     const str = e.target.value;
-    //console.log("Valor obtenido", str);
+    console.log("Valor obtenido", str);
     const patt = new RegExp("www.mep.go.cr/educatico");
     const res = patt.test(str);
-    //console.log("Resultado", res);          
+    console.log("Resultado", res);          
     if (res !== true) {
       alertify
         .alert("La url del recruso debe provenir de educatico.", function () {

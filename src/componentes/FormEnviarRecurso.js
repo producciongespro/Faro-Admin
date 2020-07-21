@@ -72,7 +72,7 @@ export default function FormEnviarRecurso() {
       } else {
         materiaLleno = true;
       }
-    }
+    } 
 
     console.log("-----------------Validación de datos:");
     console.log("materiaLleno", materiaLleno);

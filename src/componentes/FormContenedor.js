@@ -38,12 +38,18 @@ function FormContenedor(props) {
         enviar(urlAPI, data, function (resp) {
             console.log(resp);
             alertify.alert(config.nombre, resp.msj);
+            //Resetea los datos del formulario
             reset();
+            //Cierra el modal que contiene el formualrio
+            //y recargar la tabla
+            props.handleRecargar();
         })
 
 
     }
-    console.log(errors);
+    console.log("errors", errors);
+
+
 
 
     const devolverPropiedad = (registro, llave) => {
@@ -61,14 +67,17 @@ function FormContenedor(props) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {
-                console.log(props.subCategorias)
+                // console.log(props.subCategorias)
 
             }
             <div className="row">
                 <div className="col-sm-12">
                     <div className="input-group flex-nowrap">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="spnNombre">Nombre</span>
+                            <span className="input-group-text" id="spnNombre">
+                                {errors.nombre && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Nombre
+                            </span>
                         </div>
                         <input
                             type="text"
@@ -83,7 +92,10 @@ function FormContenedor(props) {
 
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text">Descripción</span>
+                            <span className="input-group-text">
+                                {errors.descripcion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Descripción
+                            </span>
                         </div>
                         <textarea
                             id="txtDesc"
@@ -99,7 +111,10 @@ function FormContenedor(props) {
 
                     <div className="input-group flex-nowrap">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" >Url</span>
+                            <span className="input-group-text" >
+                                {errors.url && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Url
+                            </span>
                         </div>
                         <input
                             type="text"
@@ -111,15 +126,16 @@ function FormContenedor(props) {
                         />
                     </div>
                     <br />
-                    <div className="input-group flex-nowrap">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" >Nombre de la imagen</span>
-                        </div>
+                    {
+                        //Si son cursos virtuales debe ir el campo imagen requerido
+                        props.idCategoria === "1" &&
+                        (
+                            <div className="input-group flex-nowrap">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text" >Nombre de la imagen</span>
+                                </div>
 
-                        {
-                            //Si son cursos virtuales debe ir el campo imagen requerido
-                            props.idCategoria === 1 &&
-                            (
+
                                 <input
                                     type="text"
                                     className="form-control"
@@ -128,28 +144,18 @@ function FormContenedor(props) {
                                     name="url_imagen"
                                     ref={register({ required: true })}
                                 />
-                            )
-                        }
-                                 {
-                            //Si el formualrio es para otro registro, el campo imagen no es requerido
-                            props.idCategoria !== 1 &&
-                            (
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Ejemplo: 'word.png'"
-                                    defaultValue={devolverPropiedad(props.registro, "url_imagen")}
-                                    name="url_imagen"
-                                    ref={register}
-                                />
-                            )
-                        }
 
-                    </div>
+
+                            </div>
+                        )}
                     <br />
+
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="selSubCategoria">Subcategoría</label>
+                            <label className="input-group-text" htmlFor="selSubCategoria">
+                                {errors.id_sub_categoria && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Subcategoría
+                            </label>
                         </div>
                         <select
                             className="custom-select"
@@ -168,7 +174,10 @@ function FormContenedor(props) {
                     <br />
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="selPoblacion">Población</label>
+                            <label className="input-group-text" htmlFor="selPoblacion">
+                                {errors.poblacion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                                Población
+                            </label>
                         </div>
                         <select
                             className="custom-select"
@@ -191,8 +200,18 @@ function FormContenedor(props) {
             </div>
             <br />
             <div className="row">
+                {
+                    //Verifica si el objeto tiene al menos una propiedad para lanzar el alert
+                    //Esto evita que se lance el "alert" cuando se carga el formulario
+                    Object.keys(errors).length !== 0 &&
+                    <div className="col-md-8 offset-md-2 alert alert-danger" role="alert">
+                        Debe competar los datos requeridos.
+                        </div>
+                }
+            </div>
+            <div className="row">
                 <div className="col-sm-12 text-right">
-                    <button type="submit" className="btn btn-outline-info">
+                    <button type="submit" className="btn btn-outline-info"  >
                         {
                             props.accion === "editar" && <span>Guardar cambios</span>
                         }

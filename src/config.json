@@ -8,5 +8,8 @@
     "assetsLocal": "http://localhost/Faro/asset/",
     "PRODUCCION": "-----------",
     "servidor-Produccion": "https://cajadeherramientas.mep.go.cr/webservices/",
-    "assetsProduccion": "https://cajadeherramientas.mep.go.cr/Faro/asset/"    
+    "assetsProduccion": "https://cajadeherramientas.mep.go.cr/Faro/asset/",
+    "TEST-SERV": "-----------",
+    "servidor-TEST": "https://pruebarecursos.mep.go.cr/test-faroadmin/",
+    "assets-TEST": "https://pruebarecursos.mep.go.cr/test-faroadmin/asset/"
 }

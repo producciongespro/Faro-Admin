@@ -19,6 +19,11 @@ var urlImg=config.assets+"img/7_desarrollo_prof/";
 
 function ContenedorListados (props) {
     modo = props.modo;
+    //URIS:
+    const URL_odp = config.servidor + "obtener_oferta_desarrollo.php";
+
+    console.log("URL_odp",URL_odp);
+    
 
 
     const [ datosFiltrados, setDatosFiltrados ] = useState(false);
@@ -28,13 +33,22 @@ function ContenedorListados (props) {
     const [accion, setAccion] = useState(null);
     const handleClose = () => setShow(false);
 
+    const handleRecargar=()=> {
+        //recarga la tabla una vez que se haya actualizado un registro  o se haya insertado uno.
+        setShow(false);
+        obtenerDatos(function () {
+            //console.log("datosJson",datosJson);            
+            setDatosFiltrados( filtrar(datosJson, "oferta", modo ));            
+        })  
+    }
+
     async function obtenerDatos (cb) {
-        datosJson=await obtener(config.servidor + "obtener_oferta_desarrollo.php");
-        //console.log("******datosJson",datosJson);       
+        datosJson=await obtener(URL_odp);
+        console.log("******datosJson",datosJson);       
         subCategorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");
-        //console.log("*******subCategorias",subCategorias);        
+        console.log("*******subCategorias",subCategorias);        
         poblacionesIdp=await obtener (config.servidor + "obtener_poblaciones_idp.php");
-        //console.log("*******poblacionesIdp",poblacionesIdp);
+        console.log("*******poblacionesIdp",poblacionesIdp);
         cb();
     }
 
@@ -131,10 +145,20 @@ function ContenedorListados (props) {
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {
-                                accion === "editar" && <span>Edición de registro</span>
+                                accion === "editar" && 
+                                    <span>
+                                    Edición de registro de {props.modo}
+                                    </span>
                             }
                             {
-                                accion === "agregar" && <span>Ingreso de registro</span>
+                                accion === "agregar" && 
+                                    <span>
+                                        Ingreso de registro de {props.modo}
+                                    </span>
+                            }
+                            {
+                                console.log("props.idCategoria ",props.modo )
+                                
                             }
                         </Modal.Title>
                     </Modal.Header>
@@ -148,7 +172,7 @@ function ContenedorListados (props) {
                                     }
                                     </div>
                                 </div>
-                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria } />
+                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria }  handleRecargar={handleRecargar}   />
                     </Modal.Body>
                     <Modal.Footer>
 

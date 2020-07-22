@@ -58,8 +58,7 @@ function Login() {
     //console.log("Errores", errors);    
      
     return (
-       <div className="container-login">        
-       
+       <div className="container-login">              
             <div className="container">
             <br/>
             <div className="d-flex justify-content-center h-100">
@@ -82,7 +81,7 @@ function Login() {
                                     type="text" autoComplete="username"  
                                     name="usuario" className="form-control" 
                                     placeholder="Correo del MEP"                                     
-                                    defaultValue="luis@correo.de"                                     
+                                    defaultValue="luis.chacon.campos@mep.go.cr"
                                     />                                
                             </div>                            
                             <div className="input-group form-group">

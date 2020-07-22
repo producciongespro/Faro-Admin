@@ -14,7 +14,7 @@ function Tabla(props) {
                     {
                          // VISOR - PAPELERA - BITACORA
                         (props.modo === "visor" || props.modo === "papelera" || props.modo === "bitacora" ) && 
-                        <th className="text-center" scope="col">Recurso</th>
+                        <th className="text-center" scope="col">Registro</th>
                     }
                     {
                         //PAPELERA

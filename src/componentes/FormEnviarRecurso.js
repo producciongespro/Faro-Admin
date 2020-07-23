@@ -100,6 +100,7 @@ export default function FormEnviarRecurso() {
         console.log("resp------------->", resp );
         alertify.alert(
           config.nombre + " " + config.version,
+          //TODO: implementar resp.msj,
           resp,
           function () {
             console.log("ok");

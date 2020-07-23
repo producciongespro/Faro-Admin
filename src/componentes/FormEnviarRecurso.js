@@ -97,10 +97,10 @@ export default function FormEnviarRecurso() {
       console.log("datos a enviar al servidor:", data);
 
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
-        console.log("resp------------->", resp);
+        console.log("resp------------->", resp );
         alertify.alert(
           config.nombre + " " + config.version,
-          resp.msj,
+          resp,
           function () {
             console.log("ok");
             reset();

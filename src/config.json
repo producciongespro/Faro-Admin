@@ -1,8 +1,8 @@
 {
     "version": "1.0.1",
     "nombre": "Administración de Caja de Herramientas",
-    "servidor": "http://localhost/Faro/webservices/",
-    "assets": "http://localhost/Faro/asset/",
+    "servidor": "https://cajadeherramientas.mep.go.cr/webservices/",
+    "assets": "https://cajadeherramientas.mep.go.cr/Faro/asset/",
     "LOCAL": "-------------",
     "servidor-Local": "http://localhost/Faro/webservices/",
     "assetsLocal": "http://localhost/Faro/asset/",

@@ -270,7 +270,7 @@ export default function FormEnviarRecurso() {
 
             {
               //Año por nivel          
-              asignaturaSel != "Primera Infancia" &&             
+              asignaturaSel != "Primera infancia" &&             
             <div className="row">
               <div className="col-sm-12">
                 <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />

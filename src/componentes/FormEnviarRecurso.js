@@ -22,6 +22,8 @@ export default function FormEnviarRecurso() {
   const [idNivel, setIdNivel] = useState(-1);
   const [idPrograma, setIdPrograma] = useState(0);
   const [isReady, setIsReady] = useState(false);
+  //asignaturaSel se necesita para asignaturas que no tienen años o que el select años se debe renderizar diferente
+  const [asignaturaSel, setAsignaturaSel]= useState(0);
   const { register, handleSubmit, errors, reset } = useForm();
   const { usuario } = useContext(MyContext);
 
@@ -140,6 +142,11 @@ export default function FormEnviarRecurso() {
     setIdPrograma(e.target.value);
   }
 
+  const handleSeleccionarAsignatura=(e)=> {
+    console.log("Asignatura", e.target.value);
+    setAsignaturaSel(e.target.value);
+  }
+
 
 
 
@@ -193,6 +200,7 @@ export default function FormEnviarRecurso() {
                     className="custom-select"
                     name="materia"
                     id="selMateria"
+                    onChange={handleSeleccionarAsignatura}
                     ref={register({ required: true })}
                   >
                     <option defaultValue value={-1} >Seleccione la asignatura</option>
@@ -262,13 +270,13 @@ export default function FormEnviarRecurso() {
 
             {
               //Año por nivel          
-            }
+              asignaturaSel != "Primera Infancia" &&             
             <div className="row">
               <div className="col-sm-12">
                 <GrupoCheck nivel={idNivel} nombre="anno" listaAnnos="vacio" />
               </div>
             </div>
-
+          }
 
             {
               //SUBPROGRAMA: 

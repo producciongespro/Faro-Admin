@@ -1,4 +1,32 @@
-import React, {useEffect, useState}  from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ContenedorListados.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ContenedorListados.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useEffect, useState}  from 'react';
 import { Modal } from 'react-bootstrap';
 import TablaContenedor from '../componentes/TablaContenedor';
 import FormContenedor from '../componentes/FormContenedor';
@@ -56,7 +84,7 @@ function ContenedorListados (props) {
  * @async
  * @function downloadData
  * @param {string} url - url del servicio para obtener los datos
- * @return {Promise<string>} The data from the URL.
+ * @return {Promise&lt;string>} The data from the URL.
  */
     async function obtenerDatos (cb) {
         datosJson=await obtener(URL_odp);
@@ -121,87 +149,109 @@ function ContenedorListados (props) {
   }
 
     return (
-        <React.Fragment>
-            <div className="row">
-            <div className="col-sm-12">
-                <h4>{props.modo}</h4>                                
-            </div>            
-            </div>
-            <hr/>
+        &lt;React.Fragment>
+            &lt;div className="row">
+            &lt;div className="col-sm-12">
+                &lt;h4>{props.modo}&lt;/h4>                                
+            &lt;/div>            
+            &lt;/div>
+            &lt;hr/>
 
-            <div className="row">
-                <div className="col-sm-12 text-right">
-                <button 
+            &lt;div className="row">
+                &lt;div className="col-sm-12 text-right">
+                &lt;button 
                     className="btn btn-info"
                     onClick={handleAbrirModal}
                     id={-1}
                 > 
-                    <i className="fas fa-plus-circle"></i> Agregar registro                    
-                </button>
-                </div>
-            </div>
-            <br/>
+                    &lt;i className="fas fa-plus-circle">&lt;/i> Agregar registro                    
+                &lt;/button>
+                &lt;/div>
+            &lt;/div>
+            &lt;br/>
 
-        <div className="row">
-            <div className="col-sm-12">
+        &lt;div className="row">
+            &lt;div className="col-sm-12">
                 {
-                    datosFiltrados &&
-                    <TablaContenedor array={datosFiltrados} handleEliminarRegistro={handleEliminarRegistro}  handleAbrirModal={handleAbrirModal} clase="table table-striped" />
+                    datosFiltrados &amp;&amp;
+                    &lt;TablaContenedor array={datosFiltrados} handleEliminarRegistro={handleEliminarRegistro}  handleAbrirModal={handleAbrirModal} clase="table table-striped" />
                 }
                 
-            </div>
-        </div>
+            &lt;/div>
+        &lt;/div>
 
 
-        <Modal
+        &lt;Modal
                     show={show}
                     onHide={handleClose}
                     size="lg"
                 >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
+                    &lt;Modal.Header closeButton>
+                        &lt;Modal.Title>
                             {
-                                accion === "editar" && 
-                                    <span>
+                                accion === "editar" &amp;&amp; 
+                                    &lt;span>
                                     Edición de registro de {props.modo}
-                                    </span>
+                                    &lt;/span>
                             }
                             {
-                                accion === "agregar" && 
-                                    <span>
+                                accion === "agregar" &amp;&amp; 
+                                    &lt;span>
                                         Ingreso de registro de {props.modo}
-                                    </span>
+                                    &lt;/span>
                             }
                             {
                                 console.log("props.idCategoria ",props.modo )
                                 
                             }
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                                <div className="row">
-                                    <div className="col-sm-12 text-center">
+                        &lt;/Modal.Title>
+                    &lt;/Modal.Header>
+                    &lt;Modal.Body>
+                                &lt;div className="row">
+                                    &lt;div className="col-sm-12 text-center">
                                     {
-                                    registro &&                                    
-                                        registro.url_imagen &&
-                                            <img className="img-thumbnail img-previa" src={urlImg+registro.url_imagen} alt="imagen de recurso" />
+                                    registro &amp;&amp;                                    
+                                        registro.url_imagen &amp;&amp;
+                                            &lt;img className="img-thumbnail img-previa" src={urlImg+registro.url_imagen} alt="imagen de recurso" />
                                     }
-                                    </div>
-                                </div>
+                                    &lt;/div>
+                                &lt;/div>
                                 
-                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria }  handleRecargar={handleRecargar}   />
-                    </Modal.Body>
-                    <Modal.Footer>
+                                &lt;FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria }  handleRecargar={handleRecargar}   />
+                    &lt;/Modal.Body>
+                    &lt;Modal.Footer>
 
-                    </Modal.Footer>
-                </Modal>
+                    &lt;/Modal.Footer>
+                &lt;/Modal>
 
 
 
-        </React.Fragment>
+        &lt;/React.Fragment>
     );
     
 }
 
 
-export default ContenedorListados;
+export default ContenedorListados;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ContenedorListados">ContenedorListados</a></li><li><a href="global.html#downloadData">downloadData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Mon Aug 03 2020 15:08:54 GMT-0600 (GMT-06:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

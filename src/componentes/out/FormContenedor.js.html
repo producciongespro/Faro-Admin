@@ -1,4 +1,32 @@
-import React, { useContext } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: FormContenedor.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: FormContenedor.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useContext } from 'react';
 import MyContext from '../modulos/MyContext';
 import { useForm } from 'react-hook-form';
 import enviar from '../modulos/enviar';
@@ -70,21 +98,21 @@ function FormContenedor(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        &lt;form onSubmit={handleSubmit(onSubmit)}>
             {
                 // console.log(props.subCategorias)
 
             }
-            <div className="row">
-                <div className="col-sm-12">
-                    <div className="input-group flex-nowrap">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" id="spnNombre">
-                                {errors.nombre && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+            &lt;div className="row">
+                &lt;div className="col-sm-12">
+                    &lt;div className="input-group flex-nowrap">
+                        &lt;div className="input-group-prepend">
+                            &lt;span className="input-group-text" id="spnNombre">
+                                {errors.nombre &amp;&amp; &lt;i className="mr-2 text-danger fas fa-exclamation-circle">&lt;/i>}
                                 Nombre
-                            </span>
-                        </div>
-                        <input
+                            &lt;/span>
+                        &lt;/div>
+                        &lt;input
                             type="text"
                             className="form-control"
                             placeholder="Nombre del recurso"
@@ -92,17 +120,17 @@ function FormContenedor(props) {
                             name="nombre"
                             ref={register({ required: true })}
                         />
-                    </div>
-                    <br />
+                    &lt;/div>
+                    &lt;br />
 
-                    <div className="input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text">
-                                {errors.descripcion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                    &lt;div className="input-group">
+                        &lt;div className="input-group-prepend">
+                            &lt;span className="input-group-text">
+                                {errors.descripcion &amp;&amp; &lt;i className="mr-2 text-danger fas fa-exclamation-circle">&lt;/i>}
                                 Descripción
-                            </span>
-                        </div>
-                        <textarea
+                            &lt;/span>
+                        &lt;/div>
+                        &lt;textarea
                             id="txtDesc"
                             name="descripcion"
                             className="form-control"
@@ -111,17 +139,17 @@ function FormContenedor(props) {
                             placeholder="Breve descripición del recurso"
                             ref={register({ required: true })}
                         />
-                    </div>
-                    <br />
+                    &lt;/div>
+                    &lt;br />
 
-                    <div className="input-group flex-nowrap">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" >
-                                {errors.url && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                    &lt;div className="input-group flex-nowrap">
+                        &lt;div className="input-group-prepend">
+                            &lt;span className="input-group-text" >
+                                {errors.url &amp;&amp; &lt;i className="mr-2 text-danger fas fa-exclamation-circle">&lt;/i>}
                                 Url
-                            </span>
-                        </div>
-                        <input
+                            &lt;/span>
+                        &lt;/div>
+                        &lt;input
                             type="text"
                             className="form-control"
                             placeholder="Url"
@@ -129,19 +157,19 @@ function FormContenedor(props) {
                             name="url"
                             ref={register({ required: true })}
                         />
-                    </div>
-                    <br />
+                    &lt;/div>
+                    &lt;br />
                     {
                         //Si son cursos virtuales debe ir el campo imagen requerido
-                        props.idCategoria === "1" &&
+                        props.idCategoria === "1" &amp;&amp;
                         (
-                            <div className="input-group flex-nowrap">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" >Nombre de la imagen</span>
-                                </div>
+                            &lt;div className="input-group flex-nowrap">
+                                &lt;div className="input-group-prepend">
+                                    &lt;span className="input-group-text" >Nombre de la imagen&lt;/span>
+                                &lt;/div>
 
 
-                                <input
+                                &lt;input
                                     type="text"
                                     className="form-control"
                                     placeholder="Ejemplo: 'word.png'"
@@ -151,18 +179,18 @@ function FormContenedor(props) {
                                 />
 
 
-                            </div>
+                            &lt;/div>
                         )}
-                    <br />
+                    &lt;br />
 
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="selSubCategoria">
-                                {errors.id_sub_categoria && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                    &lt;div className="input-group mb-3">
+                        &lt;div className="input-group-prepend">
+                            &lt;label className="input-group-text" htmlFor="selSubCategoria">
+                                {errors.id_sub_categoria &amp;&amp; &lt;i className="mr-2 text-danger fas fa-exclamation-circle">&lt;/i>}
                                 Subcategoría
-                            </label>
-                        </div>
-                        <select
+                            &lt;/label>
+                        &lt;/div>
+                        &lt;select
                             className="custom-select"
                             id="selSubCategoria"
                             name="id_sub_categoria"
@@ -171,20 +199,20 @@ function FormContenedor(props) {
                         >
                             {
                                 props.subCategorias.map((item, i) => (
-                                    <option key={"subcategoria" + i} value={item.id} > {item.sub_categoria} </option>
+                                    &lt;option key={"subcategoria" + i} value={item.id} > {item.sub_categoria} &lt;/option>
                                 ))
                             }
-                        </select>
-                    </div>
-                    <br />
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="selPoblacion">
-                                {errors.poblacion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>}
+                        &lt;/select>
+                    &lt;/div>
+                    &lt;br />
+                    &lt;div className="input-group mb-3">
+                        &lt;div className="input-group-prepend">
+                            &lt;label className="input-group-text" htmlFor="selPoblacion">
+                                {errors.poblacion &amp;&amp; &lt;i className="mr-2 text-danger fas fa-exclamation-circle">&lt;/i>}
                                 Población
-                            </label>
-                        </div>
-                        <select
+                            &lt;/label>
+                        &lt;/div>
+                        &lt;select
                             className="custom-select"
                             id="selPoblacion"
                             name="poblacion"
@@ -193,41 +221,63 @@ function FormContenedor(props) {
                         >
                             {
                                 props.poblacionesIdp.map((item, i) => (
-                                    <option key={"subcategoria" + i} value={item.nombre} > {item.nombre} </option>
+                                    &lt;option key={"subcategoria" + i} value={item.nombre} > {item.nombre} &lt;/option>
                                 ))
                             }
-                        </select>
-                    </div>
+                        &lt;/select>
+                    &lt;/div>
 
 
 
-                </div>
-            </div>
-            <br />
-            <div className="row">
+                &lt;/div>
+            &lt;/div>
+            &lt;br />
+            &lt;div className="row">
                 {
                     //Verifica si el objeto tiene al menos una propiedad para lanzar el alert
                     //Esto evita que se lance el "alert" cuando se carga el formulario
-                    Object.keys(errors).length !== 0 &&
-                    <div className="col-md-8 offset-md-2 alert alert-danger" role="alert">
+                    Object.keys(errors).length !== 0 &amp;&amp;
+                    &lt;div className="col-md-8 offset-md-2 alert alert-danger" role="alert">
                         Debe competar los datos requeridos.
-                        </div>
+                        &lt;/div>
                 }
-            </div>
-            <div className="row">
-                <div className="col-sm-12 text-right">
-                    <button type="submit" className="btn btn-outline-info"  >
+            &lt;/div>
+            &lt;div className="row">
+                &lt;div className="col-sm-12 text-right">
+                    &lt;button type="submit" className="btn btn-outline-info"  >
                         {
-                            props.accion === "editar" && <span>Guardar cambios</span>
+                            props.accion === "editar" &amp;&amp; &lt;span>Guardar cambios&lt;/span>
                         }
                         {
-                            props.accion === "agregar" && <span>Agregar registro</span>
+                            props.accion === "agregar" &amp;&amp; &lt;span>Agregar registro&lt;/span>
                         }
-                    </button>
-                </div>
-            </div>
-        </form>
+                    &lt;/button>
+                &lt;/div>
+            &lt;/div>
+        &lt;/form>
     )
 }
 
-export default FormContenedor;
+export default FormContenedor;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#FormContenedor">FormContenedor</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Mon Aug 03 2020 14:54:34 GMT-0600 (GMT-06:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

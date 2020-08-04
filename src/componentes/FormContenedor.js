@@ -198,6 +198,98 @@ function FormContenedor(props) {
                             }
                         </select>
                     </div>
+                    
+                  
+
+{
+    /**
+     @todo Quitar esto para producción
+     selects de rquerimientos
+     */
+    console.log("props.idCategoria", props.idCategoria)
+}
+                   {
+                       //---Cursos virtuales
+                       props.idCategoria === "1" &&
+                       <div className="input-group mb-3">
+                       <div className="input-group-prepend">
+                           <label className="input-group-text" htmlFor="selSubcategoria">
+                               {
+                               //errors.poblacion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>
+                               }
+                               Subcategoría
+                           </label>
+                       </div>
+                       <select
+                           className="custom-select"
+                           id="selSubcategoria"
+                           name="subcategoria"
+                           //defaultValue={devolverPropiedad(props.registro, "poblacion")}
+                           //ref={register({ required: true })}
+                       >
+                           <option value="1"> Prácticas docentes </option>
+                           <option value="2"> Gestión de centros educativos </option>
+                           <option value="3">Efectividad en la gestión pública </option>
+                       </select>
+                   </div>
+                   }
+
+                    {
+                       //---Videoteca
+                       props.idCategoria === "3" &&
+                       <div className="input-group mb-3">
+                       <div className="input-group-prepend">
+                           <label className="input-group-text" htmlFor="selSubcategoria">
+                               {
+                               //errors.poblacion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>
+                               }
+                               Subcategoría
+                           </label>
+                       </div>
+                       <select
+                           className="custom-select"
+                           id="selSubcategoria"
+                           name="subcategoria"
+                           //defaultValue={devolverPropiedad(props.registro, "poblacion")}
+                           //ref={register({ required: true })}
+                       >
+                           <option value="1"> Educación especial </option>
+                           <option value="2"> Educación preescolar </option>
+                           <option value="3"> Educación ambiental </option>
+                           <option value="4"> Tecnología y educación </option>
+                           <option value="5"> Aspectos educativos </option>
+                           <option value="6"> Lesgislación educativa </option>
+                           <option value="3"> Planeamiento </option>
+                       </select>
+                   </div>
+                   }
+
+{
+                       //---Otras ofertas
+                       props.idCategoria === "5" &&
+                       <div className="input-group mb-3">
+                       <div className="input-group-prepend">
+                           <label className="input-group-text" htmlFor="selSubcategoria">
+                               {
+                               //errors.poblacion && <i className="mr-2 text-danger fas fa-exclamation-circle"></i>
+                               }
+                               Subcategoría
+                           </label>
+                       </div>
+                       <select
+                           className="custom-select"
+                           id="selSubcategoria"
+                           name="subcategoria"
+                           //defaultValue={devolverPropiedad(props.registro, "poblacion")}
+                           //ref={register({ required: true })}
+                       >
+                           <option value="1"> Nacionales </option>
+                           <option value="2"> Extranjeras </option>
+                           
+                       </select>
+                   </div>
+                   }
+                    
 
 
 

@@ -171,7 +171,7 @@ function FormContenedor(props) {
                         >
                             {
                                 props.subCategorias.map((item, i) => (
-                                    <option key={"subcategoria" + i} value={item.id} > {item.sub_categoria} </option>
+                                    <option key={"subcategoria" + i} value={item.id} > {item.nombreCategoria} </option>
                                 ))
                             }
                         </select>

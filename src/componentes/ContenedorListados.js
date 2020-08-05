@@ -27,9 +27,7 @@ function ContenedorListados (props) {
     modo = props.modo;
     //URIS:
     const URL_odp = config.servidor + "obtener_oferta_desarrollo.php";
-
-    console.log("URL_odp",URL_odp);
-    
+    //console.log("URL_odp",URL_odp); 
 
 
     const [ datosFiltrados, setDatosFiltrados ] = useState(false);
@@ -60,12 +58,13 @@ function ContenedorListados (props) {
  */
     async function obtenerDatos (cb) {
         datosJson=await obtener(URL_odp);
-        console.log("******datosJson",datosJson);       
-        subCategorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");
-        console.log("*******subCategorias",subCategorias);        
+        console.log("******datosJson",datosJson);               
+        subCategorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");        
+        console.log("*******subCategorias",subCategorias);                
         poblacionesIdp=await obtener (config.servidor + "obtener_poblaciones_idp.php");
         console.log("*******poblacionesIdp",poblacionesIdp);
         cb();
+        
     }
 
   useEffect(()=>{

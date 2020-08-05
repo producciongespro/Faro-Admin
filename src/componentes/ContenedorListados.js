@@ -11,7 +11,7 @@ import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
 
 var datosJson=null;
-var subCategorias=null;
+var categorias=null;
 var poblacionesIdp=null;
 var modo=null;
 var urlImg=config.assets+"img/7_desarrollo_prof/";
@@ -58,13 +58,12 @@ function ContenedorListados (props) {
  */
     async function obtenerDatos (cb) {
         datosJson=await obtener(URL_odp);
-        console.log("******datosJson",datosJson);               
-        subCategorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");        
-        console.log("*******subCategorias",subCategorias);                
+        //console.log("******datosJson",datosJson);               
+        categorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");        
+        //console.log("*******categorias",categorias);                
         poblacionesIdp=await obtener (config.servidor + "obtener_poblaciones_idp.php");
-        console.log("*******poblacionesIdp",poblacionesIdp);
-        cb();
-        
+        //console.log("*******poblacionesIdp",poblacionesIdp);
+        cb();        
     }
 
   useEffect(()=>{
@@ -188,7 +187,7 @@ function ContenedorListados (props) {
                                     </div>
                                 </div>
                                 
-                                <FormContenedor accion={accion} subCategorias={subCategorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria }  handleRecargar={handleRecargar}   />
+                                <FormContenedor accion={accion} categorias={categorias} poblacionesIdp={poblacionesIdp} registro={registro} modo={modo} idCategoria={props.idCategoria }  handleRecargar={handleRecargar}   />
                     </Modal.Body>
                     <Modal.Footer>
 

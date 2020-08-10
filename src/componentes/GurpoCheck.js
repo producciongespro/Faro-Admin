@@ -75,6 +75,10 @@ const niveles=[
   {
     "id": 5,
     "nombreNivel": "Educación jóvenes y adultos"
+  },
+  {
+    "id": 6,
+    "nombreNivel": "Pedagogía Hospitalaría"
   }
 ];
 const annosPedagoHosp=[ 

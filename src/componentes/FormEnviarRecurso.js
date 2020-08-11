@@ -96,7 +96,7 @@ export default function FormEnviarRecurso() {
       }
 
       data.id_usuario = usuario.idUsuario;
-      console.log("datos a enviar al servidor:", data);
+      console.log("////**********datos a enviar al servidor:", data, "**********//////");
 
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
         console.log("resp------------->", resp );
@@ -309,7 +309,7 @@ export default function FormEnviarRecurso() {
               <div className="input-group-prepend">
                 <span className="input-group-text">Nombre</span>
               </div>
-              <input type="text" className="form-control" name="nombre" id="txtNombre" aria-label="Default" placeholder="Escriba aquí el nombre del recurso." ref={register({ required: true, max: 32, min: 0, maxLength: 80 })} />
+              <input type="text" className="form-control" name="nombre" id="txtNombre" aria-label="Default" placeholder="Escriba aquí el nombre del recurso." ref={register({ required: true, max: 128, min: 0, maxLength: 80 })} />
             </div>
             {errors.nombre && <p className="error" >* Nombre requerido</p>}
 

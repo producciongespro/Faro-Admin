@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "nombre": "Administración de Caja de Herramientas",
     "servidor": "http://localhost/Faro/webservices/",
     "assets": "http://localhost/Faro/asset/"   

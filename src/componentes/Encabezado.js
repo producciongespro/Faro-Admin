@@ -27,9 +27,9 @@ function Encabezado() {
         <div className="jumbotron">
             <div className="row">
                 <div className="col-10">
-                    { usuario.idTipoUsuario === 1 && <h2>Administración de Recursos </h2>}
-                    { usuario.idTipoUsuario === 2 && <h2>Administración de Desarrollo profesional </h2>}
-                    { usuario.idTipoUsuario === 3 && <h2>Administración de Plantillas de planeamiento </h2>}                    
+                    { usuario.idTipoUsuario === 1 && <h2>Administración de Recursos/Caja de Herramientas</h2>}
+                    { usuario.idTipoUsuario === 2 && <h2>Administración de Desarrollo profesional/Caja de Herramientas</h2>}
+                    { usuario.idTipoUsuario === 3 && <h2>Administración de Plantillas de planeamiento/Caja de Herramientas</h2>}                    
                 </div>
 
                 {
@@ -52,7 +52,7 @@ function Encabezado() {
                         >
                             <Dropdown.Item as="button" >{"Nombre: "+ usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2 }</Dropdown.Item>
                             <Dropdown.Item as="button" >{"Correo: "+ usuario.correo}</Dropdown.Item>
-                            <Dropdown.Item as="button" >Tipo de usuaario: {usuario.etiquetaTipoUsuario} </Dropdown.Item>
+                            <Dropdown.Item as="button" >Tipo de usuario: {usuario.etiquetaTipoUsuario} </Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item onClick={handleCerrarSesion} as="button" eventKey="1">Cerrar sesión</Dropdown.Item>
                         </DropdownButton>

@@ -99,7 +99,7 @@ function Login() {
                                     />
                             </div>
                             <div className="row align-items-center remember">
-                                <input type="checkbox" />Rocordarme
+                                <input type="checkbox" />Recordarme
 					</div>
                             <div className="form-group">
                                 <input type="submit"  value="Acceder" className="btn float-right login_btn" />
@@ -107,7 +107,7 @@ function Login() {
                         </form>
                     </div>
                     <div className="card-footer">
-                        <div className="d-flex justify-content-center links">
+                        <div className="d-flex justify-content-center links solicitar">
                             Solicitud de cuenta <a href="pepito.com">Registro</a>
                         </div>
                         <div className="d-flex justify-content-center">

@@ -9,7 +9,7 @@ function Inicio () {
             </div>
             <div className="row">
                 <div className="col-12">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora consequatur praesentium cumque, nemo debitis tempore soluta eligendi ex et iste omnis ullam explicabo sapiente! Nostrum velit soluta nisi id laborum?
+                    Sistema administrativo para agregar un recurso en la caja de herramientas, http://www.cajadeherramientas.mep.go.cr/app/; <br/> Recuerde que para hacer el proceso debe primero agregarlo en el Portal oficial de Educatico, para eso debe comunicarse con sitioweb@mep.go.cr.
                 </div>
             </div>
         </React.Fragment>

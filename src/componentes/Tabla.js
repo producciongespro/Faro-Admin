@@ -93,7 +93,11 @@ function Tabla(props) {
                         <th className="text-center" scope="col"> Fecha </th>   
                     }
                     
-                            
+                    {
+                        //BITACORA
+                        props.modo === "bitacora" &&                    
+                        <th className="text-center" scope="col"> Tabla </th>   
+                    }       
                 
 
                 </tr>
@@ -182,7 +186,12 @@ function Tabla(props) {
                                         {moment(item.fecha_evento).fromNow()}
                                     </td>
                                 }                                                                  
-                                        
+                                                                   {
+                                    props.modo === "bitacora" &&   
+                                    <td  className="text-center "  >
+                                        {item.tabla}
+                                    </td>
+                                }      
                                 
 
                             </tr>

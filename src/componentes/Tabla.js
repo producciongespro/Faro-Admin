@@ -5,6 +5,7 @@ import 'moment/locale/es';
 
 function Tabla(props) {
     //console.log("*****************idNivel",props.idNivel);
+    console.log("props.array",props.array);
     moment.locale('es');
     return (
         <table id="tblNivel" className={props.clase}>

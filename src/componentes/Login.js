@@ -97,22 +97,14 @@ function Login() {
                                     placeholder="Contraseña"
                                     //defaultValue="123" 
                                     />
-                            </div>
-                            <div className="row align-items-center remember">
-                                <input type="checkbox" />Recordarme
-					</div>
+                            </div>                       
                             <div className="form-group">
-                                <input type="submit"  value="Acceder" className="btn float-right login_btn" />
+                                <input  type="submit"  value="Acceder" className="btn float-right login_btn" />
                             </div>
                         </form>
                     </div>
                     <div className="card-footer">
-                        <div className="d-flex justify-content-center links solicitar">
-                            Solicitud de cuenta <a href="pepito.com">Registro</a>
-                        </div>
-                        <div className="d-flex justify-content-center">
-                            <a href="pepito.com">¿Olvidó su contraseña?</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

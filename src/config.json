@@ -2,5 +2,5 @@
     "version": "1.0.2",
     "nombre": "Administración de Caja de Herramientas",
     "servidor": "https://cajadeherramientas.mep.go.cr/webservices/",
-    "assets": "https://cajadeherramientas.mep.go.cr/Faro/asset/"       
+    "assets": "https://cajadeherramientas.mep.go.cr/Faro/asset/"    
 }

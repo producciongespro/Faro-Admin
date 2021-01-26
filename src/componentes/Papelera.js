@@ -53,9 +53,9 @@ function Papelera () {
     //console.log("e.target.id", e.target);
     const data = {
       "id":e.target.dataset.origen,
-      "usuario": usuario.idUsuario      
+      "id_usuario": usuario.idUsuario      
     }
-    //console.log("Dato a recuperar:",data);     
+    console.log("Dato a recuperar:",data);     
     enviar(urlRecuperarBorrados, data, function (resp) { 
         console.log("resp",resp);           
         alertify

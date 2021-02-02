@@ -141,7 +141,17 @@ export default function FormEnviarRecurso() {
 
       data.id_usuario = usuario.idUsuario;
       console.log("////**********datos a enviar al servidor:", data, "**********//////");
-      enviarDatos (config.servidor + "registrar_recurso.php",  data);
+      const negocio = {
+        "idTipo": 2,
+        "nombre": "Lavacar",
+        "telefono1": "789654",
+      "descripcion": "prueba",
+      "contacto": "lolo@decom"
+      }
+
+
+      enviarDatos ("http://localhost/sesion-3/server/insertar_registro.php",  negocio);
+      //enviarDatos (config.servidor + "registrar_recurso.php",  data);
      /*
       const testUsuario= {
         "name": "morpheus",

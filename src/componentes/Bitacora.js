@@ -7,8 +7,7 @@ function Bitacora (props) {
     const [datosJson, setDataJson ] = useState(null);
 
     useEffect(()=>{
-        //console.log("props.idTipoUsuario",props.idTipoUsuario);
-        
+    console.log("props.idTipoUsuario",props.idTipoUsuario);        
     let urlAPI=config.servidor+"obtener_bitacora2.php?tabla="+props.idTipoUsuario;        
         obtener(urlAPI);
     },[]);
@@ -18,8 +17,9 @@ function Bitacora (props) {
     })
 
     async function obtener (urlAPI) {
-        let response = await fetch(urlAPI);                
-        setDataJson(await response.json());               
+        let response = await fetch(urlAPI);
+        let data=  await response.json()                
+        setDataJson (  data.reverse() );               
     }
 
     return (

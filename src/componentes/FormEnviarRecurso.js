@@ -138,21 +138,30 @@ export default function FormEnviarRecurso() {
       } else {
         data.tabla = "recursos";
       }
-
+     
       data.id_usuario = usuario.idUsuario;
-      // console.log("////**********datos a enviar al servidor:", data, "**********//////");
-   /*   const negocio = {
+      console.log("////**********datos a enviar al servidor:", data, "**********//////");
+      
+      // enviarDatos (config.servidor + "registrar_recurso.php",  data);
+
+/* Prueba 2 API local
+
+      const negocio = {
         "idTipo": 2,
         "nombre": "Lavacar",
         "telefono1": "789654",
       "descripcion": "prueba",
       "contacto": "lolo@decom"
       }*/
+/*
 
+      enviarDatos ("http://localhost/sesion-3/server/insertar_registro.php",  negocio);
 
-      // enviarDatos ("http://localhost/sesion-3/server/insertar_registro.php",  negocio);
-      //enviarDatos (config.servidor + "registrar_recurso.php",  data);
+    */
+      
      /*
+
+     Prueba 1 API REq res
       const testUsuario= {
         "name": "morpheus",
         "job": "leader"

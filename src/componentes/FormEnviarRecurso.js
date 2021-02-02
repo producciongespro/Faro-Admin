@@ -6,7 +6,7 @@ import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
 import GrupoCheck from './GurpoCheck';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
-//import enviar from '../modulos/enviar';
+import enviar from '../modulos/enviar';
 import config from '../config.json';
 import {getData, sendData} from '../modulos/akiri';
 
@@ -140,17 +140,17 @@ export default function FormEnviarRecurso() {
       }
 
       data.id_usuario = usuario.idUsuario;
-      console.log("////**********datos a enviar al servidor:", data, "**********//////");
-      const negocio = {
+      // console.log("////**********datos a enviar al servidor:", data, "**********//////");
+   /*   const negocio = {
         "idTipo": 2,
         "nombre": "Lavacar",
         "telefono1": "789654",
       "descripcion": "prueba",
       "contacto": "lolo@decom"
-      }
+      }*/
 
 
-      enviarDatos ("http://localhost/sesion-3/server/insertar_registro.php",  negocio);
+      // enviarDatos ("http://localhost/sesion-3/server/insertar_registro.php",  negocio);
       //enviarDatos (config.servidor + "registrar_recurso.php",  data);
      /*
       const testUsuario= {
@@ -159,7 +159,7 @@ export default function FormEnviarRecurso() {
       }
       enviarDatos ("https://reqres.in/api/users" ,  testUsuario);
 */
-     /*
+     
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {        
         console.log("resp------------->", resp );
         alertify.alert(
@@ -173,7 +173,7 @@ export default function FormEnviarRecurso() {
         );
       });
 
-      */
+    
 
     } else {
       alertify.alert(config.nombre, "Debe seleccionar al menos un año y seleccionar la asignatura correspondiente.");

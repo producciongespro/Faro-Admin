@@ -6,9 +6,9 @@ import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
 import GrupoCheck from './GurpoCheck';
 import obtenerValoresCheck from '../modulos/obtenerValoresCheck';
-import enviar from '../modulos/enviar';
+//import enviar from '../modulos/enviar';
 import config from '../config.json';
-import obtener from '../modulos/obtener';
+import {getData, sendData} from '../modulos/akiri';
 
 //Arrays 
 var niveles = null;
@@ -17,6 +17,29 @@ var asignaturaSecundaria= null;
 var programasAe= null;
 var subprogramasAe= null;
 var asignaturasPedagoHosp= null;
+
+const reqres=()=> {
+  let usuario = {
+    nombre: "Pepito",
+    edad: 80
+};
+
+fetch ("https://reqres.in/api/users", {
+    method: 'POST',
+    body: JSON.stringify(usuario),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+.then(resp => resp.json())
+.then(console.log)
+.catch(error=>{
+    console.log("Error en la petición ", error);    
+        
+})
+}
+
+//reqres();
 
 export default function FormEnviarRecurso() {
   const [idNivel, setIdNivel] = useState(-1);
@@ -29,15 +52,36 @@ export default function FormEnviarRecurso() {
 
 
   async function obtenerDatos() {
-    niveles = await obtener(config.servidor + "obtener_niveles.php");
+    niveles = await getData(config.servidor + "obtener_niveles.php");
     //console.log("niveles", niveles);
-    asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
-    asignaturaSecundaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
-    programasAe = await obtener(config.servidor + "obtener_tabla.php?tabla=programas_ae");
-    subprogramasAe = await obtener(config.servidor + "obtener_subprogramas_ae.php");
-    asignaturasPedagoHosp = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_ph");
+    //asignaturaPrimaria = await obtener(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
+
+    asignaturaPrimaria = await getData(config.servidor + "obtener_tabla.php?tabla=asignaturas_primaria");
+    //console.log("asignaturaPrimaria", asignaturaPrimaria);
+
+    asignaturaSecundaria = await getData(config.servidor + "obtener_tabla.php?tabla=asignaturas_secundaria");
+    //console.log("asignaturaSecundaria", asignaturaSecundaria);
+    
+    programasAe = await getData(config.servidor + "obtener_tabla.php?tabla=programas_ae");
+    //console.log("programasAe", programasAe);
+
+    subprogramasAe = await getData(config.servidor + "obtener_subprogramas_ae.php");
+    //console.log("subprogramasAe", subprogramasAe);
+
+    asignaturasPedagoHosp = await getData(config.servidor + "obtener_tabla.php?tabla=asignaturas_ph");
+    //console.log("asignaturasPedagoHosp", asignaturasPedagoHosp);
+
     setIsReady(true);
   }
+
+  
+
+
+  async function enviarDatos( urlAPI, data) {
+    const resp=  await sendData (urlAPI, data);
+    console.log("resp", resp);    
+  }
+  
 
 
   useEffect(() => {
@@ -45,7 +89,7 @@ export default function FormEnviarRecurso() {
     console.log("nivel", idNivel);
     //console.log("asignaturasPedagoHosp", asignaturasPedagoHosp);    
 
-  })
+  },[]);
 
 
 
@@ -97,22 +141,35 @@ export default function FormEnviarRecurso() {
 
       data.id_usuario = usuario.idUsuario;
       console.log("////**********datos a enviar al servidor:", data, "**********//////");
-
-      enviar(config.servidor + "registrar_recurso.php", data, function (resp) {
+      enviarDatos (config.servidor + "registrar_recurso.php",  data);
+     /*
+      const testUsuario= {
+        "name": "morpheus",
+        "job": "leader"
+      }
+      enviarDatos ("https://reqres.in/api/users" ,  testUsuario);
+*/
+     /*
+      enviar(config.servidor + "registrar_recurso.php", data, function (resp) {        
         console.log("resp------------->", resp );
         alertify.alert(
           config.nombre + " " + config.version,
           //TODO: implementar resp.msj,
-          resp,
+          resp.msj,
           function () {
             console.log("ok");
             reset();
           }
         );
       });
+
+      */
+
     } else {
       alertify.alert(config.nombre, "Debe seleccionar al menos un año y seleccionar la asignatura correspondiente.");
     }
+
+    
 
 
   }

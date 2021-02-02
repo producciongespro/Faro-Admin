@@ -138,9 +138,14 @@ export default function FormEnviarRecurso() {
       } else {
         data.tabla = "recursos";
       }
-
+     
       data.id_usuario = usuario.idUsuario;
       console.log("////**********datos a enviar al servidor:", data, "**********//////");
+      
+      enviarDatos (config.servidor + "registrar_recurso.php",  data);
+
+/* Prueba 2 API local
+
       const negocio = {
         "idTipo": 2,
         "nombre": "Lavacar",
@@ -151,8 +156,12 @@ export default function FormEnviarRecurso() {
 
 
       enviarDatos ("http://localhost/sesion-3/server/insertar_registro.php",  negocio);
-      //enviarDatos (config.servidor + "registrar_recurso.php",  data);
+
+    */
+      
      /*
+
+     Prueba 1 API REq res
       const testUsuario= {
         "name": "morpheus",
         "job": "leader"
@@ -160,6 +169,7 @@ export default function FormEnviarRecurso() {
       enviarDatos ("https://reqres.in/api/users" ,  testUsuario);
 */
      /*
+     TODO: Extrae alertify de este código:
       enviar(config.servidor + "registrar_recurso.php", data, function (resp) {        
         console.log("resp------------->", resp );
         alertify.alert(

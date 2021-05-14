@@ -176,6 +176,8 @@ function VerRecursos() {
     asignatura = e.target.value;
     console.log("Asignatura", asignatura);
     console.log(idNivel);
+    //Si el nivel es recursos agenda estudiantil
+    // carga otro método de filtrado "filtrarRecursosAe"
     if (idNivel !== 7) {
       filtrarPorAsignatura();
     } else {
@@ -206,8 +208,10 @@ function VerRecursos() {
         nombrePrograma
       );
       console.log("tmpFiltrdosAe", tmpFiltrdosAe);
+      //filtra los datos por  el nombre del programa
       setDatosFiltrados(tmpFiltrdosAe);
     } else {
+        //Si es "todas" carga la variable original con el json de recursos ae
       setDatosFiltrados(recursosAe);
     }
   };

@@ -203,7 +203,7 @@ function VerRecursos() {
 
     if (nombrePrograma !== "Todas") {
       const tmpFiltrdosAe = filtrar(
-        datosFiltrados,
+        recursosAe,
         "nombrePrograma",
         nombrePrograma
       );

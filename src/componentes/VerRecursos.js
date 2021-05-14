@@ -159,23 +159,28 @@ function VerRecursos() {
 
     //console.log("asignaturas",asignaturas);
     //Filtra array por nivel y lo carga en el estado datosFiltrados:
-/**
- * Si el id nivel es 7 carga el json de recursos agenda estudiantil
- * caso contrario carga de la tabla recursos
- */
+    /**
+     * Si el id nivel es 7 carga el json de recursos agenda estudiantil
+     * caso contrario carga de la tabla recursos
+     */
     if (tmpIdNivel !== 7) {
       datosPorNivel = filtrar(datosJson, "id_nivel", tmpIdNivel);
       //console.log("datosPorNivel", datosPorNivel);
       setDatosFiltrados(datosPorNivel);
     } else {
-        setDatosFiltrados(recursosAe);
+      setDatosFiltrados(recursosAe);
     }
   };
 
   const handleSeleccionarAsignatura = (e) => {
     asignatura = e.target.value;
     console.log("Asignatura", asignatura);
-    filtrarPorAsignatura();
+    console.log(idNivel);
+    if (idNivel !== 7) {
+      filtrarPorAsignatura();
+    } else {
+      filtrarRecursosAe(asignatura);
+    }
   };
 
   const filtrarPorAsignatura = () => {
@@ -183,9 +188,27 @@ function VerRecursos() {
 
     if (asignatura !== "Todas") {
       const tmpData = filtrar(datosPorNivel, "materia", asignatura);
+      console.log("tmpData", tmpData);
       setDatosFiltrados(tmpData);
     } else {
       setDatosFiltrados(datosPorNivel);
+    }
+  };
+
+  const filtrarRecursosAe = (nombrePrograma) => {
+    console.log("nombrePrograma", nombrePrograma);
+    //console.log("datosFiltrados", datosFiltrados);
+
+    if (nombrePrograma !== "Todas") {
+      const tmpFiltrdosAe = filtrar(
+        datosFiltrados,
+        "nombrePrograma",
+        nombrePrograma
+      );
+      console.log("tmpFiltrdosAe", tmpFiltrdosAe);
+      setDatosFiltrados(tmpFiltrdosAe);
+    } else {
+      setDatosFiltrados(recursosAe);
     }
   };
 

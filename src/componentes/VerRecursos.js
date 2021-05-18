@@ -146,11 +146,18 @@ function VerRecursos() {
 
   const handleEditarRecurso = (e) => {
     const id = e.target.dataset.origen;
-    //console.log("idItem", id);
-    const tmpRecurso = filtrar(datosPorNivel, "id", id);
+    console.log("idItem", id);
+    let tmpRecurso=null;
+    /*
+    if (idNivel !== 7) {
+      tmpRecurso = filtrar(datosPorNivel, "id", id);
+    } else {
+      tmpRecurso = filtrar(recursosAe, "idRecursosAe", id);
+    }        
     //console.log("tmpRecursos", tmpRecurso[0]);
     setDetalleRecurso(tmpRecurso[0]);
     setShow(true);
+    */
   };
 
   const handleSeleccionarNivel = (e) => {

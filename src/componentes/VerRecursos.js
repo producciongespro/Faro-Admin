@@ -145,19 +145,20 @@ function VerRecursos() {
   };
 
   const handleEditarRecurso = (e) => {
-    const id = e.target.dataset.origen;
+    const id = e.currentTarget.dataset.origen;
     console.log("idItem", id);
-    let tmpRecurso=null;
-    /*
+    let tmpRecursos=null;
+    
     if (idNivel !== 7) {
-      tmpRecurso = filtrar(datosPorNivel, "id", id);
+      tmpRecursos = filtrar(datosPorNivel, "id", id);
     } else {
-      tmpRecurso = filtrar(recursosAe, "idRecursosAe", id);
+      tmpRecursos = filtrar(recursosAe, "idRecursoAe", id);
     }        
-    //console.log("tmpRecursos", tmpRecurso[0]);
-    setDetalleRecurso(tmpRecurso[0]);
+    console.log("tmpRecursos", tmpRecursos);
+    
+    setDetalleRecurso(tmpRecursos[0]);
     setShow(true);
-    */
+    
   };
 
   const handleSeleccionarNivel = (e) => {
@@ -299,9 +300,8 @@ function VerRecursos() {
                       <option
                         key={"programasAe" + i}
                         value={item.nombrePrograma}
-                      >
-                        {" "}
-                        {item.nombrePrograma}{" "}
+                      >                        
+                        {item.nombrePrograma}
                       </option>
                     ))
                 }
@@ -314,6 +314,9 @@ function VerRecursos() {
           // Botón Buscar
         }
       </div>
+      {
+        //Tabla que se renderiza mientras está esperando la respuesta del servidor
+      }
       {esperando ? (
         <Tabla
           array={datosFiltrados}

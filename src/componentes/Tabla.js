@@ -183,12 +183,11 @@ function Tabla(props) {
               )}
               {props.modo === "visor" && (
                 <td
-                  data-origen={item.id}
+                  data-origen={item.id ? item.id : item.idRecursoAe   }
                   className="text-center e-mouse color-turq"
                   onClick={props.handleShow}
                 >
-                  <i
-                    data-origen={item.id}
+                  <i                    
                     className="fas fa-pencil-alt over-grande"
                   ></i>
                 </td>

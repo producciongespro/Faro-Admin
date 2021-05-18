@@ -147,18 +147,17 @@ function VerRecursos() {
   const handleEditarRecurso = (e) => {
     const id = e.currentTarget.dataset.origen;
     console.log("idItem", id);
-    let tmpRecursos=null;
-    
+    let tmpRecursos = null;
+
     if (idNivel !== 7) {
       tmpRecursos = filtrar(datosPorNivel, "id", id);
     } else {
       tmpRecursos = filtrar(recursosAe, "idRecursoAe", id);
-    }        
+    }
     console.log("tmpRecursos", tmpRecursos);
-    
+
     setDetalleRecurso(tmpRecursos[0]);
     setShow(true);
-    
   };
 
   const handleSeleccionarNivel = (e) => {
@@ -219,7 +218,7 @@ function VerRecursos() {
       //filtra los datos por  el nombre del programa
       setDatosFiltrados(tmpFiltrdosAe);
     } else {
-        //Si es "todas" carga la variable original con el json de recursos ae
+      //Si es "todas" carga la variable original con el json de recursos ae
       setDatosFiltrados(recursosAe);
     }
   };
@@ -300,7 +299,7 @@ function VerRecursos() {
                       <option
                         key={"programasAe" + i}
                         value={item.nombrePrograma}
-                      >                        
+                      >
                         {item.nombrePrograma}
                       </option>
                     ))
@@ -354,7 +353,11 @@ function VerRecursos() {
                     rel="noopener noreferrer"
                   >
                     <img
-                      src={detalleRecurso.img_educatico}
+                      src={
+                        detalleRecurso.img_educatico
+                          ? detalleRecurso.img_educatico
+                          : detalleRecurso.imgEducatico
+                      }
                       alt="Imagen del recurso"
                     />
                   </a>
@@ -455,7 +458,7 @@ function VerRecursos() {
                 }
                 <br />
                 {
-                  //URL IMAGEN
+                  //URL IMAGEN EDICIÓN
                 }
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -468,7 +471,7 @@ function VerRecursos() {
                     className="form-control"
                     aria-label="Default"
                     placeholder="Coloque la dirección web de la imagen miniatura del recurso."
-                    defaultValue={detalleRecurso.img_educatico}
+                    defaultValue={detalleRecurso.img_educatico  ? detalleRecurso.img_educatico : detalleRecurso.imgEducatico }
                     ref={register({ required: true })}
                   />
                 </div>

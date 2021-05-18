@@ -155,7 +155,7 @@ function Tabla(props) {
                 )}
 
               {
-                // VISOR - PAPELERA: Asignatura en primaria o secundaria 
+                // VISOR - PAPELERA: Asignatura en primaria o secundaria
                 (props.idNivel === 2 || props.idNivel === 3) &&
                   (props.modo === "visor" || props.modo === "papelera") &&
                   props.asignatura === "Todas" && (
@@ -183,25 +183,20 @@ function Tabla(props) {
               )}
               {props.modo === "visor" && (
                 <td
-                  data-origen={item.id ? item.id : item.idRecursoAe   }
+                  data-origen={item.id ? item.id : item.idRecursoAe}
                   className="text-center e-mouse color-turq"
                   onClick={props.handleShow}
                 >
-                  <i                    
-                    className="fas fa-pencil-alt over-grande"
-                  ></i>
+                  <i className="fas fa-pencil-alt over-grande"></i>
                 </td>
               )}
               {props.modo === "visor" && (
                 <td
-                  data-origen={item.id}
+                  data-origen={item.id ? item.id : item.idRecursoAe  }
                   className="text-center e-mouse color-rojo"
                   onClick={props.handleEliminarRecurso}
                 >
-                  <i
-                    data-origen={item.id}
-                    className="far fa-trash-alt over-grande"
-                  ></i>
+                  <i className="far fa-trash-alt over-grande"></i>
                 </td>
               )}
 

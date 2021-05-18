@@ -122,7 +122,8 @@ function VerRecursos() {
 
   const handleEliminarRecurso = (e) => {
     setEsperando(true);
-    const id = e.target.dataset.origen;
+    const id = e.currentTarget.dataset.origen;
+    console.log("id", id);
     const registroBorrar = { id: id, id_usuario: usuario.idUsuario };
     console.log("data a eliminar", registroBorrar);
     alertify.confirm("¿Desea realmente eliminar el recurso?", function () {

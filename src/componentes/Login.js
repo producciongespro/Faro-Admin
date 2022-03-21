@@ -6,11 +6,15 @@ import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
 import enviar from '../modulos/enviar';
 import config from '../config.json';
+import endpoints from '../endpoints';
 import './Login.css';
 
 
 
 function Login() {
+
+    console.log("endpoints", endpoints);
+
     const { setUsuario } = useContext(MyContext);
     const { register, handleSubmit, errors } = useForm();
     const urlLogin= config.servidor+"login.php"

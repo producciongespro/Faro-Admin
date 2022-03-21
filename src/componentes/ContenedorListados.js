@@ -6,6 +6,7 @@ import obtener from '../modulos/obtener';
 import enviar from '../modulos/enviar';
 import filtrar from '../modulos/filtrar';
 import config from '../config.json';
+import endpoints from '../endpoints';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
@@ -57,11 +58,11 @@ function ContenedorListados (props) {
  * @return {Promise<string>} The data from the URL.
  */
     async function obtenerDatos (cb) {
-        datosJson=await obtener(URL_odp);
+        datosJson=await obtener(endpoints.getODP);
         //console.log("******datosJson",datosJson);               
-        categorias=await obtener (config.servidor + "obtener_sub_categorias_odp.php");        
+        categorias=await obtener (endpoints.getSubODP);        
         //console.log("*******categorias",categorias);                
-        poblacionesIdp=await obtener (config.servidor + "obtener_poblaciones_idp.php");
+        poblacionesIdp=await obtener (endpoints.getPoblacionesIDP);
         //console.log("*******poblacionesIdp",poblacionesIdp);
         cb();        
     }

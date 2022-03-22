@@ -9,8 +9,10 @@ import avatar from '../assets/img/avatar.png'
 
 
 function Encabezado() {
-    const { usuario, setUsuario } = useContext(MyContext);
+    const { user, setUser } = useContext(MyContext);
 
+    
+    /*
     const handleCerrarSesion = () => {       
 
         alertify.confirm(config.nombre, "Desea salir del sistema?",
@@ -21,21 +23,20 @@ function Encabezado() {
                 console.log("cancelado cierre de sesión");                
             });            
     }
+*/
+
 
     return (
 
         <div className="jumbotron">
             <div className="row">
                 <div className="col-10">
-                    { usuario.idTipoUsuario === 1 && <h2>Administración de Recursos/Caja de Herramientas</h2>}
-                    { usuario.idTipoUsuario === 2 && <h2>Administración de Desarrollo profesional/Caja de Herramientas</h2>}
-                    { usuario.idTipoUsuario === 3 && <h2>Administración de Plantillas de planeamiento/Caja de Herramientas</h2>}                    
+                    { user.role === 10 && <h2>Administración de Recursos/Caja de Herramientas</h2>}
+                    { user.role === 11 && <h2>Administración de Desarrollo profesional/Caja de Herramientas</h2>}
+                    { user.role === 12 && <h2>Administración de Plantillas de planeamiento/Caja de Herramientas</h2>}                    
                 </div>
 
-                {
-                    //console.log("usuario",usuario)
-
-                }
+             
 
                 <div className="col-2">
                     <>
@@ -50,11 +51,15 @@ function Encabezado() {
                                 />
                             }
                         >
-                            <Dropdown.Item as="button" >{"Nombre: "+ usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2 }</Dropdown.Item>
-                            <Dropdown.Item as="button" >{"Correo: "+ usuario.correo}</Dropdown.Item>
-                            <Dropdown.Item as="button" >Tipo de usuario: {usuario.etiquetaTipoUsuario} </Dropdown.Item>
+                            <Dropdown.Item as="button" >{"Nombre: "+ user.name }</Dropdown.Item>
+                            <Dropdown.Item as="button" >{"Correo: "+ user.username}</Dropdown.Item>
+                            <Dropdown.Item as="button" >Tipo de usuario: {user.type} </Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item onClick={handleCerrarSesion} as="button" eventKey="1">Cerrar sesión</Dropdown.Item>
+                            <Dropdown.Item 
+                               // onClick={handleCerrarSesion} 
+                                as="button" eventKey="1">
+                                    Cerrar sesión
+                            </Dropdown.Item>
                         </DropdownButton>
                     </>
                 </div>

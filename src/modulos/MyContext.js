@@ -1,6 +1,6 @@
 import React from 'react';
 
-// set the defaults
+/*
 const MyContext = React.createContext({
     usuario : {      
       correo: "",
@@ -12,6 +12,17 @@ const MyContext = React.createContext({
       etiquetaTipoUsuario: "",
       isAccesado: false},    
     setUsuario : () => {} 
+});
+*/
+
+
+const MyContext = React.createContext({
+  user : {      
+    name: null,
+    username: null,
+    role: null
+    },    
+  setUser : () => {} 
 });
 
 export default MyContext;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect }  from 'react';
+import React, {useState, useEffect, useContext }  from 'react';
 import MyContext from './modulos/MyContext';
 import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
@@ -14,17 +14,32 @@ import ContenedorListados from './componentes/ContenedorListados';
 import * as ssoMEP from "sso-mep";
 
 
-const handleLogin = async () => {
-  const res =  await  ssoMEP.login();
-  console.log(res);
-}
+
 
 
 function App() {
   const [componente, setComponente] = useState(null);   
-  const [usuario, setUsuario] = useState(MyContext._currentValue.usuario);    
-  const contextUsuario = { usuario, setUsuario };
+  const [user, setUser] = useState(MyContext._currentValue.user);    
+  const contextUser = { user, setUser };
 
+  //console.log("contextUser", contextUser);
+
+  const handleLogin = async () => {
+    const res =  await  ssoMEP.login();
+    console.log("res.account", res.account);
+    const roleApp = await ssoMEP.getRoleApp( res.account );
+    console.log("role App", roleApp);
+    const tmpUsr = {
+      name: res.account.name,
+      username: res.account.username,
+      role: roleApp.rol,
+      type: roleApp.tipo
+    };
+    setUser(tmpUsr);
+  
+  
+  
+  }
 
 
   const handleCargarComponentes = (e) => {
@@ -58,10 +73,10 @@ function App() {
         setComponente(<Papelera /> )
       break;
       case "Bitacora":        
-        setComponente(<Bitacora idTipoUsuario={usuario.idTipoUsuario} /> )
+        setComponente(<Bitacora idTipoUsuario={user.role} /> )
       break;      
       case "ContenedorListados":        
-        setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} idUsuario={usuario.idUsuario} /> )
+        setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} idUsuario={user.username} /> )
       break;
     
       default:
@@ -100,24 +115,11 @@ function App() {
   }
 
 
-  return (    
-       <MyContext.Provider value={contextUsuario}  > 
-
-       {
-        // console.log("Contexto usuario desde APP", contextUsuario.usuario )
-         
-       }  
-  
-        {                       
-           contextUsuario.usuario.isAccesado !== true ?
-          (
-            <LoginSSO  handleLogin={handleLogin} />
-          ) :
-          (
-            <AdminPanel />
-          )           
-        }
-        </MyContext.Provider>        
+  return (
+          contextUser.user.role === null ? <LoginSSO  handleLogin={handleLogin} /> :  
+          <MyContext.Provider value={contextUser}  > 
+            <AdminPanel />        
+          </MyContext.Provider>       
       );
 }
 

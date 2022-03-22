@@ -8,7 +8,7 @@ import endpoints from '../endpoints';
 
 
 function Menu (props) { 
-    const { usuario} = useContext(MyContext);  
+    const { user} = useContext(MyContext);  
     const [botonesFiltrados, setBotonesFiltrados] = useState(null);
     //var arrayBotones = filtrar(botones, "idTipo", usuario.idTipoUsuario )[0].botones;
     var arrayBotones=null;
@@ -26,9 +26,11 @@ function Menu (props) {
 
     async function obtenerListaBotones () {
         arrayBotones= await obtener(endpoints.getBotonesMenu );
-        //console.log(arrayBotones);
-        setBotonesFiltrados( filtrar(arrayBotones, "idTipoUsuario", usuario.idTipoUsuario.toString() )  );
-        
+        console.log(arrayBotones);
+        console.log("user en emnu", user);
+        if (user.role ) {
+            setBotonesFiltrados( filtrar(arrayBotones, "idTipoUsuario", user.role.toString() )  );    
+        }               
         
     }
     

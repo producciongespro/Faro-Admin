@@ -5,7 +5,6 @@ import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
 import enviar from '../modulos/enviar';
-import config from '../config.json';
 import endpoints from '../endpoints';
 import './Login.css';
 
@@ -17,14 +16,14 @@ function Login() {
 
     const { setUsuario } = useContext(MyContext);
     const { register, handleSubmit, errors } = useForm();
-    const urlLogin= config.servidor+"login.php"
+    
         
     const onSubmit = data => {
         //console.log("data", data );
         //console.log("urlLogin",urlLogin);
         
       try {
-        enviar(urlLogin, data, function (resp) { 
+        enviar(endpoints.login, data, function (resp) { 
             //console.log("respuesta", resp.conectado);
             if (resp.conectado) {            
                 const  datosUsuario = { 
@@ -47,7 +46,7 @@ function Login() {
                     msjServer="Problemas de conexión con la base de datos. Error 405"
                 }
                 alertify
-                .alert( "Error "+ config.nombre,  msjServer, function(){
+                .alert(  `Error ${process.env.REACT_APP_NOMBRE}`, msjServer, function(){
                     console.log("Ok");                    
                 });      
             }
@@ -85,7 +84,7 @@ function Login() {
                                     type="text" autoComplete="username"  
                                     name="usuario" className="form-control" 
                                     placeholder="Correo del MEP"                                     
-                                    //defaultValue="luis.chacon.campos@mep.go.cr"
+                                    defaultValue="luis.chacon.campos@mep.go.cr"
                                     />                                
                             </div>                            
                             <div className="input-group form-group">
@@ -99,7 +98,7 @@ function Login() {
                                     autoComplete="current-password" 
                                     className="form-control" 
                                     placeholder="Contraseña"
-                                    //defaultValue="123" 
+                                    defaultValue="123" 
                                     />
                             </div>                       
                             <div className="form-group">

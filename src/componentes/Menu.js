@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect}  from 'react';
 import MyContext from '../modulos/MyContext';
 import filtrar from '../modulos/filtrar';
 import obtener from '../modulos/obtener';
-import config from '../config.json';
+import endpoints from '../endpoints';
 
 
 
@@ -25,7 +25,7 @@ function Menu (props) {
     })
 
     async function obtenerListaBotones () {
-        arrayBotones= await obtener(config.servidor + 'obtener_menu_botones.php');
+        arrayBotones= await obtener(endpoints.getBotonesMenu );
         //console.log(arrayBotones);
         setBotonesFiltrados( filtrar(arrayBotones, "idTipoUsuario", usuario.idTipoUsuario.toString() )  );
         

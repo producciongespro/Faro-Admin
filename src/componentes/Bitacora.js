@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import config from '../config';
+import endpoints from '../endpoints';
 import Tabla from '../componentes/Tabla';
+
 
 
 function Bitacora (props) {
@@ -8,7 +9,8 @@ function Bitacora (props) {
 
     useEffect(()=>{
     console.log("props.idTipoUsuario",props.idTipoUsuario);        
-    let urlAPI=config.servidor+"obtener_bitacora2.php?tabla="+props.idTipoUsuario;        
+    let urlAPI=  endpoints.getBitacora+props.idTipoUsuario;        
+    console.log("urlAPI", urlAPI);
         obtener(urlAPI);
     },[]);
 

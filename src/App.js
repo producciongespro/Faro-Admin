@@ -1,15 +1,23 @@
-import React, {useState }  from 'react';
+import React, {useState, useEffect }  from 'react';
 import MyContext from './modulos/MyContext';
 import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
 import Encabezado from './componentes/Encabezado';
 import Login from './componentes/Login';
+import LoginSSO from './componentes/LoginSSO';
 import Bitacora from './componentes/Bitacora';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';
 import VerRecursos from './componentes/VerRecursos';
 import ContenedorListados from './componentes/ContenedorListados';
 
+import * as ssoMEP from "sso-mep";
+
+
+const handleLogin = async () => {
+  const res =  await  ssoMEP.login();
+  console.log(res);
+}
 
 
 function App() {
@@ -103,7 +111,7 @@ function App() {
         {                       
            contextUsuario.usuario.isAccesado !== true ?
           (
-            <Login />
+            <LoginSSO  handleLogin={handleLogin} />
           ) :
           (
             <AdminPanel />

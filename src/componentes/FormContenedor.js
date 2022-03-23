@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import MyContext from '../modulos/MyContext';
 import { useForm } from 'react-hook-form';
 import enviar from '../modulos/enviar';
-import config from '../config.json';
 import filtrar from '../modulos/filtrar';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import 'alertifyjs/build/css/themes/default.min.css';
+import endpoints from '../endpoints';
 
 /**
  * Contenedor de formulario
@@ -24,13 +24,13 @@ function FormContenedor(props) {
 
 
     const onSubmit = data => {
-        let urlAPI = config.servidor;
+        let urlAPI;;
         switch (props.accion) {
             case "agregar":
-                urlAPI = urlAPI + "registrar_odp.php";
+                urlAPI =  endpoints.insertODP;
                 break;
             case "editar":
-                urlAPI = urlAPI + "actualizar_odp.php";
+                urlAPI = endpoints.updateODP;
                 //en edición envia el id del registro a editar:
                 data.id = props.registro.id;
                 break;
@@ -47,7 +47,7 @@ function FormContenedor(props) {
 
         enviar(urlAPI, data, function (resp) {
             console.log(resp);
-            alertify.alert(config.nombre, resp.msj);
+            alertify.alert(process.env.REACT_APP_NOMBRE, resp.msj);
             //Resetea los datos del formulario
             reset();
             //Cierra el modal que contiene el formualrio

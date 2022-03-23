@@ -13,7 +13,7 @@ var urlObtenerBorrados;
 var urlRecuperarBorrados;
 function Papelera () {     
     const [datosJson, setDatosJson ] = useState(null);
-    const { usuario } = useContext(MyContext);
+    const { user } = useContext(MyContext);
 
 
   useEffect(() => {
@@ -21,13 +21,14 @@ function Papelera () {
     urlObtenerBorrados=config.servidor;    
     urlRecuperarBorrados=config.servidor; 
 
-    switch (usuario.idTipoUsuario) {
-      case 1:
+    switch (user.role) {
+      case "10":
         //Recursos
         urlObtenerBorrados=urlObtenerBorrados +'obtener_recursos_borrados.php';
         urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_recurso.php';
       break;
-      case 2:
+      case "11":
+        console.log("Obeniendo recursos borrados ODP ");
         //ODP
         urlObtenerBorrados = urlObtenerBorrados +'obtener_odp_borrado.php';
         urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_odp_borrado.php';
@@ -53,7 +54,8 @@ function Papelera () {
     //console.log("e.target.id", e.target);
     const data = {
       "id":e.target.dataset.origen,
-      "id_usuario": usuario.idUsuario      
+      //"id_usuario": usuario.idUsuario      
+      "id_usuario": user.username      
     }
     console.log("Dato a recuperar:",data);     
     enviar(urlRecuperarBorrados, data, function (resp) { 
@@ -85,7 +87,7 @@ function Papelera () {
         </div>
           ) : 
           (
-            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso}  idTipoUsuario={usuario.idTipoUsuario} />
+            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso}  idTipoUsuario={user.role} />
           )
       }
 

@@ -25,7 +25,7 @@ function Tabla(props) {
           }
           {
             //PAPELERA
-            props.modo === "papelera" && props.idTipoUsuario !== 2 && (
+            props.modo === "papelera" && props.idTipoUsuario !== "11" && (
               <th className="text-center" scope="col">
                 {" "}
                 Asignatura{" "}

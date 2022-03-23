@@ -1,8 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import moment from "moment";
 import "moment/locale/es";
+import MyContext from '../modulos/MyContext';
 
 function Tabla(props) {
+
+  const { user } = useContext(MyContext);
+
+
   //console.log("*****************idNivel",props.idNivel);
   console.log("props.array", props.array);
   moment.locale("es");
@@ -25,7 +30,7 @@ function Tabla(props) {
           }
           {
             //PAPELERA
-            props.modo === "papelera" && props.idTipoUsuario !== "11" && (
+            props.modo === "papelera" && user.role !== "11" && (
               <th className="text-center" scope="col">
                 {" "}
                 Asignatura{" "}

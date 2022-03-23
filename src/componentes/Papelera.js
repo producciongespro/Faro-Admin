@@ -28,7 +28,7 @@ function Papelera () {
         urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_recurso.php';
       break;
       case "11":
-        console.log("Obeniendo recursos borrados ODP ");
+       // console.log("Obeniendo recursos borrados ODP ");
         //ODP
         urlObtenerBorrados = urlObtenerBorrados +'obtener_odp_borrado.php';
         urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_odp_borrado.php';
@@ -87,7 +87,7 @@ function Papelera () {
         </div>
           ) : 
           (
-            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso}  idTipoUsuario={user.role} />
+            <Tabla array={datosJson} clase="table table-dark" modo="papelera" handleRecuperarRecurso={handleRecuperarRecurso} />
           )
       }
 

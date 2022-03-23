@@ -1,6 +1,4 @@
 import React, {useContext} from "react";
-import moment from "moment";
-import "moment/locale/es";
 import MyContext from '../modulos/MyContext';
 
 function Tabla(props) {
@@ -9,8 +7,7 @@ function Tabla(props) {
 
 
   //console.log("*****************idNivel",props.idNivel);
-  console.log("props.array", props.array);
-  moment.locale("es");
+  console.log("props.array", props.array);  
   return (
     <table id="tblNivel" className={props.clase}>
       <thead>
@@ -215,7 +212,7 @@ function Tabla(props) {
 
               {props.modo === "bitacora" && (
                 <td className="text-center ">
-                  {moment(item.fecha_evento).fromNow()}
+                  {item.fecha_evento}
                 </td>
               )}
               {props.modo === "bitacora" && (

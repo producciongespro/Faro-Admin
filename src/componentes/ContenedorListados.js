@@ -5,7 +5,6 @@ import FormContenedor from '../componentes/FormContenedor';
 import obtener from '../modulos/obtener';
 import enviar from '../modulos/enviar';
 import filtrar from '../modulos/filtrar';
-import config from '../config.json';
 import endpoints from '../endpoints';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
@@ -15,7 +14,6 @@ var datosJson=null;
 var categorias=null;
 var poblacionesIdp=null;
 var modo=null;
-var urlImg=config.assets+"img/7_desarrollo_prof/";
 //var datosFiltrados=null;
 
 /** Este componente es un contenedor de las vistas en ODP
@@ -25,11 +23,7 @@ var urlImg=config.assets+"img/7_desarrollo_prof/";
 
 
 function ContenedorListados (props) {
-    modo = props.modo;
-    //URIS:
-    const URL_odp = config.servidor + "obtener_oferta_desarrollo.php";
-    //console.log("URL_odp",URL_odp); 
-
+    modo = props.modo;      
 
     const [ datosFiltrados, setDatosFiltrados ] = useState(false);
     const [registro, setRegistro] = useState(null);    
@@ -86,11 +80,11 @@ function ContenedorListados (props) {
           "id_usuario": props.idUsuario          
     };    
     console.log("Registro a eliminar", dataDel);                     
-    alertify.confirm(config.nombre, "¿Desea realemnte eliminar el registro?",
+    alertify.confirm(process.env.REACT_APP_NOMBRE, "¿Desea realemnte eliminar el registro?",
         function(){
-            enviar ( config.servidor + "eliminar_odp.php", dataDel, function (resp) {
+            enviar ( endpoints.delODP, dataDel, function (resp) {
                 //Calback depsués de eliminar un registro:
-                alertify.alert(config.nombre, resp.msj );
+                alertify.alert(process.env.REACT_APP_NOMBRE, resp.msj );
                 //REcupera el json actualizado del servidor                 
                 obtenerDatos(function () {
                     //console.log("datosJson",datosJson);            
@@ -183,8 +177,7 @@ function ContenedorListados (props) {
                                     {
                                     registro &&                                    
                                         registro.url_imagen &&
-                                            <img className="img-thumbnail img-previa" src={urlImg+registro.url_imagen} alt="imagen de recurso" />
-                                    }
+                                            <img className="img-thumbnail img-previa" src={  endpoints.assets+"img/7_desarrollo_prof/"+registro.url_imagen} alt="imagen de recurso" />                                    }
                                     </div>
                                 </div>
                                 

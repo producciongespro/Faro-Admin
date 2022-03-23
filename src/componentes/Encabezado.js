@@ -1,30 +1,13 @@
 import React, { useContext } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import alertify from 'alertifyjs';
-import 'alertifyjs/build/css/alertify.min.css';
-import 'alertifyjs/build/css/themes/default.min.css';
-import config from '../config.json';
+
 import MyContext from '../modulos/MyContext';
 import avatar from '../assets/img/avatar.png'
 
 
-function Encabezado() {
-    const { user, setUser } = useContext(MyContext);
-
-    
-    /*
-    const handleCerrarSesion = () => {       
-
-        alertify.confirm(config.nombre, "Desea salir del sistema?",
-            function () {
-                setUsuario({ isAccesado: false });                
-            },
-            function () {
-                console.log("cancelado cierre de sesión");                
-            });            
-    }
-*/
-
+function Encabezado(props) {
+    const { user } = useContext(MyContext);
+   
 
     return (
 
@@ -56,7 +39,7 @@ function Encabezado() {
                             <Dropdown.Item as="button" >Tipo de usuario: {user.type} </Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item 
-                               // onClick={handleCerrarSesion} 
+                               onClick={props.handleCerrarSesion} 
                                 as="button" eventKey="1">
                                     Cerrar sesión
                             </Dropdown.Item>

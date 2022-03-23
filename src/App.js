@@ -13,6 +13,10 @@ import ContenedorListados from './componentes/ContenedorListados';
 
 import * as ssoMEP from "sso-mep";
 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
+
 
 
 
@@ -35,10 +39,21 @@ function App() {
       role: roleApp.rol,
       type: roleApp.tipo
     };
-    setUser(tmpUsr);
-  
-  
-  
+    setUser(tmpUsr); 
+  }
+
+  const handleCerrarSesion =()=> {
+
+    alertify.confirm(process.env.REACT_APP_NOMBRE, "Desea salir del sistema?",
+    function () {
+      ssoMEP.signOut();               
+    },
+    function () {
+        console.log("cancelado cierre de sesión");                
+    });
+
+
+    
   }
 
 
@@ -90,7 +105,7 @@ function App() {
   const AdminPanel =()=> {
     return (
       <React.Fragment>
-        <Encabezado/>
+        <Encabezado  handleCerrarSesion={handleCerrarSesion}   />
       <div className="container">
         <div className="row">
           <div className="col-4">

@@ -5,12 +5,12 @@ import 'alertifyjs/build/css/themes/default.min.css';
 import Tabla from './Tabla';
 import enviar from '../modulos/enviar';
 import loadingGif from '../assets/img/loading1.gif';
-import config from '../config.json';
+import endpoints from '../endpoints';
 import MyContext from '../modulos/MyContext';
 
 //Rutas absolutas de los API dependiendo del modo (ODP - Recursos - plantillas plan, ...)
-var urlObtenerBorrados;
-var urlRecuperarBorrados;
+let urlObtenerBorrados;
+let urlRecuperarBorrados;
 function Papelera () {     
     const [datosJson, setDatosJson ] = useState(null);
     const { user } = useContext(MyContext);
@@ -18,20 +18,20 @@ function Papelera () {
 
   useEffect(() => {
     //Reset de variables
-    urlObtenerBorrados=config.servidor;    
-    urlRecuperarBorrados=config.servidor; 
+    urlObtenerBorrados= "";    
+    urlRecuperarBorrados= ""; 
 
     switch (user.role) {
       case "10":
         //Recursos
-        urlObtenerBorrados=urlObtenerBorrados +'obtener_recursos_borrados.php';
-        urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_recurso.php';
+        urlObtenerBorrados= endpoints.getRecursosBorrados;
+        urlRecuperarBorrados= endpoints.recuperarRecursoBorrado;
       break;
       case "11":
        // console.log("Obeniendo recursos borrados ODP ");
         //ODP
-        urlObtenerBorrados = urlObtenerBorrados +'obtener_odp_borrado.php';
-        urlRecuperarBorrados=urlRecuperarBorrados+'recuperar_odp_borrado.php';
+        urlObtenerBorrados = endpoints.getODPBorrados;
+        urlRecuperarBorrados= endpoints.recuperarODPBorrado;
       break;
     
       default:
@@ -61,7 +61,7 @@ function Papelera () {
     enviar(urlRecuperarBorrados, data, function (resp) { 
         console.log("resp",resp);           
         alertify
-        .alert( config.nombre, resp.msj, function(){
+        .alert( process.env.REACT_APP_NOMBRE, resp.msj, function(){
           console.log("ok");          
         });
         obtenerDatos(urlObtenerBorrados);

@@ -41,7 +41,7 @@ function FormContenedor(props) {
         //console.log("urlARPI",urlAPI);
         //Se agregan las demás propiedades al dataform
         data.id_tipo = props.idCategoria;
-        data.usuario = usuario.idUsuario;
+        // data.usuario = usuario.nombre;
         console.log("Datos a enviar al servidor", data);
 
 

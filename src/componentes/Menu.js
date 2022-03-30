@@ -26,8 +26,8 @@ function Menu (props) {
 
     async function obtenerListaBotones () {
         arrayBotones= await obtener(endpoints.getBotonesMenu );
-        console.log(arrayBotones);
-        console.log("user en emnu", user);
+        //console.log(arrayBotones);
+        //console.log("user en emnu", user);
         if (user.role ) {
             setBotonesFiltrados( filtrar(arrayBotones, "idTipoUsuario", user.role.toString() )  );    
         }               

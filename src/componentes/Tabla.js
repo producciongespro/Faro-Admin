@@ -28,9 +28,8 @@ function Tabla(props) {
           {
             //PAPELERA
             props.modo === "papelera" && user.role !== "11" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Asignatura{" "}
+              <th className="text-center" scope="col">                
+                Asignatura
               </th>
             )
           }
@@ -70,9 +69,8 @@ function Tabla(props) {
           {
             //VISOR
             props.modo === "visor" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Editar{" "}
+              <th className="text-center" scope="col">                
+                Editar
               </th>
             )
           }
@@ -80,9 +78,8 @@ function Tabla(props) {
           {
             //VISOR
             props.modo === "visor" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Eliminar{" "}
+              <th className="text-center" scope="col">                
+                Eliminar
               </th>
             )
           }
@@ -90,9 +87,8 @@ function Tabla(props) {
           {
             //PAPELERA
             props.modo === "papelera" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Recuperar{" "}
+              <th className="text-center" scope="col">                
+                Recuperar
               </th>
             )
           }
@@ -100,28 +96,16 @@ function Tabla(props) {
           {
             //BITACORA
             props.modo === "bitacora" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Evento{" "}
+              <th className="text-center" scope="col">                
+                Evento
               </th>
             )
           }
           {
             //BITACORA
             props.modo === "bitacora" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Responsable{" "}
-              </th>
-            )
-          }
-
-          {
-            //BITACORA
-            props.modo === "bitacora" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Fecha{" "}
+              <th className="text-center" scope="col">                
+                Responsable
               </th>
             )
           }
@@ -129,9 +113,17 @@ function Tabla(props) {
           {
             //BITACORA
             props.modo === "bitacora" && (
-              <th className="text-center" scope="col">
-                {" "}
-                Tabla{" "}
+              <th className="text-center" scope="col">                
+                Fecha
+              </th>
+            )
+          }
+
+          {
+            //BITACORA
+            props.modo === "bitacora" && (
+              <th className="text-center" scope="col">                
+                Tabla
               </th>
             )
           }

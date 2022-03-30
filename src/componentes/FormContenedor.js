@@ -16,15 +16,18 @@ import endpoints from '../endpoints';
 
 function FormContenedor(props) {
     const { register, handleSubmit, errors, reset } = useForm();
-    const { usuario } = useContext(MyContext);
-    const categorias = filtrar (props.categorias, "idOferta", props.idCategoria )
+    const { user } = useContext(MyContext);
+    const categorias = filtrar (props.categorias, "idOferta", props.idCategoria );
      
-    console.log("categorias", categorias);
-    console.log("props.idCategoria", props.idCategoria)
+    //console.log("categorias", categorias);
+    //console.log("props.idCategoria", props.idCategoria);
+    console.log("usuario >>>>>>>", user);
 
 
     const onSubmit = data => {
-        let urlAPI;;
+        let urlAPI;
+        data.usuario = user.username;
+        data.token = user.token;
         switch (props.accion) {
             case "agregar":
                 urlAPI =  endpoints.insertODP;
@@ -32,7 +35,7 @@ function FormContenedor(props) {
             case "editar":
                 urlAPI = endpoints.updateODP;
                 //en edición envia el id del registro a editar:
-                data.id = props.registro.id;
+                data.id = props.registro.id;               
                 break;
 
             default:

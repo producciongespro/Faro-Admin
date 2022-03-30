@@ -1,5 +1,6 @@
-import React, {useEffect, useState}  from 'react';
+import React, {useEffect, useState, useContext}  from 'react';
 import { Modal } from 'react-bootstrap';
+import MyContext from '../modulos/MyContext';
 import TablaContenedor from '../componentes/TablaContenedor';
 import FormContenedor from '../componentes/FormContenedor';
 import obtener from '../modulos/obtener';
@@ -23,7 +24,8 @@ var modo=null;
 
 
 function ContenedorListados (props) {
-    modo = props.modo;      
+    modo = props.modo; 
+    const { user } = useContext(MyContext);     
 
     const [ datosFiltrados, setDatosFiltrados ] = useState(false);
     const [registro, setRegistro] = useState(null);    
@@ -77,7 +79,8 @@ function ContenedorListados (props) {
   const handleEliminarRegistro =(e)=>{           
     let dataDel = {
           "id": e.target.id,
-          "id_usuario": props.idUsuario          
+          "usuario": user.username,
+          "token": user.token
     };    
     console.log("Registro a eliminar", dataDel);                     
     alertify.confirm(process.env.REACT_APP_NOMBRE, "¿Desea realemnte eliminar el registro?",

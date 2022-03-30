@@ -30,14 +30,15 @@ function App() {
 
   const handleLogin = async () => {
     const res =  await  ssoMEP.login();
-    console.log("res.account", res.account);
+    //console.log("res.account", res.account);
     const roleApp = await ssoMEP.getRoleApp( res.account );
-    console.log("role App", roleApp);
+    //console.log("role App", roleApp);
     const tmpUsr = {
       name: res.account.name,
       username: res.account.username,
       role: roleApp.rol,
-      type: roleApp.tipo
+      type: roleApp.tipo,
+      token: roleApp.api_key      
     };
     setUser(tmpUsr); 
   }

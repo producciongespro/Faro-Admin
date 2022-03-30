@@ -24,7 +24,9 @@ export default function FormEnviarRecurso() {
   //asignaturaSel se necesita para asignaturas que no tienen años o que el select años se debe renderizar diferente
   const [asignaturaSel, setAsignaturaSel] = useState(0);
   const { register, handleSubmit, errors, reset } = useForm();
-  const { usuario } = useContext(MyContext);
+  const { user } = useContext(MyContext);
+
+  console.log("usuario", user);
 
   async function obtenerDatos() {
     niveles = await getData(config.servidor + "obtener_niveles.php");
@@ -130,7 +132,7 @@ export default function FormEnviarRecurso() {
         data.tabla = "recursos";
       }
 
-      data.id_usuario = usuario.idUsuario;
+      data.id_usuario = user.username;
       console.log(
         "////**********datos a enviar al servidor:",
         data,

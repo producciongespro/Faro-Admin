@@ -4,7 +4,7 @@ import Inicio from './componentes/Inicio';
 import Papelera from './componentes/Papelera';
 import Menu from './componentes/Menu';
 import Encabezado from './componentes/Encabezado';
-import Login from './componentes/Login';
+//import Login from './componentes/Login';
 import LoginSSO from './componentes/LoginSSO';
 import Bitacora from './componentes/Bitacora';
 import FormEnviarRecurso from './componentes/FormEnviarRecurso';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Tabla(props) {
+function Tabla (props) {
     return (
         <table id="tblNivel" className={props.clase}>
             <thead>
@@ -26,10 +26,16 @@ function Tabla(props) {
                                 </td>
                                 <td>{item.descripcion}</td>
                                         <td>
-                                            <i id={item.id} onClick={props.handleAbrirModal} className="fas fa-pencil-alt"></i>
+                                            <i 
+                                            role='button'
+                                            id={item.id} 
+                                            onClick={props.handleAbrirModal} className="fas fa-pencil-alt"></i>
                                         </td>
                                         <td>
-                                            <i id={item.id} onClick={props.handleEliminarRegistro} className="far fa-trash-alt"></i>
+                                            <i 
+                                            role='button'
+                                            id={item.id} 
+                                            onClick={props.handleEliminarRegistro} className="far fa-trash-alt"></i>
                                         </td>                                    
                             </tr>
                         ))

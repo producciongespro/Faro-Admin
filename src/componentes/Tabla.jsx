@@ -180,6 +180,8 @@ function Tabla(props) {
                   data-origen={item.id ? item.id : item.idRecursoAe}
                   className="text-center e-mouse color-turq"
                   onClick={props.handleShow}
+                  role="button"                                 
+                  
                 >
                   <i className="fas fa-pencil-alt over-grande"></i>
                 </td>
@@ -189,6 +191,7 @@ function Tabla(props) {
                   data-origen={item.id ? item.id : item.idRecursoAe  }
                   className="text-center e-mouse color-rojo"
                   onClick={props.handleEliminarRecurso}
+                  role="button"                                
                 >
                   <i className="far fa-trash-alt over-grande"></i>
                 </td>

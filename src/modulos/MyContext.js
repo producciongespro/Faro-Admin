@@ -20,7 +20,8 @@ const MyContext = React.createContext({
   user : {      
     name: null,
     username: null,
-    role: null
+    role: null,
+    token: null
     },    
   setUser : () => {} 
 });

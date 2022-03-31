@@ -89,7 +89,7 @@ function App() {
         setComponente(<Papelera /> )
       break;
       case "Bitacora":        
-        setComponente(<Bitacora idTipoUsuario={user.role} /> )
+        setComponente(<Bitacora /> )
       break;      
       case "ContenedorListados":        
         setComponente(<ContenedorListados  modo={modo} idCategoria={idCategoria} idUsuario={user.username} /> )

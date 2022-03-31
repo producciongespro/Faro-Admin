@@ -1,15 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import endpoints from '../endpoints';
 import Tabla from '../componentes/Tabla';
+import MyContext from '../modulos/MyContext';
 
 
 
 function Bitacora (props) {
     const [datosJson, setDataJson ] = useState(null);
+    const { user} = useContext(MyContext); 
+    console.log("USUARIO EN BITACORA >>>>>> ",user);       
 
     useEffect(()=>{
-    console.log("props.idTipoUsuario",props.idTipoUsuario);        
-    let urlAPI=  endpoints.getBitacora+props.idTipoUsuario;        
+     
+    let urlAPI=  endpoints.getBitacora+user.role;        
     console.log("urlAPI", urlAPI);
         obtener(urlAPI);
     },[]);

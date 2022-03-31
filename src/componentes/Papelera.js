@@ -38,8 +38,8 @@ function Papelera () {
         console.log("id tipo usario fuera de ragno");        
         break;
     }
-    console.log("urlObtenerBorrados",urlObtenerBorrados);
-    console.log("urlRecuperarBorrados",urlRecuperarBorrados);
+    //console.log("urlObtenerBorrados",urlObtenerBorrados);
+    //console.log("urlRecuperarBorrados",urlRecuperarBorrados);
         
     obtenerDatos(urlObtenerBorrados);
   }, [])
@@ -53,9 +53,10 @@ function Papelera () {
   const handleRecuperarRecurso =(e)=>{
     //console.log("e.target.id", e.target);
     const data = {
-      "id":e.target.dataset.origen,
-      //"id_usuario": usuario.idUsuario      
-      "id_usuario": user.username      
+      id: e.target.dataset.origen,      
+      usuario: user.username,
+      token: user.token,
+      role: user.role
     }
     console.log("Dato a recuperar:",data);     
     enviar(urlRecuperarBorrados, data, function (resp) { 

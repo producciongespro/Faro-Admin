@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "datatables.net": "^1.10.22",
+    "gespro-utils": "^2.7.10",
     "jquery": "^3.5.1",
     "jsdoc": "^3.6.6",
     "react": "^16.13.1",

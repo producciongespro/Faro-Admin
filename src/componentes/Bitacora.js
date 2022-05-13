@@ -22,6 +22,7 @@ function Bitacora(props) {
     console.log("URI", URI);
      
     const res = await getData(   URI );
+    console.log("res", res);    
     setDataJson(res.reverse());
   };
 

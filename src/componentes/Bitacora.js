@@ -18,7 +18,7 @@ function Bitacora(props) {
   });
 
   const setup = async () => {
-    const URI = `${endpoints.getBitacora}${establecerTabla(user.role) }`;
+    const URI = `${endpoints.getBitacora}${user.role}`;
     console.log("URI", URI);
      
     const res = await getData(   URI );
@@ -26,6 +26,7 @@ function Bitacora(props) {
     setDataJson(res.reverse());
   };
 
+/*  
   const establecerTabla = (role) => {
     let tabla = null;
     switch (role) {
@@ -48,6 +49,7 @@ function Bitacora(props) {
     };
     return tabla;
   };
+  */
 
   return (
     <React.Fragment>

@@ -7,7 +7,7 @@ import "alertifyjs/build/css/themes/default.min.css";
 import GrupoCheck from "./GurpoCheck";
 import obtenerValoresCheck from "../modulos/obtenerValoresCheck";
 import config from "../config.json";
-import { getData, sendData } from "../modulos/akiri";
+import { getData, sendData } from "gespro-utils";
 
 //Arrays
 var niveles = null;

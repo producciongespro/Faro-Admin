@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "alertifyjs": "^1.13.1",
     "animate.css": "^4.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bootstrap": "^4.5.2",
     "datatables.net": "^1.10.22",
     "gespro-utils": "^2.8.10",
